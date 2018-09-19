@@ -1,0 +1,16 @@
+
+{
+    ["__version"] = "2.1.5"
+,   ["cmdlines"] = 
+    {
+        "xmake f -c -p macosx -a x86_64 --xcode_dir=/Applications/Xcode.app --file=/Users/lidengfeng/Documents/Workspace/FengEngine/lua-5.1.5/xmake.lua"
+    ,   "xmake --file=/Users/lidengfeng/Documents/Workspace/FengEngine/lua-5.1.5/xmake.lua"
+    ,   "xmake f -c -p macosx -a x86_64 --xcode_dir=/Applications/Xcode.app --file=/Users/lidengfeng/Documents/Workspace/FengEngine/lua-5.1.5/xmake.lua"
+    ,   "xmake --file=/Users/lidengfeng/Documents/Workspace/FengEngine/lua-5.1.5/xmake.lua"
+    ,   "xmake f -c -p macosx -a x86_64 --xcode_dir=/Applications/Xcode.app --file=/Users/lidengfeng/Documents/Workspace/FengEngine/lua-5.1.5/xmake.lua"
+    ,   "xmake --file=/Users/lidengfeng/Documents/Workspace/FengEngine/lua-5.1.5/xmake.lua"
+    ,   "xmake f -c -p macosx -a x86_64 --xcode_dir=/Applications/Xcode.app --file=/Users/lidengfeng/Documents/Workspace/FengEngine/lua-5.1.5/xmake.lua"
+    ,   "xmake --file=/Users/lidengfeng/Documents/Workspace/FengEngine/lua-5.1.5/xmake.lua"
+    }
+
+}

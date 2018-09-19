@@ -1,0 +1,13 @@
+
+{
+    ["__version"] = "2.1.5"
+,   ["lua_common"] = 
+    {
+        ["languages"] = "gnu99"
+    ,   ["warnings"] = "all"
+    ,   ["__scriptdir"] = "/Users/lidengfeng/Documents/Workspace/FengEngine/lua-5.1.5"
+    ,   ["showmenu"] = false
+    ,   ["default"] = true
+    }
+
+}

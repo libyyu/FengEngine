@@ -1,0 +1,41 @@
+
+{
+    ["options_all"] = 
+    {
+        ["plat"] = "macosx"
+    ,   ["arch"] = "x86_64"
+    ,   ["clean"] = true
+    ,   ["xcode_dir"] = "/Applications/Xcode.app"
+    }
+
+,   ["options_lua51"] = 
+    {
+        ["plat"] = "macosx"
+    ,   ["arch"] = "x86_64"
+    ,   ["clean"] = true
+    ,   ["xcode_dir"] = "/Applications/Xcode.app"
+    }
+
+,   ["mtimes"] = 
+    {
+        ["xmake.lua"] = 1537371885
+    }
+
+,   ["options_luac"] = 
+    {
+        ["plat"] = "macosx"
+    ,   ["arch"] = "x86_64"
+    ,   ["clean"] = true
+    ,   ["xcode_dir"] = "/Applications/Xcode.app"
+    }
+
+,   ["__version"] = "2.1.5"
+,   ["options_lua"] = 
+    {
+        ["plat"] = "macosx"
+    ,   ["arch"] = "x86_64"
+    ,   ["clean"] = true
+    ,   ["xcode_dir"] = "/Applications/Xcode.app"
+    }
+
+}
