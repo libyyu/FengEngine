@@ -15,6 +15,7 @@ option("cjson_common")
 -- add target
 target("cjson")
     add_options("cjson_common")
+    add_options("luajit", "genxcode")
     -- make as a static library
     set_kind("static")
     --设置最终文件目录

@@ -76,6 +76,12 @@ end
 option("luajit")
     set_default(false)
     set_showmenu(true)
+option("genxcode")
+    set_default(false)
+    set_showmenu(true)
+option("FengEngineBundle")
+    set_default(false)
+    set_showmenu(true)
 
 if not is_option("luajit") then
     add_subfiles("lua-5.1.5/xmake.lua") 
@@ -96,7 +102,7 @@ target("FengEngine")
 	--设置链接目录
 	add_linkdirs("./libs/$(plat)/$(arch)")
 
-	add_options("luajit")
+	add_options("luajit", "genxcode", "FengEngineBundle")
 	if is_option("luajit") then
 		add_includedirs("luajit/src")
 		add_links("luajit")

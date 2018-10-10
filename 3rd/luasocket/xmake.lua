@@ -15,6 +15,7 @@ option("socket_common")
 -- add target
 target("luasocket")
     add_options("socket_common")
+    add_options("luajit", "genxcode")
     -- make as a static library
     set_kind("static")
     --设置最终文件目录
