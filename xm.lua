@@ -80,6 +80,8 @@ option("luajit")
 if not is_option("luajit") then
     add_subfiles("lua-5.1.5/xmake.lua") 
 end
+add_subfiles("3rd/luasocket/xmake.lua"
+    , "3rd/lua-cjson/xmake.lua")
 
 target("FengEngine")
 	if is_plat("iphoneos") then
@@ -102,7 +104,17 @@ target("FengEngine")
 		add_includedirs("lua-5.1.5/src")
 		add_deps("lua51")
         add_links("lua51")
-	end
+    end
+    add_deps("luasocket", "cjson")
+    add_links("luasocket", "cjson")
+    add_defines("_RZ_DLL_")
+    add_includedirs("rzlib")
+    --3rd
+    add_files("3rd/lpeg/*.c")
+    add_files("3rd/pb.c")
+	add_files("3rd/slua.c")
 
-	add_files("slua.c")
+    add_files("Source/Common/*.cpp")
+    add_files("Source/AnyLog/*.cpp")
+    add_files("Source/*.cpp")
 	

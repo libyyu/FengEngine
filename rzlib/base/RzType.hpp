@@ -11,8 +11,16 @@
 #include "RzPlatform.hpp"
 #if PLATFORM_TARGET == PLATFORM_WINDOWS
 #include <tchar.h>
+#define STD_CALL  __stdcall
+#define STDCALL  __stdcall
+#define CALLBACK  __stdcall
+#define WINAPI    __stdcall
 #else
 #include <wchar.h>
+#define STD_CALL
+#define STDCALL
+#define CALLBACK
+#define WINAPI
 #endif
 
 #ifdef  _DEBUG
@@ -46,7 +54,7 @@
 	#if defined(_MSC_VER)
 		#define RZ_DLL_API __declspec(dllexport)
 	#else
-		#define RZ_DLL_API
+		#define RZ_DLL_API extern
 	#endif
 #else
 	#if defined(_MSC_VER)
