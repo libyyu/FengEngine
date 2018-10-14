@@ -7,13 +7,17 @@
 #include <memory>
 #include <functional>
 #include <vector>
-
+#ifdef _WIN32
+#include <Windows.h>
+#else
+#include <pthread.h>
+#include <unistd.h>
+typedef void* H_HTTPHANDLE;
+#endif
 //////////////////////////////////////////////////////////////////////////////////////////////
 class HttpLock;
 
-typedef void* H_HTTPHANDLE;
-
-void h_Sleep(unsigned long);
+void h_Sleep(unsigned int);
 
 class HttpRequest
 {
@@ -59,7 +63,7 @@ public:
     int SetMovedUrl(bool get_moved_url);
 
     int SetPostData(const std::string& message);
-    int SetPostData(const void* data, unsigned int size);
+    int SetPostData(const void* data, size_t size);
 
     //************************************
     // Method:    SetRequestHeader
@@ -101,7 +105,7 @@ protected:
         int      SetRequestTimeout(long time_out = 0);
         int      SetRequestUrl(const std::string& url);
         int      SetMovedUrl(bool get_moved_url);
-        int      SetPostData(const void* data, unsigned int size);
+        int      SetPostData(const void* data, size_t size);
         int      SetRequestHeader(const std::string& header);
         int      SetRequestProxy(const std::string& proxy, long proxy_port);
 

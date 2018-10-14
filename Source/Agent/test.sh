@@ -1,20 +1,24 @@
-LOCAL_PATH=../..
-LUAJIT_PATH=../../luajit-2.0.4/src
-CURL_PATH=../../curl-7.48.0
-PROJECT_SRC_PATH=../../Project-Source
 
-MODULE_NAME=httptest
+CURL_PATH=../../3rd/curl
+#./configure  --disable-shared --enable-static --without-zlib --without-libidn --without-ssl --without-librtmp --without-gnutls --without-nss --without-libssh2 --without-winidn --disable-rtsp --disable-ldap --disable-ldaps --disable-ipv6
+MODULE_NAME=libAgent
+g++ -c \
+	-I./ \
+	-I$CURL_PATH/include \
+	HTTPRequest.cpp \
+	exp_HTTPRequest.cpp \
+	-std=c++11 -static \
+	-DCURL_STATICLIB
+ar cr ${MODULE_NAME}.a exp_HTTPRequest.o HTTPRequest.o
+rm -rf *.o
 
+MODULE_NAME=test
 g++ \
 	-I./ \
-	-I$LOCAL_PATH \
-	-I$LUAJIT_PATH \
 	-I$CURL_PATH/include \
-	-I$PROJECT_SRC_PATH \
-	-I$PROJECT_SRC_PATH/Agent \
 	-L./ \
-	$PROJECT_SRC_PATH/Agent/HTTPRequest.cpp \
-	$PROJECT_SRC_PATH/Agent/HTTPDemo.cpp \
-	-o ${MODULE_NAME}.exe -m32 -std=c++11 \
-	-DTEST -DCURL_STATICLIB \
-	-Wl,--no-whole-archive -static-libgcc -static-libstdc++ -lcurl-x86 -lws2_32 -lwldap32
+	-L../../3rd/curl/lib/macosx \
+	HTTPDemo.cpp \
+	-o ${MODULE_NAME} -std=c++11 \
+	-DCURL_STATICLIB \
+	-lcurl -lldap -lAgent

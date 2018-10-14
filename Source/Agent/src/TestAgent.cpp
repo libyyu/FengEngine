@@ -1,5 +1,4 @@
 #define _F_DLL_
-#include "FAssist.h"
 #include "curl/curl.h"
 #include <string>
 #include <assert.h>

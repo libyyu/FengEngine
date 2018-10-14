@@ -1,12 +1,5 @@
   
 #include <stdio.h>                       
-#ifdef _WIN32
-#include <Windows.h>
-#else
-#include <pthread.h>
-#include <unistd.h>
-#endif
-
 #include "curl/curl.h"        //libcurl interface
 #include "HTTPRequest.hpp"   //HttpRequest class
 
@@ -22,7 +15,7 @@ typedef unsigned long DWORD;
 #define FALSE   0
 #endif  //#ifndef _WIN32
 
-void h_Sleep(unsigned long dt)
+void h_Sleep(unsigned int dt)
 {
 #ifdef _WIN32
 	::Sleep(dt);
@@ -134,7 +127,6 @@ public:
                 DoHttpLock http_lock(s_request_lock);
                 HttpHelper::s_async_requests.remove(*request);
             }
-
         }
 
 #ifdef _WIN32
@@ -186,7 +178,6 @@ public:
                 DoHttpLock http_lock(s_download_lock);
                 HttpHelper::s_async_downloads.remove(*request);
             }
-
         }
 
 #ifdef _WIN32
@@ -207,7 +198,7 @@ public:
 
         DoHttpLock http_lock(thread_chunk->_download->m_httplock);
         size_t written = 0;
-        int real_size = size * nmemb;
+        size_t real_size = size * nmemb;
         if (thread_chunk->_endidx > 0)
         {
             if (thread_chunk->_startidx <= thread_chunk->_endidx)
@@ -259,7 +250,8 @@ public:
 #ifdef _WIN32
         return thread_chunk->_download->DoDownload(thread_chunk);
 #else
-        return (void *)(thread_chunk->_download->DoDownload(thread_chunk));
+        thread_chunk->_download->DoDownload(thread_chunk);
+        return NULL;
 #endif
     }
 };
@@ -369,7 +361,7 @@ int HttpRequest::SetPostData(const std::string& message)
     return SetPostData(message.c_str(), message.size());
 }
 
-int HttpRequest::SetPostData(const void* data, unsigned int size)
+int HttpRequest::SetPostData(const void* data, size_t size)
 {
     if (m_request_handle)
     {
@@ -575,8 +567,6 @@ HttpRequest::RequestHelper::RequestHelper()
     : m_curl_handle(nullptr)
 #ifdef _WIN32
     , m_perform_thread(nullptr)
-#else
-    , m_perform_thread(-1)
 #endif
     , m_http_headers(nullptr)
     , m_close_self(false)
@@ -618,7 +608,7 @@ int HttpRequest::RequestHelper::SetRequestTimeout(long time_out)
 {
     if (m_curl_handle)
     {
-        return curl_easy_setopt(m_curl_handle, CURLOPT_TIMEOUT, 0);
+        return curl_easy_setopt(m_curl_handle, CURLOPT_TIMEOUT_MS, time_out);
     }
 
     return CURLE_FAILED_INIT;
@@ -658,7 +648,7 @@ int HttpRequest::RequestHelper::SetMovedUrl(bool get_moved_url)
     return CURLE_FAILED_INIT;
 }
 
-int HttpRequest::RequestHelper::SetPostData(const void* data, unsigned int size)
+int HttpRequest::RequestHelper::SetPostData(const void* data, size_t size)
 {
     if (m_curl_handle /*&& data && size > 0*/)
     {
@@ -763,7 +753,7 @@ int HttpRequest::RequestHelper::Perform()
         curl_code = curl_easy_setopt(m_curl_handle, CURLOPT_NOPROGRESS, 1);
 
         curl_code = curl_easy_setopt(m_curl_handle, CURLOPT_NOSIGNAL, 1);
-        curl_code = curl_easy_setopt(m_curl_handle, CURLOPT_CONNECTTIMEOUT_MS, 0);
+        curl_code = curl_easy_setopt(m_curl_handle, CURLOPT_CONNECTTIMEOUT_MS, 1000);
 
         curl_code = curl_easy_perform(m_curl_handle);
         if (curl_code == CURLE_OPERATION_TIMEDOUT)
@@ -790,14 +780,12 @@ int HttpRequest::RequestHelper::Perform()
             m_result_callback(m_id, false, m_receive_content);
         }
 
-        m_is_running = false;
-
         if (m_http_headers)
         {
             curl_slist_free_all(reinterpret_cast<curl_slist*>(m_http_headers));
             m_http_headers = nullptr;
         }
-
+        m_is_running = false;
         return curl_code;
     }
 
@@ -1110,7 +1098,7 @@ HttpDownloader::DownloadHelper::DownloadHelper()
 #ifdef _WIN32
     : m_perform_thread(nullptr)
 #else
-    : m_perform_thread(-1)
+    : m_perform_thread()
 #endif
     , m_close_self(false)
     , m_retry_times(HttpDownloader::s_kRetryCount)
@@ -1197,8 +1185,11 @@ int HttpDownloader::DownloadHelper::SetDownloadThreadCount(int thread_count)
 int HttpDownloader::DownloadHelper::Perform()
 {
     m_total_size = GetDownloadFileSize();
+    printf("total size:%f\n", m_total_size);
     if (m_total_size < 0)
     {
+        m_is_running = false;
+        m_result_callback(m_id, false, m_error_string);
         return HttpRequest::REQUEST_PERFORM_ERROR;
     }
 
@@ -1218,6 +1209,8 @@ int HttpDownloader::DownloadHelper::Perform()
 #endif
     if (!fp)
     {
+        m_is_running = false;
+        m_result_callback(m_id, false, m_error_string);
         return HttpRequest::REQUEST_OPENFILE_ERROR;
     }
 
@@ -1352,17 +1345,27 @@ double HttpDownloader::DownloadHelper::GetDownloadFileSize()
 
         if (handle)
         {
+            if (m_url.substr(0, 5) == "https")
+            {
+                curl_easy_setopt(handle, CURLOPT_SSL_VERIFYPEER, 0L);
+                curl_easy_setopt(handle, CURLOPT_SSL_VERIFYHOST, 0L);
+            }
+            //curl_easy_setopt(handle, CURLOPT_SSL_VERIFYPEER, true);
+            //curl_easy_setopt(handle, CURLOPT_CAINFO, "/Users/lidengfeng/Downloads/cacert.pem");
+
             curl_easy_setopt(handle, CURLOPT_URL, m_url.c_str());
             curl_easy_setopt(handle, CURLOPT_HEADER, 1);
             curl_easy_setopt(handle, CURLOPT_NOBODY, 1);
-            curl_easy_setopt(handle, CURLOPT_FOLLOWLOCATION, 1);
             curl_easy_setopt(handle, CURLOPT_MAXREDIRS, 5);
+            curl_easy_setopt(handle, CURLOPT_FOLLOWLOCATION, 1);
             curl_easy_setopt(handle, CURLOPT_HEADERFUNCTION, HttpHelper::RetriveHeaderFunction);
             curl_easy_setopt(handle, CURLOPT_HEADERDATA, &m_receive_header);
             curl_easy_setopt(handle, CURLOPT_WRITEFUNCTION, HttpHelper::RetriveContentFunction);
             curl_easy_setopt(handle, CURLOPT_WRITEDATA, NULL);
-            curl_easy_setopt(handle, CURLOPT_RANGE, "2-");
-
+            //curl_easy_setopt(handle, CURLOPT_RANGE, "2-");
+            curl_easy_setopt(handle, CURLOPT_CONNECTTIMEOUT_MS, 5000);
+            curl_easy_setopt(handle, CURLOPT_TIMEOUT_MS, m_time_out);   //0 means block always
+        
             CURLcode curl_code = curl_easy_perform(handle);
 
             if (curl_code == CURLE_OPERATION_TIMEDOUT)
@@ -1370,6 +1373,7 @@ double HttpDownloader::DownloadHelper::GetDownloadFileSize()
                 int retry_count = m_retry_times;
                 while (retry_count > 0)
                 {
+                    printf("Connect Timeout, Will Try %d/%d\n", 1+m_retry_times-retry_count, m_retry_times);
                     curl_code = curl_easy_perform(handle);
                     if (curl_code != CURLE_OPERATION_TIMEDOUT) break;
                     retry_count--;
@@ -1428,8 +1432,8 @@ int HttpDownloader::DownloadHelper::DoDownload(ThreadChunk* thread_chunk)
     curl_easy_setopt(curl_handle, CURLOPT_NOSIGNAL, 1L);
     curl_easy_setopt(curl_handle, CURLOPT_POST, 0L);
 
-    curl_easy_setopt(curl_handle, CURLOPT_CONNECTTIMEOUT_MS, 0L);
-    curl_easy_setopt(curl_handle, CURLOPT_TIMEOUT, thread_chunk->_download->m_time_out);   //0 means block always
+    curl_easy_setopt(curl_handle, CURLOPT_CONNECTTIMEOUT_MS, 1000L);
+    curl_easy_setopt(curl_handle, CURLOPT_TIMEOUT_MS, thread_chunk->_download->m_time_out);   //0 means block always
 
     curl_easy_setopt(curl_handle, CURLOPT_WRITEFUNCTION, HttpHelper::write_callback);
     curl_easy_setopt(curl_handle, CURLOPT_WRITEDATA, thread_chunk);
@@ -1440,8 +1444,8 @@ int HttpDownloader::DownloadHelper::DoDownload(ThreadChunk* thread_chunk)
     curl_easy_setopt(curl_handle, CURLOPT_XFERINFOFUNCTION, HttpHelper::progress_callback);
     curl_easy_setopt(curl_handle, CURLOPT_XFERINFODATA, thread_chunk);
 
-    curl_easy_setopt(curl_handle, CURLOPT_LOW_SPEED_LIMIT, 1L);
-    curl_easy_setopt(curl_handle, CURLOPT_LOW_SPEED_TIME, 5L);
+    //curl_easy_setopt(curl_handle, CURLOPT_LOW_SPEED_LIMIT, 1L);
+    //curl_easy_setopt(curl_handle, CURLOPT_LOW_SPEED_TIME, 5L);
 
     if (thread_chunk->_endidx != 0)
     {

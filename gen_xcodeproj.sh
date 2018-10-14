@@ -19,4 +19,4 @@ echo "PARAMS: $PARAMS"
 
 
 build f -c -p $PLATFORM -a x86_64 --xcode_dir="$XCODE_DIR" --file=$self_path/xm.lua  --genxcode=y --FengEngineBundle=y $PARAMS
-build project -k xcode --file=$self_path/xm.lua -a x86_64  -m "release,debug" Projects/temp
+build project -k xcode --file=$self_path/xm.lua -a x86_64  -m "release,debug" Projects/macosx

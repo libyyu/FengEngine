@@ -10,22 +10,24 @@
 #include <cstdlib>
 #include <string.h>
 
-#include "FAssist.h"
-
 class DownCallbackClass
 {
 public:
         DownCallbackClass() :m_down_finished(false) {}
         ~DownCallbackClass() {}
 public:
-        void DownResultCallback(int id, bool success, const std::string& data)
+        void DownResultCallback(int id, bool success, const std::string& error_string)
         {
+                if(!success)
+                {
+                        std::cerr << "download error:" << error_string.c_str() << std::endl;
+                }
                 m_down_finished = true;
         }
         int down_callback(double total_size, double downloaded_size, void* userdata)
         {
                 long tmp = static_cast<long>(downloaded_size / total_size * 100);
-                log_info("\rdownload progress:%d", tmp);
+                printf("\rdownload progress:%ld\n", tmp);
                 return 0;
         }
         bool IsDownFinished(void) { return m_down_finished;  }
@@ -59,19 +61,25 @@ static void TestRequest();
 
 extern "C"
 {
-	extern HttpRequest* exp_newHttpRequest(const char* url = NULL);
+	extern HttpRequest* exp_CreateHttpRequest(const char* url = NULL);
+    extern void exp_DestroyHttpRequest(HttpRequest*& request);
 	extern int exp_SetRequestUrl(HttpRequest * request,const char* url);
 	extern int exp_SetRequestHeader(HttpRequest * request,const char* header);
-	extern int exp_SetRequestResultCallback(HttpRequest * request,void (__stdcall* Request_Callback)(int,bool,const char*,int));
+#ifdef _WIN32
+	extern int exp_SetRequestResultCallback(HttpRequest * request,void (__stdcall* Request_Callback)(int,bool,const char*,size_t));
+#else
+        extern int exp_SetRequestResultCallback(HttpRequest * request,void (* Request_Callback)(int,bool,const char*,size_t));
+#endif
 	extern void* exp_PerformRequest(HttpRequest * request,int type);
 	extern int exp_GetRequestId(HttpRequest * request);
-
-	extern void L_EstablishAnyLog(void* func);
 };
 
 static bool bFinished = false;
-
-static __stdcall void On_Agent_Request_Callback(int id, bool success, const char* data,int len)
+#ifdef _WIN32
+static __stdcall void On_Agent_Request_Callback(int id, bool success, const char* data,size_t len)
+#else
+static void On_Agent_Request_Callback(int id, bool success, const char* data, size_t len)
+#endif
 {
 	if (success && data)
 	{
@@ -82,19 +90,15 @@ static __stdcall void On_Agent_Request_Callback(int id, bool success, const char
 	bFinished = true;
 }
 
-static void default_print(int logType,const char* message)
-{
-	printf("[%d]:%s\n",logType,message);
-}
-
 static void TestRequest()
 {
-	HttpRequest* request = exp_newHttpRequest("www.baidu.com");
+        printf(">>>>>>>>>>>>>TestRequest\n");
+	HttpRequest* request = exp_CreateHttpRequest("http://www.qq.com");
 
 	exp_SetRequestResultCallback(request, On_Agent_Request_Callback);
 	exp_SetRequestHeader(request, "User-Agent:Mozilla/4.04[en](Win95;I;Nav)");
 
-        log_info("request-id:%d",exp_GetRequestId(request));
+        printf("request-id:%d\n",exp_GetRequestId(request));
 
 	H_HTTPHANDLE hRequest  = (H_HTTPHANDLE)exp_PerformRequest(request, 1);
 	if (hRequest)
@@ -102,22 +106,46 @@ static void TestRequest()
 		while (bFinished == false) h_Sleep(300);
 		long http_code;
 		if (request->GetHttpCode(hRequest, &http_code))
-                        log_info("http code:%d",http_code);
+                        printf("http code:%ld\n",http_code);
 
 		std::string header;
 		if (request->GetReceiveHeader(hRequest, &header))
 		{
-                        log_info("%s",header.c_str());
+                        printf("%s\n",header.c_str());
 		}
 
 		HttpRequest::Close(hRequest);
 	}
+    exp_DestroyHttpRequest(request);
+}
+
+void TestDownload()
+{
+        printf(">>>>>>>>>>>>TestDownload\n");
+        HttpDownloader download;
+        DownCallbackClass dc;
+        const char* down_url = "http://curl.haxx.se/ca/cacert.pem";
+        const char* down_file = "./BaiduPlayer.exe";
+        printf("download %s\n", down_url);
+        download.SetDownloadUrl(down_url);
+        download.SetProgressCallback(std::bind(&DownCallbackClass::down_callback, &dc, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3));
+        download.SetResultCallback(std::bind(&DownCallbackClass::DownResultCallback, &dc, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3));
+        download.DownloadFile(down_file);
+        //download.SetTimeout(3);
+        H_HTTPHANDLE hDownload = download.StartDownload(HttpDownloader::DOWN_ASYNC);
+        if (hDownload)
+        {
+                while (dc.IsDownFinished() == false)
+                {
+                        h_Sleep(300);
+                }
+                //to do download finish clean up
+                HttpDownloader::Close(hDownload);
+        }
 }
 
 int main(int argc, char* argv[])
 {
-	L_EstablishAnyLog((void*)default_print);
-
 //         MyResultClass mc;
 // 
 //         HttpRequest request;
@@ -142,28 +170,9 @@ int main(int argc, char* argv[])
 //                 HttpRequest::Close(hRequest);
 //         }
 
-	TestRequest();
+    //    TestRequest();
 
-
-        HttpDownloader download;
-        DownCallbackClass dc;
-        const char* down_url = "http://dlsw.baidu.com/sw-search-sp/soft/71/10998/OfflineBaiduPlayer_151_V4.1.2.263.1432003947.exe";
-        const char* down_file = "BaiduPlayer.exe";
-
-        download.SetDownloadUrl(down_url);
-        download.SetProgressCallback(std::bind(&DownCallbackClass::down_callback, &dc, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3));
-        download.SetResultCallback(std::bind(&DownCallbackClass::DownResultCallback, &dc, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3));
-        download.DownloadFile(down_file);
-        H_HTTPHANDLE hDownload = download.StartDownload(HttpDownloader::DOWN_ASYNC);
-        if (hDownload)
-        {
-                while (dc.IsDownFinished() == false)
-                {
-                        h_Sleep(300);
-                }
-                //to do download finish clean up
-                HttpDownloader::Close(hDownload);
-        }
+        TestDownload();
 
         return 0;
 }
