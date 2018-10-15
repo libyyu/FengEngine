@@ -1345,14 +1345,6 @@ double HttpDownloader::DownloadHelper::GetDownloadFileSize()
 
         if (handle)
         {
-            if (m_url.substr(0, 5) == "https")
-            {
-                curl_easy_setopt(handle, CURLOPT_SSL_VERIFYPEER, 0L);
-                curl_easy_setopt(handle, CURLOPT_SSL_VERIFYHOST, 0L);
-            }
-            //curl_easy_setopt(handle, CURLOPT_SSL_VERIFYPEER, true);
-            //curl_easy_setopt(handle, CURLOPT_CAINFO, "/Users/lidengfeng/Downloads/cacert.pem");
-
             curl_easy_setopt(handle, CURLOPT_URL, m_url.c_str());
             curl_easy_setopt(handle, CURLOPT_HEADER, 1);
             curl_easy_setopt(handle, CURLOPT_NOBODY, 1);
@@ -1444,8 +1436,8 @@ int HttpDownloader::DownloadHelper::DoDownload(ThreadChunk* thread_chunk)
     curl_easy_setopt(curl_handle, CURLOPT_XFERINFOFUNCTION, HttpHelper::progress_callback);
     curl_easy_setopt(curl_handle, CURLOPT_XFERINFODATA, thread_chunk);
 
-    //curl_easy_setopt(curl_handle, CURLOPT_LOW_SPEED_LIMIT, 1L);
-    //curl_easy_setopt(curl_handle, CURLOPT_LOW_SPEED_TIME, 5L);
+    curl_easy_setopt(curl_handle, CURLOPT_LOW_SPEED_LIMIT, 1L);
+    curl_easy_setopt(curl_handle, CURLOPT_LOW_SPEED_TIME, 5L);
 
     if (thread_chunk->_endidx != 0)
     {

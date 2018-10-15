@@ -124,7 +124,7 @@ void TestDownload()
         printf(">>>>>>>>>>>>TestDownload\n");
         HttpDownloader download;
         DownCallbackClass dc;
-        const char* down_url = "http://curl.haxx.se/ca/cacert.pem";
+        const char* down_url = "https://www.baidu.com";
         const char* down_file = "./BaiduPlayer.exe";
         printf("download %s\n", down_url);
         download.SetDownloadUrl(down_url);
@@ -170,7 +170,7 @@ int main(int argc, char* argv[])
 //                 HttpRequest::Close(hRequest);
 //         }
 
-    //    TestRequest();
+        TestRequest();
 
         TestDownload();
 
