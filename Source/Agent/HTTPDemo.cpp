@@ -2,6 +2,7 @@
 //
 
 #include "HTTPRequest.hpp"
+#include "HTTPHelper.h"
 
 #include <iostream>
 #include <string>
@@ -27,7 +28,7 @@ public:
         int down_callback(double total_size, double downloaded_size, void* userdata)
         {
                 long tmp = static_cast<long>(downloaded_size / total_size * 100);
-                printf("\rdownload progress:%ld\n", tmp);
+                printf("\rdownload progress:%ld%%\n", tmp);
                 return 0;
         }
         bool IsDownFinished(void) { return m_down_finished;  }
@@ -144,35 +145,86 @@ void TestDownload()
         }
 }
 
+#ifdef _WIN32
+static __stdcall void On_HTTP_Request_Callback(bool success, const std::string& data, void* userdata)
+#else
+static void On_HTTP_Request_Callback(bool success, const std::string& data, void* userdata)
+#endif
+{
+    if (success)
+    {
+        std::ofstream outfile;
+        outfile.open("baidu.html", std::ios_base::binary | std::ios_base::trunc);
+        if (outfile.good()) outfile.write(data.c_str(), data.size());
+    }
+    else
+        printf("error:%s\n", data.c_str());
+}
+
+class MyRequestHandle : public IRequestHandle
+{
+public:
+    ~MyRequestHandle()
+    {
+        printf("~MyRequestHandle\n");
+    }
+    void OnRequestFinished(bool success, const std::string& content, void* userdata)
+    {
+        if(!success)
+        {
+            std::cerr << "download error:" << content.c_str() << std::endl;
+        }
+        else
+        {
+            std::cout << "Download Finished!" << std::endl;
+        }
+    }
+    int  OnProgress(double total_size, double handle_size, void* userdata)
+    {
+        long tmp = static_cast<long>(handle_size / total_size * 100);
+        printf("\rdownload progress:%ld%%\n", tmp);
+        
+        return 0;
+    }
+};
+
+void TestHTTPRequest()
+{
+    auto v = HTTPRequest::Create(true);
+    HTTPRequest& http = *v;
+    http.SetUrl("https://www.baidu.com");
+    http.SetSSLVerify(true);
+    http.SetTimeout(5000);
+    http.SetResultCallback(On_HTTP_Request_Callback);
+    http.SetRequestHeader("User-Agent:Mozilla/4.04[en](Win95;I;Nav)");
+    http.Run(false, true);
+    
+    //HTTPRequest::Tick(0);
+}
+void TestHTTPRequestDownload()
+{
+    auto v = HTTPRequest::Create(true);
+    HTTPRequest& http = *v;
+    static MyRequestHandle dc;
+    http.SetUrl("https://curl.haxx.saae/download/curl-7.61.1.tar.gz");
+    http.SetSSLVerify(true);
+    http.SetTimeout(50000);
+    const char* down_file = "./cur3.tar.gz";
+    http.SetRequestHandle(&dc);
+    http.SetDownloadPath(down_file);
+    http.Run(true, true);
+}
+
 int main(int argc, char* argv[])
 {
-//         MyResultClass mc;
-// 
-//         HttpRequest request;
-//         request.SetRequestUrl("http://10.236.100.16/hdwiki/index.php?doc-view-285");
-//         request.SetResultCallback(std::bind(&MyResultClass::MyRequestResultCallback, &mc, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3));
-//         request.SetRequestHeader("User-Agent:Mozilla/4.04[en](Win95;I;Nav)");
-// 
-//         H_HTTPHANDLE hRequest = request.PerformRequest(HttpRequest::REQUEST_ASYNC);
-//         if (hRequest)
-//         {
-//                 while (mc.IsRequestFinish() == false) h_Sleep(300);
-//                 long http_code;
-//                 if (request.GetHttpCode(hRequest, &http_code))
-//                         std::cout << "http code: " << http_code << std::endl;
-// 
-//                 std::string header;
-//                 if (request.GetReceiveHeader(hRequest, &header))
-//                 {
-//                         std::cout << header << std::endl;
-//                 }
-// 
-//                 HttpRequest::Close(hRequest);
-//         }
+        //TestRequest();
 
-        TestRequest();
-
-        TestDownload();
-
+        //TestDownload();
+    
+   // TestHTTPRequest();
+    TestHTTPRequestDownload();
+    
+    HTTPRequest::Tick(0);
+    
         return 0;
 }
