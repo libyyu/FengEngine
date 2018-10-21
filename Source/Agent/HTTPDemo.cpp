@@ -166,7 +166,11 @@ class MyRequestHandle : public IRequestHandle
 public:
     ~MyRequestHandle()
     {
-        printf("~MyRequestHandle\n");
+        
+    }
+    void OnDelete(void* userdata)
+    {
+        printf("Need Destroy MyRequestHandle\n");
     }
     void OnRequestFinished(bool success, const std::string& content, void* userdata)
     {
@@ -206,7 +210,7 @@ void TestHTTPRequestDownload()
     auto v = HTTPRequest::Create(true);
     HTTPRequest& http = *v;
     static MyRequestHandle dc;
-    http.SetUrl("https://curl.haxx.saae/download/curl-7.61.1.tar.gz");
+    http.SetUrl("http://dlsw.baidu.com/sw-search-sp/soft/71/10998/OfflineBaiduPlayer_151_V4.1.2.263.1432003947.exe");
     http.SetSSLVerify(true);
     http.SetTimeout(50000);
     const char* down_file = "./cur3.tar.gz";
@@ -221,7 +225,7 @@ int main(int argc, char* argv[])
 
         //TestDownload();
     
-   // TestHTTPRequest();
+    TestHTTPRequest();
     TestHTTPRequestDownload();
     
     HTTPRequest::Tick(0);

@@ -105,24 +105,33 @@ public:
     }
     bool FindRequest(HTTPRequest* request)
     {
-        DoHTTPLock http_lock(s_request_lock);
+        s_request_lock->Lock();
         for(HTTPRequest* v: s_async_requests)
         {
             if(v == request)
+            {
+                s_request_lock->UnLock();
                 return true;
+            }
         }
+        s_request_lock->UnLock();
         return false;
     }
     void RemoveRequest(HTTPRequest*& request)
     {
-        DoHTTPLock http_lock(s_request_lock);
+        s_request_lock->Lock();
         s_async_requests.remove(request);
-        HTTPRequest::Destroy(request);
+        s_request_lock->UnLock();
+        if(request->IsAutoDestroy())
+        {
+            HTTPRequest::Destroy(request);
+        }
     }
     void AddRequest(HTTPRequest* request)
     {
-        DoHTTPLock http_lock(s_request_lock);
+        s_request_lock->Lock();
         s_async_requests.push_back(request);
+        s_request_lock->UnLock();
     }
     
     void Tick(float dt)
@@ -161,7 +170,6 @@ private:
     int                m_id;
     int                m_retry_times;
     long               m_time_out;
-    bool               m_close_self;
     bool               m_is_running;
     bool               m_is_download;
     long               m_http_code;
@@ -221,10 +229,9 @@ public:
 #else
     , m_perform_thread(pthread_t())
 #endif
-    , m_close_self(false)
     , m_is_running(false)
-    , m_retry_times(0)
-    , m_time_out(0)
+    , m_retry_times(HTTPRequest::s_kRetryCount)
+    , m_time_out(HTTPRequest::s_kTimeout)
     , m_http_code(0)
     , m_post_data(nullptr)
     , m_post_data_size(0)
@@ -235,7 +242,7 @@ public:
     , m_is_download(false)
     , m_downloaded_size(0.0)
     , m_total_size(0.0)
-    , m_thread_count(1)
+    , m_thread_count(HTTPRequest::s_kThreadCount)
     , m_multi_download(false)
     , m_download_fail(false)
     , m_is_cancel(false)
@@ -266,19 +273,8 @@ public:
         delete m_post_data;
         m_post_data = nullptr;
         
-        try {
-#ifdef _WIN32
-            if (m_perform_thread)
-            {
-                CloseHandle(m_perform_thread);
-                m_perform_thread = nullptr;
-            }
-#else
-            pthread_kill(m_perform_thread, 0);
-#endif
-        } catch(std::exception e) {
+        Close();
         
-        }
         m_owner = nullptr;
         m_is_running = false;
     }
@@ -323,6 +319,10 @@ public:
     void SetUserData(void* userdata)
     {
         m_userdata = userdata;
+    }
+    void* GetUserData()
+    {
+        return m_userdata;
     }
 
     void SetProgressCallback(ProgressCallback pc)
@@ -391,7 +391,6 @@ public:
     }
     
     long     GetHttpCode() { return m_http_code; }
-    bool     SelfClose(void) { return m_close_self; }
     
 public:
     int Run(bool async)
@@ -421,8 +420,6 @@ public:
     }
     void Close()
     {
-        bool basync = false;
-        
         if(HTTPHelper::Instance()->FindRequest(m_owner))
         {
 #ifdef _WIN32
@@ -431,19 +428,27 @@ public:
             if(pthread_kill(m_perform_thread, 0) != 0)
 #endif
             {
-                HTTPHelper::Instance()->RemoveRequest(m_owner);
+                printf("Failed to close thread.\n");
             }
-            else
-            {
-                m_close_self = true;
-            }
-            basync = true;
-        }
-        
-        if (basync == false)
-        {
+            HTTPHelper::Instance()->RemoveRequest(m_owner);
             m_is_cancel = true;
         }
+        
+        try {
+#ifdef _WIN32
+            if (m_perform_thread)
+            {
+                CloseHandle(m_perform_thread);
+                m_perform_thread = nullptr;
+            }
+#else
+            pthread_kill(m_perform_thread, 0);
+#endif
+        } catch(std::exception e) {
+            
+        }
+        
+        m_is_running = false;
     }
 protected:
     void    ReqeustResultDefault(bool success, const std::string& content)
@@ -610,7 +615,6 @@ protected:
         curl_easy_setopt(curl_handle, CURLOPT_NOSIGNAL, 1L);
         curl_easy_setopt(curl_handle, CURLOPT_POST, 0L);
         
-        //curl_easy_setopt(curl_handle, CURLE_OPERATION_TIMEDOUT, 0L);
         curl_easy_setopt(curl_handle, CURLOPT_FORBID_REUSE, 1);
         curl_easy_setopt(curl_handle, CURLOPT_CONNECTTIMEOUT_MS, thread_chunk->_download->m_time_out); // ?
         curl_easy_setopt(curl_handle, CURLOPT_TIMEOUT_MS, 0);   //0 means block always
@@ -754,7 +758,7 @@ protected:
             curl_code = curl_easy_setopt(curl_handle, CURLOPT_WRITEDATA, &m_receive_content);
             curl_code = curl_easy_setopt(curl_handle, CURLOPT_NOPROGRESS, 1);
             curl_code = curl_easy_setopt(curl_handle, CURLOPT_NOSIGNAL, 1);
-            curl_code = curl_easy_setopt(curl_handle, CURLOPT_CONNECTTIMEOUT_MS, 1000);
+            curl_code = curl_easy_setopt(curl_handle, CURLOPT_CONNECTTIMEOUT_MS, 5000);
             curl_code = curl_easy_setopt(curl_handle, CURLOPT_TIMEOUT_MS, m_time_out);
             curl_code = curl_easy_setopt(curl_handle, CURLOPT_SSL_VERIFYPEER, m_enable_ssl);
             curl_code = curl_easy_setopt(curl_handle, CURLOPT_SSL_VERIFYHOST, m_enable_ssl);
@@ -1104,6 +1108,11 @@ void         HTTPRequest::SetUserData(void* userdata)
     if(!_impl) return;
     return _impl->SetUserData(userdata);
 }
+void*       HTTPRequest::GetUserData()
+{
+    if(!_impl) return nullptr;
+    return _impl->GetUserData();
+}
 int         HTTPRequest::GetRequestId()
 {
     if(!_impl) return 0;
@@ -1206,6 +1215,7 @@ long         HTTPRequest::GetHttpCode()
 
 HTTPRequest::HTTPRequest(bool init)
 :_impl(nullptr)
+,_auto_destroy(true)
 {
     if(init) Init();
 }

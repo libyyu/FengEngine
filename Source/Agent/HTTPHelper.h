@@ -33,10 +33,13 @@ class HTTPRequest
     friend class HTTPHelper;
     friend class HTTPImpl;
     std::shared_ptr<class HTTPImpl> _impl;
+    bool   _auto_destroy;
     HTTPRequest(bool init = false);
     ~HTTPRequest();
 public:
     void         Init();
+    bool         IsAutoDestroy(){ return _auto_destroy; }
+    void         SetAutoDestroy(bool autoDestroy) { _auto_destroy = autoDestroy; }
     int          Run(bool download, bool async);
     static HTTPRequest* Create(bool init = false);
     static void  Destroy(HTTPRequest*& request);
@@ -47,6 +50,7 @@ public:
     void         SetUrl(const std::string& url);
     void         SetMovedUrl(bool get_moved_url);
     void         SetUserData(void* userdata);
+    void*        GetUserData();
     int          GetRequestId();
     void         SetProgressCallback(ProgressCallback pc);
     void         SetResultCallback(ResultCallback rc);
