@@ -210,9 +210,10 @@ void TestHTTPRequestDownload()
     auto v = HTTPRequest::Create(true);
     HTTPRequest& http = *v;
     static MyRequestHandle dc;
-    http.SetUrl("http://dlsw.baidu.com/sw-search-sp/soft/71/10998/OfflineBaiduPlayer_151_V4.1.2.263.1432003947.exe");
+    http.SetUrl("https://curl.haxx.se/download/curl-7.61.1.tar.gz");
     http.SetSSLVerify(true);
-    http.SetTimeout(50000);
+    http.SetTimeout(5000);
+    http.SetDownloadRange(0, 3986000);
     const char* down_file = "./cur3.tar.gz";
     http.SetRequestHandle(&dc);
     http.SetDownloadPath(down_file);
@@ -225,7 +226,7 @@ int main(int argc, char* argv[])
 
         //TestDownload();
     
-    TestHTTPRequest();
+   // TestHTTPRequest();
     TestHTTPRequestDownload();
     
     HTTPRequest::Tick(0);

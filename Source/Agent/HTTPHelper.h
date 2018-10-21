@@ -62,6 +62,7 @@ public:
     bool         SetDownloadMode(bool is_download);
     void         SetDownloadPath(const std::string& path);
     void         SetDownloadThreadCount(size_t count);
+    void         SetDownloadRange(int from, int to = -1);
     
     void         SetRequestHeader(const std::map<std::string, std::string>& headers);
     void         SetRequestHeader(const std::string& header);

@@ -12,7 +12,7 @@
 #if PLATFORM_TARGET == PLATFORM_WINDOWS
 #include <tchar.h>
 #define STD_CALL  __stdcall
-#define STDCALL  __stdcall
+#define STDCALL   __stdcall
 #define CALLBACK  __stdcall
 #define WINAPI    __stdcall
 #else

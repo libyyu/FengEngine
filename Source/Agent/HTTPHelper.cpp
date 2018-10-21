@@ -1,5 +1,6 @@
 
 #include <list>
+#include <set>
 #include <regex>
 #include <sstream>
 #include <exception>
@@ -54,7 +55,7 @@ private:
 class HTTPHelper
 {
 private:
-    std::list<HTTPRequest* >        s_async_requests;
+    std::set<HTTPRequest*>          s_async_requests;
     std::shared_ptr<HTTPLock>       s_request_lock;
     CURLSH*                         s_share_handle;
     static int s_id;
@@ -106,13 +107,11 @@ public:
     bool FindRequest(HTTPRequest* request)
     {
         s_request_lock->Lock();
-        for(HTTPRequest* v: s_async_requests)
+        auto p = s_async_requests.find(request);
+        if(p != s_async_requests.end())
         {
-            if(v == request)
-            {
-                s_request_lock->UnLock();
-                return true;
-            }
+            s_request_lock->UnLock();
+            return true;
         }
         s_request_lock->UnLock();
         return false;
@@ -120,7 +119,9 @@ public:
     void RemoveRequest(HTTPRequest*& request)
     {
         s_request_lock->Lock();
-        s_async_requests.remove(request);
+        auto p = s_async_requests.find(request);
+        if(p != s_async_requests.end())
+            s_async_requests.erase(p);
         s_request_lock->UnLock();
         if(request->IsAutoDestroy())
         {
@@ -130,7 +131,7 @@ public:
     void AddRequest(HTTPRequest* request)
     {
         s_request_lock->Lock();
-        s_async_requests.push_back(request);
+        s_async_requests.insert(request);
         s_request_lock->UnLock();
     }
     
@@ -175,10 +176,13 @@ private:
     long               m_http_code;
     double             m_downloaded_size;
     double             m_total_size;
-    size_t             m_thread_count;
+    int                m_thread_count;
+    int                m_download_range_begin;
+    int                m_download_range_end;
     bool               m_multi_download;
     bool               m_download_fail;
     bool               m_is_cancel;
+    bool               m_is_async;
     
     std::string        m_url;
     std::string        m_download_path;
@@ -204,8 +208,8 @@ private:
     
     typedef struct tDownloadThreadChunk
     {
-        static size_t counter;
-        size_t      _id;
+        static int  counter;
+        int         _id;
         FILE*       _fp;
         long        _startidx;
         long        _endidx;
@@ -243,10 +247,13 @@ public:
     , m_downloaded_size(0.0)
     , m_total_size(0.0)
     , m_thread_count(HTTPRequest::s_kThreadCount)
+    , m_download_range_begin(0)
+    , m_download_range_end(0)
     , m_multi_download(false)
     , m_download_fail(false)
     , m_is_cancel(false)
     , m_download_lock(nullptr)
+    , m_is_async(false)
     
     , m_enable_ssl(false)
     , m_enable_redirect(true)
@@ -312,10 +319,16 @@ public:
     {
         m_download_path = path;
     }
-    void SetDownloadThreadCount(size_t count)
+    void SetDownloadThreadCount(int count)
     {
         m_thread_count = count;
     }
+    void SetDownloadRange(int from, int to)
+    {
+        m_download_range_begin = from;
+        m_download_range_end = to;
+    }
+    
     void SetUserData(void* userdata)
     {
         m_userdata = userdata;
@@ -399,7 +412,7 @@ public:
         {
             return 0;
         }
-        
+        m_is_async = async;
         HTTPHelper::Instance()->AddRequest(m_owner);
         
         if (!async)
@@ -417,6 +430,18 @@ public:
 #endif
             return 0;
         }
+    }
+    void Stop()
+    {
+        if(!m_is_running)
+        {
+            return;
+        }
+        Close();
+    }
+    int Resume()
+    {
+        return Run(m_is_async);
     }
     void Close()
     {
@@ -856,13 +881,13 @@ protected:
                 
                 if (i < m_thread_count - 1)
                 {
-                    thread_chunk->_startidx = i * gap;
+                    thread_chunk->_startidx = i * gap + m_download_range_begin;
                     thread_chunk->_endidx = thread_chunk->_startidx + gap - 1;
                 }
                 else
                 {
                     thread_chunk->_startidx = i * gap;
-                    thread_chunk->_endidx = -1;
+                    thread_chunk->_endidx = m_download_range_end;
                 }
                 
 #ifdef _WIN32
@@ -897,8 +922,8 @@ protected:
             DownloadThreadChunk* thread_chunk = new DownloadThreadChunk;
             thread_chunk->_fp = fp;
             thread_chunk->_download = this;
-            thread_chunk->_startidx = 0;
-            thread_chunk->_endidx = 0;
+            thread_chunk->_startidx = m_download_range_begin;
+            thread_chunk->_endidx = m_download_range_end;
             down_code = DoDownload(thread_chunk);
         }
         
@@ -959,6 +984,22 @@ protected:
                 curl_easy_setopt(handle, CURLOPT_TIMEOUT_MS, m_time_out);   //0 means block always
                 curl_easy_setopt(handle, CURLOPT_SSL_VERIFYPEER, m_enable_ssl);
                 curl_easy_setopt(handle, CURLOPT_SSL_VERIFYHOST, m_enable_ssl);
+                
+                if(m_download_range_begin >=0)
+                {
+                    std::string down_range;
+                    std::ostringstream ostr;
+                    
+                    ostr << m_download_range_begin << "-";
+                    
+                    if(m_download_range_end >0)
+                    {
+                        ostr << m_download_range_end;
+                    }
+                    down_range = ostr.str();
+                    curl_easy_setopt(handle, CURLOPT_RANGE, down_range.c_str());
+                }
+                
                 //set force http redirect
                 if(m_enable_redirect)
                 {
@@ -1080,7 +1121,7 @@ protected:
     }
 };
 
-size_t HTTPImpl::DownloadThreadChunk::counter = 0;
+int HTTPImpl::DownloadThreadChunk::counter = 0;
 ////////////////////////////////////////////////////////////////////////
 ////
 void         HTTPRequest::SetRetryTimes(int retry_times)
@@ -1189,7 +1230,13 @@ void         HTTPRequest::SetDownloadPath(const std::string& path)
 void         HTTPRequest::SetDownloadThreadCount(size_t count)
 {
     if(!_impl) return;
-    return _impl->SetDownloadThreadCount(count);
+    return _impl->SetDownloadThreadCount((int)count);
+}
+
+void         HTTPRequest::SetDownloadRange(int from, int to)
+{
+    if(!_impl) return;
+    return _impl->SetDownloadRange(from, to);
 }
 
 bool         HTTPRequest::GetHeader(std::string* header)

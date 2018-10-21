@@ -18,6 +18,8 @@
 #define PLATFORM_TARGET        PLATFORM_ANDROID
 #elif defined(IOS) || defined(_IOS) || defined(__IOS__)
 #define PLATFORM_TARGET        PLATFORM_IOS
+#elif defined(LINUX) || defined(_LINUX) || defined(__LINUX__) || defined(__linux)
+#define PLATFORM_TARGET        PLATFORM_LINUX
 #elif defined(MACOSX) || defined(_MACOSX) || defined(__MACOSX__) || (defined(__APPLE__) && defined(__MACH__))
 #define PLATFORM_TARGET        PLATFORM_MACOSX
 #else
@@ -26,6 +28,8 @@
 /********************************************************************************/
 /*END PLATFORM*/
 /********************************************************************************/
+#if PLATFORM_TARGET == PLATFORM_WINDOWS
 
+#endif
 
 #endif//__RZPLATFORM_HPP__

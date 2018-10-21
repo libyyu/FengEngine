@@ -9,8 +9,6 @@
 #ifndef _LUA_SCRIPT_HPP__
 #define _LUA_SCRIPT_HPP__
 
-#include "../../base/RzType.hpp"
-
 //#if !SUPPORT_PARAMS
 //#warning "This library needs at least a C++11 compliant compiler, so some functions can not used."
 //#endif
@@ -31,6 +29,14 @@
 #define LUA_FUNC_REG(name) { #name, lua_##name }
 
 #define SUPPORT_PARAMS 1
+
+#ifdef _MSC_VER
+typedef __int64           				t_int64;
+typedef unsigned __int64  				t_uint64;
+#else
+typedef __int64_t         				t_int64;
+typedef __uint64_t        				t_uint64;
+#endif
 
 namespace lua
 {
@@ -93,11 +99,11 @@ namespace lua
 		}
 		static void from_stack(lua_State* l, int pos, lua_nil_t* )
 		{
-			LUA_CHECK_ERROR(0 != lua_isnil(l, pos), LUA_TNIL, pos);
+			LUA_CHECK_ERROR(0 != lua_isnoneornil(l, pos), LUA_TNIL, pos);
 		}
 		static bool try_get(lua_State * l, int pos, lua_nil_t*)
 		{
-			return lua_isnil(l, pos);
+			return lua_isnoneornil(l, pos);
 		}
 	};
 
@@ -126,7 +132,7 @@ namespace lua
 		}
 		static void from_stack(lua_State* l, int pos, lua_bytes_t* value)
 		{
-			if (lua_isnil(l, pos))
+			if (lua_isnoneornil(l, pos))
 			{
 				(*value).init(nullptr);
 				return;
@@ -137,7 +143,7 @@ namespace lua
 		}
 		static bool try_get(lua_State * l, int pos, lua_bytes_t* value)
 		{
-			if (lua_isnil(l, pos) || lua_isstring(l, pos))
+			if (lua_isnoneornil(l, pos) || lua_isstring(l, pos))
 			{
 				from_stack(l, pos, value);
 				return true;
@@ -157,7 +163,7 @@ namespace lua
 		}
 		static void from_stack(lua_State* l, int pos, char* value)
 		{
-			if (lua_isnil(l, pos))
+			if (lua_isnoneornil(l, pos))
 			{
 				return;
 			}
@@ -166,7 +172,7 @@ namespace lua
 		}
 		static bool try_get(lua_State * l, int pos, char* value)
 		{
-			if (lua_isnil(l, pos) || lua_isnumber(l, pos))
+			if (lua_isnoneornil(l, pos) || lua_isnumber(l, pos))
 			{
 				from_stack(l, pos, value);
 				return true;
@@ -186,7 +192,7 @@ namespace lua
 		}
 		static void from_stack(lua_State* l, int pos, unsigned char* value)
 		{
-			if (lua_isnil(l, pos))
+			if (lua_isnoneornil(l, pos))
 			{
 				return;
 			}
@@ -195,7 +201,7 @@ namespace lua
 		}
 		static bool try_get(lua_State * l, int pos, unsigned char* value)
 		{
-			if (lua_isnil(l, pos) || lua_isnumber(l, pos))
+			if (lua_isnoneornil(l, pos) || lua_isnumber(l, pos))
 			{
 				from_stack(l, pos, value);
 				return true;
@@ -215,7 +221,7 @@ namespace lua
 		}
 		static void from_stack(lua_State* l, int pos, signed char* value)
 		{
-			if (lua_isnil(l, pos))
+			if (lua_isnoneornil(l, pos))
 			{
 				return;
 			}
@@ -224,7 +230,7 @@ namespace lua
 		}
 		static bool try_get(lua_State * l, int pos, signed char* value)
 		{
-			if (lua_isnil(l, pos) || lua_isnumber(l, pos))
+			if (lua_isnoneornil(l, pos) || lua_isnumber(l, pos))
 			{
 				from_stack(l, pos, value);
 				return true;
@@ -247,7 +253,7 @@ namespace lua
 		}
 		static void from_stack(lua_State* l, int pos, char** value)
 		{
-			if (lua_isnil(l, pos))
+			if (lua_isnoneornil(l, pos))
 			{
 				*value = 0;
 				return;
@@ -257,7 +263,7 @@ namespace lua
 		}
 		static bool try_get(lua_State * l, int pos, char** value)
 		{
-			if (lua_isnil(l, pos) || lua_isstring(l, pos))
+			if (lua_isnoneornil(l, pos) || lua_isstring(l, pos))
 			{
 				from_stack(l, pos, value);
 				return true;
@@ -280,7 +286,7 @@ namespace lua
 		}
 		static void from_stack(lua_State* l, int pos, const char** value)
 		{
-			if (lua_isnil(l, pos))
+			if (lua_isnoneornil(l, pos))
 			{
 				*value = 0;
 				return;
@@ -290,7 +296,7 @@ namespace lua
 		}
 		static bool try_get(lua_State * l, int pos, const char** value)
 		{
-			if (lua_isnil(l, pos) || lua_isstring(l, pos))
+			if (lua_isnoneornil(l, pos) || lua_isstring(l, pos))
 			{
 				from_stack(l, pos, value);
 				return true;
@@ -313,7 +319,7 @@ namespace lua
 		}
 		static void from_stack(lua_State* l, int pos, const char** value)
 		{
-			if (lua_isnil(l, pos))
+			if (lua_isnoneornil(l, pos))
 			{
 				*value = 0;
 				return;
@@ -323,7 +329,7 @@ namespace lua
 		}
 		static bool try_get(lua_State * l, int pos, const char** value)
 		{
-			if (lua_isnil(l, pos) || lua_isstring(l, pos))
+			if (lua_isnoneornil(l, pos) || lua_isstring(l, pos))
 			{
 				from_stack(l, pos, value);
 				return true;
@@ -346,7 +352,7 @@ namespace lua
 		}
 		static void from_stack(lua_State* l, int pos, const char** value)
 		{
-			if (lua_isnil(l, pos))
+			if (lua_isnoneornil(l, pos))
 			{
 				*value = 0;
 				return;
@@ -356,7 +362,7 @@ namespace lua
 		}
 		static bool try_get(lua_State * l, int pos, const char** value)
 		{
-			if (lua_isnil(l, pos) || lua_isstring(l, pos))
+			if (lua_isnoneornil(l, pos) || lua_isstring(l, pos))
 			{
 				from_stack(l, pos, value);
 				return true;
@@ -376,7 +382,7 @@ namespace lua
 		}
 		static void from_stack(lua_State* l, int pos, bool* value)
 		{
-			LUA_CHECK_ERROR(lua_isboolean(l, pos) || lua_isnil(l, pos), LUA_TBOOLEAN, pos);
+			LUA_CHECK_ERROR(lua_isboolean(l, pos) || lua_isnoneornil(l, pos), LUA_TBOOLEAN, pos);
 			if (lua_isboolean(l, pos))
 			{
 				*value = (0 != lua_toboolean(l, pos));
@@ -388,7 +394,7 @@ namespace lua
 		}
 		static bool try_get(lua_State * l, int pos, bool* value)
 		{
-			if (lua_isnil(l, pos) || lua_isboolean(l, pos))
+			if (lua_isnoneornil(l, pos) || lua_isboolean(l, pos))
 			{
 				from_stack(l, pos, value);
 				return true;
@@ -599,9 +605,9 @@ namespace lua
 	};
 
 	template<>
-	struct lua_op_t<int64>
+	struct lua_op_t<t_int64>
 	{
-		static int push_stack(lua_State* l, int64 value)
+		static int push_stack(lua_State* l, t_int64 value)
 		{
 			std::stringstream ss;
 			ss << value;
@@ -609,9 +615,9 @@ namespace lua
 			lua_pushlstring(l, str.c_str(), str.length());
 			return 1;
 		}
-		static void from_stack(lua_State* l, int pos, int64* value)
+		static void from_stack(lua_State* l, int pos, t_int64* value)
 		{
-			if (lua_isnil(l, pos))
+			if (lua_isnoneornil(l, pos))
 			{
 				return;
 			}
@@ -619,17 +625,17 @@ namespace lua
 			size_t len = 0;
 			const char* str = luaL_checklstring(l, pos, &len);
 #if SUPPORT_PARAMS
-			*value = (int64)atoll(str);
+			*value = (t_int64)atoll(str);
 #else
 			std::istringstream iss(str);
-			int64 num;
+			t_int64 num;
 			iss >> num;
-			*value = (int64)num;
+			*value = (t_int64)num;
 #endif
 		}
-		static bool try_get(lua_State * l, int pos, int64* value)
+		static bool try_get(lua_State * l, int pos, t_int64* value)
 		{
-			if (lua_isnil(l, pos) || lua_isstring(l, pos))
+			if (lua_isnoneornil(l, pos) || lua_isstring(l, pos))
 			{
 				from_stack(l, pos, value);
 				return true;
@@ -640,9 +646,9 @@ namespace lua
 	};
 
 	template<>
-	struct lua_op_t<uint64>
+	struct lua_op_t<t_uint64>
 	{
-		static int push_stack(lua_State* l, uint64 value)
+		static int push_stack(lua_State* l, t_uint64 value)
 		{
 			std::stringstream ss;
 			ss << value;
@@ -650,9 +656,9 @@ namespace lua
 			lua_pushlstring(l, str.c_str(), str.length());
 			return 1;
 		}
-		static void from_stack(lua_State* l, int pos, uint64* value)
+		static void from_stack(lua_State* l, int pos, t_uint64* value)
 		{
-			if (lua_isnil(l, pos))
+			if (lua_isnoneornil(l, pos))
 			{
 				return;
 			}
@@ -660,17 +666,17 @@ namespace lua
 			size_t len = 0;
 			const char* str = luaL_checklstring(l, pos, &len);
 #if SUPPORT_PARAMS
-			*value = (uint64)atoll(str);
+			*value = (t_uint64)atoll(str);
 #else
 			std::istringstream iss(str);
-			uint64 num;
+			t_uint64 num;
 			iss >> num;
-			*value = (uint64)num;
+			*value = (t_uint64)num;
 #endif
 		}
-		static bool try_get(lua_State * l, int pos, uint64* value)
+		static bool try_get(lua_State * l, int pos, t_uint64* value)
 		{
-			if (lua_isnil(l, pos) || lua_isstring(l, pos))
+			if (lua_isnoneornil(l, pos) || lua_isstring(l, pos))
 			{
 				from_stack(l, pos, value);
 				return true;
@@ -690,7 +696,7 @@ namespace lua
 		}
 		static void from_stack(lua_State* l, int pos, std::string* value)
 		{
-			if (lua_isnil(l, pos))
+			if (lua_isnoneornil(l, pos))
 			{
 				return;
 			}
@@ -701,7 +707,7 @@ namespace lua
 		}
 		static bool try_get(lua_State * l, int pos, std::string* value)
 		{
-			if (lua_isnil(l, pos) || lua_isstring(l, pos))
+			if (lua_isnoneornil(l, pos) || lua_isstring(l, pos))
 			{
 				from_stack(l, pos, value);
 				return true;
@@ -724,7 +730,7 @@ namespace lua
 		}
 		static bool try_get(lua_State * l, int pos, std::string* value)
 		{
-			if (lua_isnil(l, pos) || lua_isstring(l, pos))
+			if (lua_isnoneornil(l, pos) || lua_isstring(l, pos))
 			{
 				from_stack(l, pos, value);
 				return true;
@@ -747,7 +753,7 @@ namespace lua
 		}
 		static void from_stack(lua_State* l, int pos, void** value)
 		{
-			if (lua_isnil(l, pos))
+			if (lua_isnoneornil(l, pos))
 			{
 				*value = 0;
 				return;
@@ -757,7 +763,7 @@ namespace lua
 		}
 		static bool try_get(lua_State * l, int pos, void** value)
 		{
-			if (lua_isnil(l, pos) || lua_isuserdata(l, pos))
+			if (lua_isnoneornil(l, pos) || lua_isuserdata(l, pos))
 			{
 				from_stack(l, pos, value);
 				return true;
@@ -780,7 +786,7 @@ namespace lua
 		}
 		static void from_stack(lua_State* l, int pos, T** value)
 		{
-			if (lua_isnil(l, pos))
+			if (lua_isnoneornil(l, pos))
 			{
 				*value = 0;
 				return;
@@ -790,7 +796,7 @@ namespace lua
 		}
 		static bool try_get(lua_State * l, int pos, T** value)
 		{
-			if (lua_isnil(l, pos) || lua_isuserdata(l, pos))
+			if (lua_isnoneornil(l, pos) || lua_isuserdata(l, pos))
 			{
 				from_stack(l, pos, value);
 				return true;
@@ -816,7 +822,7 @@ namespace lua
 		}
 		static void from_stack(lua_State* l, int pos, lua_CFunction* value)
 		{
-			if (lua_isnil(l, pos))
+			if (lua_isnoneornil(l, pos))
 			{
 				*value = 0;
 				return;
@@ -826,7 +832,7 @@ namespace lua
 		}
 		static bool try_get(lua_State * l, int pos, lua_CFunction* value)
 		{
-			if (lua_isnil(l, pos) || lua_isfunction(l, pos))
+			if (lua_isnoneornil(l, pos) || lua_isfunction(l, pos))
 			{
 				from_stack(l, pos, value);
 				return true;
@@ -853,7 +859,7 @@ namespace lua
 		}
 		static void from_stack(lua_State* l, int pos, std::vector<T>*& value)
 		{
-			if (lua_isnil(l, pos))
+			if (lua_isnoneornil(l, pos))
 			{
 				return;
 			}
@@ -871,7 +877,7 @@ namespace lua
 		}
 		static bool try_get(lua_State * l, int pos, std::vector<T>*& value)
 		{
-			if (lua_isnil(l, pos) || lua_istable(l, pos))
+			if (lua_isnoneornil(l, pos) || lua_istable(l, pos))
 			{
 				from_stack(l, pos, value);
 				return true;
@@ -898,7 +904,7 @@ namespace lua
 		}
 		static void from_stack(lua_State* l, int pos, std::list<T>*& value)
 		{
-			if (lua_isnil(l, pos))
+			if (lua_isnoneornil(l, pos))
 			{
 				return;
 			}
@@ -917,7 +923,7 @@ namespace lua
 		}
 		static bool try_get(lua_State * l, int pos, std::list<T>*& value)
 		{
-			if (lua_isnil(l, pos) || lua_istable(l, pos))
+			if (lua_isnoneornil(l, pos) || lua_istable(l, pos))
 			{
 				from_stack(l, pos, value);
 				return true;
@@ -945,7 +951,7 @@ namespace lua
 
 		static void from_stack(lua_State* l, int pos, std::set<T>*& value)
 		{
-			if (lua_isnil(l, pos))
+			if (lua_isnoneornil(l, pos))
 			{
 				return;
 			}
@@ -963,7 +969,7 @@ namespace lua
 		}
 		static bool try_get(lua_State * l, int pos, std::set<T>*& value)
 		{
-			if (lua_isnil(l, pos) || lua_istable(l, pos))
+			if (lua_isnoneornil(l, pos) || lua_istable(l, pos))
 			{
 				from_stack(l, pos, value);
 				return true;
@@ -991,7 +997,7 @@ namespace lua
 
 		static void from_stack(lua_State* l, int pos, std::map<K, V>*& value)
 		{
-			if (lua_isnil(l, pos))
+			if (lua_isnoneornil(l, pos))
 			{
 				return;
 			}
@@ -1011,7 +1017,7 @@ namespace lua
 		}
 		static bool try_get(lua_State * l, int pos, std::map<K, V>*& value)
 		{
-			if (lua_isnil(l, pos) || lua_istable(l, pos))
+			if (lua_isnoneornil(l, pos) || lua_istable(l, pos))
 			{
 				from_stack(l, pos, value);
 				return true;
@@ -1158,7 +1164,7 @@ namespace lua
 			{
 				bool exist = true;
 				lua_getglobal(l, name);
-				if (lua_isnil(l, -1))
+				if (lua_isnoneornil(l, -1))
 				{
 					exist = false;
 					lua_newtable(l);
@@ -1405,7 +1411,7 @@ namespace lua
 		}
 
 		lua_getfield(l, -1, method);//t,func
-		if (lua_isnil(l, -1))
+		if (lua_isnoneornil(l, -1))
 		{
 			lua_pop(l, 1);
 			return false;
@@ -1426,7 +1432,7 @@ namespace lua
 
 		lua_rawgeti(l, (int)LUA_REGISTRYINDEX, refTable); //t
 		lua_getfield(l, -1, method);//t,func
-		if (lua_isnil(l, -1))
+		if (lua_isnoneornil(l, -1))
 		{
 			lua_pop(l, 1);
 			return false;
