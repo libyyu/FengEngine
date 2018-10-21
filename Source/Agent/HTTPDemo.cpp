@@ -213,7 +213,7 @@ void TestHTTPRequestDownload()
     http.SetUrl("https://curl.haxx.se/download/curl-7.61.1.tar.gz");
     http.SetSSLVerify(true);
     http.SetTimeout(5000);
-    http.SetDownloadRange(0, 3986000);
+    http.SetDownloadRange(0, 3986003);
     const char* down_file = "./cur3.tar.gz";
     http.SetRequestHandle(&dc);
     http.SetDownloadPath(down_file);

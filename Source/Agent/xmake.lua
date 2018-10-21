@@ -20,6 +20,7 @@ target("curlAgent")
             add_files("/usr/local/Cellar/openssl/1.0.2l/lib/libcrypto.a")
         end
     end
+    set_targetdir("./lib/$(plat)")
 
 target("test")
     set_kind("binary")
