@@ -59,9 +59,10 @@ public:
 	}
 	static void DestroyILog(AnyLog::PLOG pLog)
 	{
-		if(NULL != pLog)
+        FLog* plog = static_cast<FLog*>(pLog);
+		if(NULL != plog)
 		{
-			//delete pLog;
+			delete plog;
 			pLog = NULL;
 		}
 	}

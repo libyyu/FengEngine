@@ -1,4 +1,4 @@
-﻿#define _F_DLL_
+#define _F_DLL_
 #include "FAssist.h"
 #if PLATFORM_TARGET != PLATFORM_WINDOWS
 #include <dirent.h>
@@ -93,10 +93,10 @@ void WCS2MBS(const wchar_t* str, char* &p_out,int* len)
 
 void formatString(std::string& str, const char* fmt, ...)
 {
-	char buff[2049] = { 0 };
+	char buff[20481] = { 0 };
 	va_list va;
 	va_start(va, fmt);
-	vsnprintf(buff, 2048, fmt, va);
+	vsnprintf(buff, 20480, fmt, va);
 	va_end(va);
 
 	str = buff;

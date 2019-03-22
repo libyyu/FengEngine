@@ -49,13 +49,15 @@ LUALIB_API int luaopen_lpeg (lua_State *L);
 LUALIB_API int luaopen_cjson(lua_State *l);
 LUALIB_API int luaopen_cjson_safe(lua_State *l);
 LUALIB_API int luaopen_socket_core(lua_State* L);
+LUALIB_API int luaopen_i64lib(lua_State* L);
 
 static const luaL_Reg s_lib_preload[] = {
 	{ "pb", luaopen_pb },
 	{ "lpeg",    luaopen_lpeg },
 	{ "cjson", luaopen_cjson },
 	{ "cjson.safe", luaopen_cjson_safe },
-	{ "socket.core", luaopen_socket_core },  // any 3rd lualibs added here
+	{ "socket.core", luaopen_socket_core },
+    { "i64lib", luaopen_i64lib }, // any 3rd lualibs added here
 	{ NULL, NULL }
 };
 
