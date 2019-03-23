@@ -1,5 +1,4 @@
 
-#define _F_DLL_
 #define LUA_LIB
 
 #include "PCH.h"

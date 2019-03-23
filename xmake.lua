@@ -106,9 +106,8 @@ target("FengEngine")
         set_targetdir("bin/$(plat)/$(arch)")
     end
 
-    add_defines("_RZ_DLL_")
+    add_defines("_F_DLL_")
     add_includedirs("flib")
-    --add_files("Source/Common/*.cpp")
     add_files("Source/AnyLog/*.cpp")
     add_files("Source/*.cpp")
 
@@ -118,6 +117,11 @@ target("FengEngine")
     else
         add_includedirs("lua-5.1.5/src")
         add_deps("lua51")
+    end
+
+    if has_config("genproj") then
+        add_headerfiles("Source/*.h", "Source/AnyLog/*.h")
+        add_headerfiles("flib/flib/base/*.hpp", "flib/flib/3rd/lua/*.hpp")
     end
 
 
