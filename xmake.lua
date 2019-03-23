@@ -73,20 +73,7 @@ if is_kind("static") then
 else
     set_targetdir("bin/$(plat)/$(arch)")
 end
-set_objectdir("$(buildir)/(plat)/$(arch)/.objs")
--- rule("lua")
---     if has_config("luajit") then
---         before_build(function (target)
---             --target:add("defines", "DEBUG", "TEST=\"hello\"")
---             --target:add("linkdirs", "/usr/lib", "/usr/local/lib")
---             target:add({includedirs = "luajit/src", links = "luajit"})
---         end)
---     else
---         before_build(function (target)
---             target:add({includedirs = "lua-5.1.5/src", links = "lua51"})
---         end)
---     end
--- rule_end()
+set_objectdir("$(buildir)/.objs")
 -- options
 option("luajit")
     set_default(false)
@@ -112,6 +99,12 @@ target("FengEngine")
         set_kind("shared")
     end
     add_deps("thirdpart")
+
+    if is_kind("static") then
+        set_targetdir("libs/$(plat)/$(arch)")
+    else
+        set_targetdir("bin/$(plat)/$(arch)")
+    end
 
     add_defines("_RZ_DLL_")
     add_includedirs("rzlib")
