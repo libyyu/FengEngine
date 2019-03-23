@@ -1,0 +1,3 @@
+[submodule "flib"]
+	path = flib
+	url = git@github.com:libyyu/Core.git
