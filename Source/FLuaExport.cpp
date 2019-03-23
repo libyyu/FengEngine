@@ -2,31 +2,33 @@
 #define _F_DLL_
 #define LUA_LIB
 
-#include "Common/FAssist.h"
+#include "PCH.h"
 
-_RzDeclsBegin
+_FDeclsBegin
 
-RZ_DLL_API void L_CleanupLuaState()
+F_DLL_API void L_CleanupLuaState()
 {
 	log_info("Cleanup luaState.");
-	g_SetLuaState( NULL );
+	glb_SetLuaEnv( NULL );
 }
-RZ_DLL_API void L_SetupLuaState(lua_State* l)
+F_DLL_API void L_SetupLuaState(lua_State* L)
 {
-	g_SetLuaState(l);
+	LuaEnv* env = glb_GetLuaEnv();
+	SAFE_DELETE(env);
+	env = new LuaEnv(L);
+	glb_SetLuaEnv(env);
 	log_info("Setup luaState.");
 }
-RZ_DLL_API void L_EstablishAnyLog(void* pfunc)
+F_DLL_API void L_SetupAnyLog(void* pfunc)
 {
-	g_SetAnyLog(FLog::CreateILog(pfunc));
-	log_info("AnyLog Established!");
+	glb_SetAnyLog(FLog::CreateILog(pfunc));
+	log_info("AnyLog Setup!");
 }
 
-RZ_DLL_API void L_UnEstablishAnyLog()
+F_DLL_API void L_CleanupAnyLog()
 {
-	log_info("AnyLog UnEstablish!");
-	g_SetAnyLog(NULL);
+	log_info("AnyLog Cleanup!");
+	glb_SetAnyLog(NULL);
 }
 
-
-_RzDeclsEnd
+_FDeclsEnd

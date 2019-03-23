@@ -1,7 +1,7 @@
 
 #define LUA_LIB
 
-#include "Common/FAssist.h"
+#include "flib/base/FType.hpp"
 
 #if PLATFORM_TARGET == PLATFORM_WINDOWS
 
@@ -24,7 +24,7 @@ BOOL APIENTRY DllMain(HMODULE hModule,
 }
 #endif
 
-_RzDeclsBegin
+/*_RzDeclsBegin
 LUA_API void luaS_openextlibs(lua_State *L);
 
 LUAOPEN_MODULE(FengEngine)
@@ -36,7 +36,7 @@ LUAOPEN_MODULE(FengEngine)
 	printf("%s %s attach.\n", MODULE_NAME, MODULE_VERSION);
 
 	lua_newtable(L);
-	///* make version string available to scripts */
+	//make version string available to scripts
 	lua_pushstring(L, "_VERSION");
 	lua_pushstring(L, MODULE_VERSION);
 	lua_settable(L, -3);
@@ -52,4 +52,4 @@ LUA_API void luaS_openlibs(lua_State* L)
 	luaS_openextlibs(L);
 }
 
-_RzDeclsEnd
+_RzDeclsEnd*/

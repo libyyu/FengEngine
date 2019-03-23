@@ -1,66 +1,38 @@
-﻿
-
-#ifndef __FASSIST_H__
-#define __FASSIST_H__
-
-#include <stdarg.h>
-#include "../AnyLog/ILog.h"
-#include "lua.hpp"
-#if PLATFORM_TARGET == PLATFORM_WINDOWS
-#elif PLATFORM_TARGET == PLATFORM_ANDROID
-	#include <jni.h>
-	#include <android/log.h>
-#else
-#endif
+#ifndef __PCH_H__
+#define __PCH_H__
+#pragma once
+#include "flib/3rd/lua/LuaEnv.hpp"
+#include "flib/base/FType.hpp"
+#include "AnyLog/ILog.h"
 
 #define MODULE_NAME "FengEngine"
 #define MODULE_VERSION "1.0.1"
 
-AnyLog::ILog* g_GetAnyLog();
-void g_SetAnyLog(AnyLog::ILog*);
-lua_State* g_GetLuaState();
-void g_SetLuaState(lua_State*);
-
-#if PLATFORM_TARGET == PLATFORM_WINDOWS
-#elif PLATFORM_TARGET == PLATFORM_ANDROID
-JNIEnv* g_GetJniEnv();
-#define LOGV(...) __android_log_print(ANDROID_LOG_VERBOSE, MODULE_NAME, __VA_ARGS__) 
-#define LOGD(...) __android_log_print(ANDROID_LOG_DEBUG , MODULE_NAME, __VA_ARGS__)
-#define LOGI(...) __android_log_print(ANDROID_LOG_INFO  , MODULE_NAME, __VA_ARGS__)
-#define LOGW(...) __android_log_print(ANDROID_LOG_WARN  , MODULE_NAME, __VA_ARGS__)
-#define LOGE(...) __android_log_print(ANDROID_LOG_ERROR  , MODULE_NAME, __VA_ARGS__)
-#else
-#endif
-
-
+LuaEnv* glb_GetLuaEnv();
+void glb_SetLuaEnv(LuaEnv*);
+AnyLog::ILog* glb_GetAnyLog();
+void glb_SetAnyLog(AnyLog::ILog*);
 
 #define  log_info(fmt,...)    \
-if(g_GetAnyLog() != NULL) \
+if(glb_GetAnyLog() != NULL) \
 {	\
-	g_GetAnyLog()->Log(fmt,##__VA_ARGS__);  \
+	glb_GetAnyLog()->Log(fmt,##__VA_ARGS__);  \
 }
 #define  log_warning(fmt,...)  \
-if(g_GetAnyLog() != NULL) \
+if(glb_GetAnyLog() != NULL) \
 {	\
-	g_GetAnyLog()->LogWarning(fmt,##__VA_ARGS__);  \
+	glb_GetAnyLog()->LogWarning(fmt,##__VA_ARGS__);  \
 }
 #define  log_error(fmt,...)   \
-if(g_GetAnyLog() != NULL) \
+if(glb_GetAnyLog() != NULL) \
 {	\
-	g_GetAnyLog()->LogError(fmt,##__VA_ARGS__);  \
+	glb_GetAnyLog()->LogError(fmt,##__VA_ARGS__);  \
 }
 #define  log_exception(fmt,...)   \
-if(g_GetAnyLog() != NULL) \
+if(glb_GetAnyLog() != NULL) \
 {	\
-	g_GetAnyLog()->LogException(fmt,##__VA_ARGS__);  \
+	glb_GetAnyLog()->LogException(fmt,##__VA_ARGS__);  \
 }
-
-#define LUAOPEN_MODULE(name)  LUALIB_API int luaopen_##name(lua_State* L)
-
-//频率较高的工具函数
-void MBS2WCS(const char* str, wchar_t* &out,int* len);
-void WCS2MBS(const wchar_t* str, char* &out,int* len);
-
 
 #ifndef SAFE_DELETE
 #define SAFE_DELETE(p) { if(p){delete(p);  (p)=NULL;} }
@@ -124,9 +96,5 @@ ErrRet NotifyAssert(const char* condition, const char* fileName, int lineNumber,
 #	define g_assert(x)
 #endif
 
-
-
-
-
-#endif//__FASSIST_H__
+#endif//__PCH_H__
 

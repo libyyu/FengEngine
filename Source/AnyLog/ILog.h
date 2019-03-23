@@ -1,5 +1,5 @@
 /********************************************************************
-FileName :  FType.h
+FileName :  ILog.h
 Version  :  0.10
 Date     :	2010-2-1 19:41:30
 Author   :  Feng(libyyu@qq.com)
@@ -8,8 +8,11 @@ Comment  :
 *********************************************************************/
 #ifndef __ILOG_H__
 #define __ILOG_H__
-
-#include "base/RzType.hpp"
+#pragma once
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdarg.h>
+#include <assert.h>
 
 enum LOG_TYPE
 {
@@ -19,7 +22,8 @@ enum LOG_TYPE
 	LOG_INFO = 3,
 	LOG_EXCEPTION = 4,
 };
-typedef void (STD_CALL *PLogFunc) (int logType, const char* message);
+
+typedef void (*PLogFunc) (int logType, const char* message);
 
 namespace AnyLog
 {
@@ -71,8 +75,8 @@ protected:
 	{
 		if (_log_message != NULL)
 		{
-			char buff[1025] = { 0 };
-			snprintf(buff, 1024, "%s", message);
+			char buff[20480] = { 0 };
+			snprintf(buff, 20480, "%s", message);
 			_log_message((int)logType, buff);
 		}
 	}

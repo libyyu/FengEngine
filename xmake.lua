@@ -107,8 +107,8 @@ target("FengEngine")
     end
 
     add_defines("_RZ_DLL_")
-    add_includedirs("rzlib")
-    add_files("Source/Common/*.cpp")
+    add_includedirs("flib")
+    --add_files("Source/Common/*.cpp")
     add_files("Source/AnyLog/*.cpp")
     add_files("Source/*.cpp")
 
