@@ -100,7 +100,7 @@ target("FengEngine")
     end
     add_deps("thirdpart")
 
-    if is_kind("static") then
+    if is_kind("iphoneos") then
         set_targetdir("libs/$(plat)/$(arch)")
     else
         set_targetdir("bin/$(plat)/$(arch)")
