@@ -8,6 +8,8 @@ set_xmakever("2.1.2")
 add_cxflags("-Wno-error=deprecated-declarations", "-fno-strict-aliasing")
 --add defines
 add_defines("_GNU_SOURCE=1", "_FILE_OFFSET_BITS=64", "_LARGEFILE_SOURCE")
+set_languages("c99", "cxx11")
+
 if is_plat("windows") then 
     -- add some defines only for windows
     add_cxflags("-EHsc", "-nologo")
@@ -52,6 +54,10 @@ elseif is_plat("iphoneos") then
 elseif is_plat("macosx") then
     add_cxflags("-fomit-frame-pointer")
     add_defines("__MACOSX__")
+    add_ldflags("-ObjC")
+    add_arflags("-ObjC")
+    add_shflags("-ObjC")
+    add_defines("FIXED_POINT", "USE_KISS_FFT")
 end
 -- the debug mode
 if is_mode("debug") then
@@ -65,7 +71,7 @@ elseif is_mode("release") then
     -- enable fastest optimization
     set_optimize("fastest")
     -- strip all symbols
-    set_strip("all")
+    --set_strip("all")
 end
 -- path
 if is_kind("static") then
@@ -104,6 +110,12 @@ target("FengEngine")
         set_targetdir("libs/$(plat)/$(arch)")
     else
         set_targetdir("bin/$(plat)/$(arch)")
+    end
+
+    if is_plat("macosx") then
+        add_ldflags("-all_load")
+        add_arflags("-all_load")
+        add_shflags("-all_load")
     end
 
     add_defines("_F_DLL_")

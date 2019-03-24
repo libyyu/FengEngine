@@ -8,7 +8,13 @@ target("lua51")
 		add_defines("WIN32_LEAN_AND_MEAN"
             , "_CRT_SECURE_NO_WARNINGS"
             , "LUA_BUILD_AS_DLL")
-	end
+    end
+    
+    if is_plat("windows") then
+        set_languages("c89")
+    else
+        set_languages("gnu99")
+    end
 
 target("luac")
     set_options("luajit", "genproj", "FengEngineBundle")
@@ -23,6 +29,12 @@ target("luac")
         add_ldflags("-all_load", "-pagezero_size 10000", "-image_base 100000000")
     end
 
+    if is_plat("windows") then
+        set_languages("c89")
+    else
+        set_languages("gnu99")
+    end
+
 target("lua")
     set_options("luajit", "genproj", "FengEngineBundle")
     add_rules("path")
@@ -34,6 +46,12 @@ target("lua")
         add_defines("WIN32_LEAN_AND_MEAN", "_CRT_SECURE_NO_WARNINGS", "LUA_BUILD_AS_DLL")
     elseif is_plat("macosx") then
         add_ldflags("-all_load", "-pagezero_size 10000", "-image_base 100000000")
+    end
+    
+    if is_plat("windows") then
+        set_languages("c89")
+    else
+        set_languages("gnu99")
     end
 
 

@@ -1,7 +1,7 @@
 
 #define LUA_LIB
 
-#include "flib/base/FType.hpp"
+#include "PCH.h"
 
 #if PLATFORM_TARGET == PLATFORM_WINDOWS
 
@@ -22,34 +22,30 @@ BOOL APIENTRY DllMain(HMODULE hModule,
 	}
 	return TRUE;
 }
-#endif
-
-/*_RzDeclsBegin
-LUA_API void luaS_openextlibs(lua_State *L);
 
 LUAOPEN_MODULE(FengEngine)
 {
-	int nTop = lua_gettop(L);
-	luaS_openextlibs(L);
-	lua_settop(L, nTop);
-
-	printf("%s %s attach.\n", MODULE_NAME, MODULE_VERSION);
-
-	lua_newtable(L);
-	//make version string available to scripts
-	lua_pushstring(L, "_VERSION");
-	lua_pushstring(L, MODULE_VERSION);
-	lua_settable(L, -3);
-
-	return 1;
+    int nTop = lua_gettop(L);
+    {
+        LuaEnv* env = glb_GetLuaEnv();
+        SAFE_DELETE(env);
+        env = new LuaEnv(L);
+        luaS_openextlibs(L);
+        glb_SetLuaEnv(env);
+    }
+    lua_settop(L, nTop);
+    
+    lua_newtable(L);
+    //make version string available to scripts
+    lua_pushstring(L, "_VERSION");
+    lua_pushstring(L, MODULE_VERSION);
+    lua_settable(L, -3);
+    
+    log_info("Setup luaState for module %s, version %s.", MODULE_NAME, MODULE_VERSION);
+    
+    return 1;
 }
 
-//avoid msvc not export luaL_openlibs
-LUA_API void luaL_openlibs(lua_State *L);
-LUA_API void luaS_openlibs(lua_State* L)
-{
-	luaL_openlibs(L);
-	luaS_openextlibs(L);
-}
 
-_RzDeclsEnd*/
+
+#endif

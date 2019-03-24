@@ -15,3 +15,9 @@ target("luasocket")
     else
         add_includedirs("../../lua-5.1.5/src")
     end
+
+    if is_plat("windows") then
+        set_languages("c89")
+    else
+        set_languages("gnu99")
+    end

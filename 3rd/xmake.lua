@@ -13,14 +13,14 @@ rule("3rd")
     --         target:add({includedirs = "lua-5.1.5/src", links = "lua51"})
     --     end)
     -- end
-    add_imports("core.project.project")
-    before_build(function (target)    
-        for _, dep in ipairs(target:get("deps")) do
-            local dep_target = project.target(dep)
-            target:add({files = dep_target:targetfile()})
-            --print("add ", dep_target:targetfile())
-        end
-    end)
+    -- add_imports("core.project.project")
+    -- before_build(function (target)    
+    --     for _, dep in ipairs(target:get("deps")) do
+    --         local dep_target = project.target(dep)
+    --         target:add({files = dep_target:targetfile()})
+    --         --print("add ", dep_target:targetfile())
+    --     end
+    -- end)
 rule_end()
 
 -- add target
@@ -38,4 +38,10 @@ target("thirdpart")
         add_includedirs("../luajit/src")
     else
         add_includedirs("../lua-5.1.5/src")
+    end
+
+    if is_plat("windows") then
+        set_languages("c89")
+    else
+        set_languages("gnu99")
     end
