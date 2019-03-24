@@ -91,6 +91,10 @@ option("FengEngineBundle")
     set_default(false)
     set_showmenu(true)
 option_end()
+option("test")
+    set_default(false)
+    set_showmenu(true)
+option_end()
 if not has_config("luajit") then
     add_subfiles("lua-5.1.5") 
 end
@@ -99,7 +103,7 @@ add_subfiles("3rd")
 target("FengEngine")
     set_options("luajit", "genproj", "FengEngineBundle")
     add_rules("lua", "path")
-	if is_plat("iphoneos") then
+	if is_plat("iphoneos") or has_config("test") then
         set_kind("static")
     else
         set_kind("shared")
@@ -135,6 +139,26 @@ target("FengEngine")
         add_headerfiles("Source/*.h", "Source/AnyLog/*.h")
         add_headerfiles("flib/flib/base/*.hpp", "flib/flib/3rd/lua/*.hpp")
     end
+target_end()
+
+if has_config("test") then
+    target("demo")
+        set_options("luajit", "genproj", "FengEngineBundle")
+        add_deps("FengEngine")
+        add_files("test.cpp")
+        set_kind("binary")
+        if has_config("luajit") then
+            add_includedirs("luajit/src")
+            add_links("luajit")
+        else
+            add_includedirs("lua-5.1.5/src")
+            add_deps("lua51")
+        end
+        set_targetdir("bin/$(plat)/$(arch)")
+        add_defines("_F_DLL_")
+        add_includedirs("flib")
+    target_end()
+end
 
 
 
