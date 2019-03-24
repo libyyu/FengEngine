@@ -60,19 +60,19 @@ elseif is_plat("macosx") then
     add_defines("FIXED_POINT", "USE_KISS_FFT")
 end
 -- the debug mode
-if is_mode("debug") then
-    -- enable the debug symbols
-    set_symbols("debug")
-    -- disable optimization
-    set_optimize("none")
-elseif is_mode("release") then
-    -- set the symbols visibility: hidden
-    set_symbols("hidden")
-    -- enable fastest optimization
-    set_optimize("fastest")
-    -- strip all symbols
-    --set_strip("all")
-end
+-- if is_mode("debug") then
+--     -- enable the debug symbols
+--     set_symbols("debug")
+--     -- disable optimization
+--     set_optimize("none")
+-- elseif is_mode("release") then
+--     -- set the symbols visibility: hidden
+--     set_symbols("hidden")
+--     -- enable fastest optimization
+--     set_optimize("fastest")
+--     -- strip all symbols
+--     --set_strip("all")
+-- end
 -- path
 if is_kind("static") then
     set_targetdir("libs/$(plat)/$(arch)")
