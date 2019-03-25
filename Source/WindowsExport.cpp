@@ -23,7 +23,7 @@ BOOL APIENTRY DllMain(HMODULE hModule,
 	return TRUE;
 }
 
-LUAOPEN_MODULE(FengEngine)
+int luaopen_FengEngine(lua_State* L)
 {
     int nTop = lua_gettop(L);
     {
