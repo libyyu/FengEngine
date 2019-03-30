@@ -209,5 +209,37 @@ JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM* vm, void* reserved)
 
     return result;
 }
-
+///////////////////////////////////////////////////////////////////////////
+////
+File* File::OpenFile(const char *szFileName, bool readonly)
+{
+    assert(szFileName && "szFileName is null");
+    const char* assetsPrefix = "assets://";
+    if (0 == strncmp(szFileName, assetsPrefix, strlen(assetsPrefix)))
+    {
+        //是 assets 路径，去掉开头
+        FILE* fp = AssetFILEWrapper::open(szFileName + strlen(assetsPrefix), readonly);
+        if(!fp)
+        {
+            return nullptr;
+        }
+        File* file = new File;
+        file->m_pFileHandle = fp;
+        file->m_IsAndroidAssets = true;
+        return file;
+    }
+    else
+    {
+        FStd::FFile* fp = new FStd::FFile;
+        if(0 != fp->Open(szFileName, readonly))
+        {
+            delete fp;
+            return nullptr;
+        }
+        File* file = new File;
+        file->m_pFileHandle = fp;
+        file->m_IsAndroidAssets = false;
+        return file;
+    }
+}
 #endif

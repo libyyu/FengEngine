@@ -157,6 +157,7 @@ if has_config("test") then
         set_targetdir("bin/$(plat)/$(arch)")
         add_defines("_F_DLL_")
         add_includedirs("flib")
+        add_includedirs("Source")
     target_end()
 end
 
