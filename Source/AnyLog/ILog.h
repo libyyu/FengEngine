@@ -34,7 +34,6 @@ namespace AnyLog
 		void LogWarning(const char* format,...);
 		void LogError(const char* format,...);
 		void LogException(const char* format,...);
-		virtual void SetLogCall(PLogFunc pFunc) = 0;
 	protected:
 		virtual void LogImpl(LOG_TYPE logType,const char* message) = 0;
 	private:
@@ -57,7 +56,7 @@ public:
 	}
 	static AnyLog::PLOG CreateILog(void* pfunc)
 	{
-		AnyLog::PLOG pLog = new FLog();
+		FLog* pLog = new FLog();
 		pLog->SetLogCall((PLogFunc)pfunc);
 		return pLog;
 	}
