@@ -70,15 +70,7 @@ public:
 		}
 	}
 protected:
-	void LogImpl(LOG_TYPE logType, const char* message)
-	{
-		if (_log_message != NULL)
-		{
-			char buff[20480] = { 0 };
-			snprintf(buff, 20480, "%s", message);
-			_log_message((int)logType, buff);
-		}
-	}
+    void LogImpl(LOG_TYPE logType, const char* message);
 };
 
 
