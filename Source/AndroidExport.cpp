@@ -43,12 +43,14 @@ private:
     {
         if (assetManager == NULL)
         {
+            LOGW("assetManager is null, please setupAssetManager first.");
             return NULL;
         }
         
         AAsset* asset = AAssetManager_open(assetManager, fileName, AASSET_MODE_RANDOM);
         if (asset == NULL)
         {
+            LOGW("AAssetManager_open failed.");
             return NULL;
         }
         
@@ -58,6 +60,7 @@ private:
         
         if (fd < 0)    //fail
         {
+            LOGW("AAsset_openFileDescriptor failed with code %d.", fd);
             return NULL;
         }
         
@@ -73,6 +76,7 @@ private:
         if (file == NULL)
         {
             close(cookie);
+            LOGW("AAsset funopen failed.");
             return NULL;
         }
         
@@ -94,7 +98,11 @@ private:
     static int write(void *cookie, const char *buffer, int buffer_size)
     {
         AssetFILEWrapper* self = (AssetFILEWrapper*)cookie;
-        if(self->m_readonly) return -1;
+        if(self->m_readonly)
+        {
+            LOGE("Android.asset can't write, it's readonly.");
+            return -1;
+        }
         
         return ::write(self->m_wholeFd, buffer, buffer_size);
     }
@@ -147,46 +155,47 @@ JNIEnv* glb_GetJniEnv()
 
 void setupAssetFILEWrapper()
 {
+    LOGD("setupAssetFILEWrapper");
     JNIEnv* env = glb_GetJniEnv();
     jclass UnityPlayer = env->FindClass("com/unity3d/player/UnityPlayer");
     if (UnityPlayer == NULL)
     {
-        LOGI("com/unity3d/player/UnityPlayer not found");
+        LOGW("com/unity3d/player/UnityPlayer not found");
         return;
     }
     
     jfieldID currentActivityId = env->GetStaticFieldID(UnityPlayer, "currentActivity", "Landroid/app/Activity;");
     if (currentActivityId == NULL)
     {
-        LOGI("currentActivity not found");
+        LOGW("currentActivity not found");
         return;
     }
     
     jobject activity = env->GetStaticObjectField(UnityPlayer, currentActivityId);
     if (activity == NULL)
     {
-        LOGI("activity not found");
+        LOGW("activity not found");
         return;
     }
     
     jclass Activity = env->FindClass("android/app/Activity");
     if (Activity == NULL)
     {
-        LOGI("android/app/Activity not found");
+        LOGW("android/app/Activity not found");
         return;
     }
     
     jmethodID getAssetsId = env->GetMethodID(Activity, "getAssets", "()Landroid/content/res/AssetManager;");
     if (getAssetsId == NULL)
     {
-        LOGI("getAssets not found");
+        LOGW("getAssets not found");
         return;
     }
     
     jobject assets = env->CallObjectMethod(activity, getAssetsId);
     if (assets == NULL)
     {
-        LOGI("assets not found");
+        LOGW("assets not found");
         return;
     }
     //
@@ -199,13 +208,17 @@ JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM* vm, void* reserved)
     LOGD("hello in c native code.\n");
     jint result = -1;
 
-    if (vm->GetEnv((void**) &g_JniEnv, JNI_VERSION_1_4) != JNI_OK) {
+    if (vm->GetEnv((void**) &g_JniEnv, JNI_VERSION_1_4) != JNI_OK)
+    {
+        LOGW("JNI_OnLoad Get JniEnv Failed. JNI_VERSION_1_4.");
         return -1;
     }
     assert(g_JniEnv != NULL);
 
     /* success -- return valid version number */
     result = JNI_VERSION_1_4;
+    
+    setupAssetFILEWrapper();
 
     return result;
 }
@@ -221,6 +234,7 @@ File* File::OpenFile(const char *szFileName, bool readonly)
         FILE* fp = AssetFILEWrapper::open(szFileName + strlen(assetsPrefix), readonly);
         if(!fp)
         {
+            log_warning("Failed to open file: %s", szFileName);
             return nullptr;
         }
         File* file = new File;
@@ -234,6 +248,7 @@ File* File::OpenFile(const char *szFileName, bool readonly)
         if(0 != fp->Open(szFileName, readonly))
         {
             delete fp;
+            log_warning("Failed to open file: %s", szFileName);
             return nullptr;
         }
         File* file = new File;

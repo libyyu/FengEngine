@@ -122,6 +122,7 @@ File* File::OpenFile(const char *szFileName, bool readonly)
     if(0 != fp->Open(szFileName, readonly))
     {
         delete fp;
+        log_warning("Failed to open file: %s", szFileName);
         return nullptr;
     }
     

@@ -2,10 +2,9 @@
 #include "flib/3rd/lua/LuaEnv.hpp"
 #include "File.h"
 
-extern "C"
-{
-    extern void luaS_openextlibs(lua_State *L);
-}
+_FDeclsBegin
+_FCFun void luaS_openextlibs(lua_State *L);
+_FDeclsEnd
 
 int main()
 {
@@ -17,7 +16,7 @@ int main()
     char* buffer = new char[len+1];
     file->ReadAll(buffer);
     buffer[len] = 0x0;
-    
+    env->doGlobal("print", buffer);
     delete []buffer;
     delete file;
     delete env;
