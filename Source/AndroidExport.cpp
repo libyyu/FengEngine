@@ -2,6 +2,8 @@
 
 #include "PCH.h"
 #if PLATFORM_TARGET == PLATFORM_ANDROID
+#include "File.h"
+#include "flib/base/FFile.hpp"
 #include <jni.h>
 #include <android/log.h>
 #include <android/asset_manager.h>
