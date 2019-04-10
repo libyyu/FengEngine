@@ -25,6 +25,7 @@ public:
     }
     static bool setupAssetManager(JNIEnv* env, jobject assetManager)
     {
+        LOGI("setupAssetManager");
         AAssetManager* aAssetMgr = AAssetManager_fromJava(env, assetManager);
         if (aAssetMgr == NULL)
             return false;
@@ -157,7 +158,7 @@ JNIEnv* glb_GetJniEnv()
 
 void setupAssetFILEWrapper()
 {
-    LOGD("setupAssetFILEWrapper");
+    LOGI("setupAssetFILEWrapper");
     JNIEnv* env = glb_GetJniEnv();
     jclass UnityPlayer = env->FindClass("com/unity3d/player/UnityPlayer");
     if (UnityPlayer == NULL)
@@ -207,7 +208,7 @@ void setupAssetFILEWrapper()
 ////
 JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM* vm, void* reserved)
 {
-    LOGD("hello in c native code.\n");
+    LOGI("JNI_OnLoad.");
     jint result = -1;
 
     if (vm->GetEnv((void**) &g_JniEnv, JNI_VERSION_1_4) != JNI_OK)
@@ -219,7 +220,7 @@ JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM* vm, void* reserved)
 
     /* success -- return valid version number */
     result = JNI_VERSION_1_4;
-    
+    LOGI("JNI_OnLoad.setupAssetFILEWrapper");
     setupAssetFILEWrapper();
 
     return result;

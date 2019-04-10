@@ -120,6 +120,8 @@ target("FengEngine")
         add_ldflags("-all_load")
         add_arflags("-all_load")
         add_shflags("-all_load")
+    elseif is_plat("android") then
+        add_links("android")
     end
 
     add_defines("_F_DLL_")
