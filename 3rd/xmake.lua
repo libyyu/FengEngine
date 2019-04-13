@@ -27,9 +27,8 @@ rule_end()
 target("thirdpart")
     set_options("luajit", "genproj", "FengEngineBundle")
     set_kind("static")
-    add_deps("luasocket", "cjson")
     add_rules("3rd")
-
+    
     add_files("lpeg/*.c")
     add_files("pb.c")
 	add_files("slua.c")

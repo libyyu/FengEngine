@@ -31,8 +31,7 @@
 #define LUA_LIB
 #endif
 
-#include "lua.h"
-#include "lauxlib.h"
+#include "lua.hpp"
 #include <stdio.h>
 #include <string.h>
 

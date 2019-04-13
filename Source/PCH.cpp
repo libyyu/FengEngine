@@ -1,3 +1,4 @@
+#define LUA_LIB
 #include "PCH.h"
 static AnyLog::ILog* g_theLog = NULL;
 static LuaEnv* g_luaEnv = NULL;

@@ -9,6 +9,7 @@ add_cxflags("-Wno-error=deprecated-declarations", "-fno-strict-aliasing")
 --add defines
 add_defines("_GNU_SOURCE=1", "_FILE_OFFSET_BITS=64", "_LARGEFILE_SOURCE")
 set_languages("c99", "cxx11")
+set_warnings("all")
 
 if is_plat("windows") then 
     -- add some defines only for windows
@@ -102,14 +103,14 @@ add_subfiles("3rd")
 
 target("FengEngine")
     set_options("luajit", "genproj", "FengEngineBundle")
-    add_rules("lua", "path")
 	if is_plat("iphoneos") or has_config("test") then
         set_kind("static")
     else
         set_kind("shared")
     end
     add_deps("thirdpart")
-
+    set_strip("none")
+    set_optimize("none")
     if is_kind("iphoneos") then
         set_targetdir("libs/$(plat)/$(arch)")
     else
@@ -121,7 +122,7 @@ target("FengEngine")
         add_arflags("-all_load")
         add_shflags("-all_load")
     elseif is_plat("android") then
-        add_links("android")
+        add_syslinks("android")
     end
 
     add_defines("_F_DLL_")
@@ -162,6 +163,15 @@ if has_config("test") then
         add_includedirs("Source")
     target_end()
 end
+
+target("TestLua")
+    set_kind("shared")
+    add_files("testlua.cpp")
+    add_deps("lua51")
+    add_includedirs("lua-5.1.5/src")
+    set_targetdir("bin/$(plat)/$(arch)")
+    add_defines("_F_DLL_")
+    add_includedirs("flib")
 
 
 
