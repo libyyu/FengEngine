@@ -23,20 +23,6 @@ call genApplicationDebug.bat
 cd ..
 
 
-@echo gen thirdpart -- genApplicationRelease
-cd thirdpart
-call genApplicationRelease.bat
-@if errorlevel 1 goto :BAD
-cd ..
-
-
-@echo gen thirdpart -- genApplicationDebug
-cd thirdpart
-call genApplicationDebug.bat
-@if errorlevel 1 goto :BAD
-cd ..
-
-
 @echo gen luasocket -- genApplicationRelease
 cd luasocket
 call genApplicationRelease.bat
@@ -60,6 +46,20 @@ cd ..
 
 @echo gen cjson -- genApplicationDebug
 cd cjson
+call genApplicationDebug.bat
+@if errorlevel 1 goto :BAD
+cd ..
+
+
+@echo gen thirdpart -- genApplicationRelease
+cd thirdpart
+call genApplicationRelease.bat
+@if errorlevel 1 goto :BAD
+cd ..
+
+
+@echo gen thirdpart -- genApplicationDebug
+cd thirdpart
 call genApplicationDebug.bat
 @if errorlevel 1 goto :BAD
 cd ..

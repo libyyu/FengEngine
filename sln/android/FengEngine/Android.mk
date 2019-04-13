@@ -11,6 +11,14 @@ ifeq ($(APP_OPTIM)_$(TARGET_ARCH_ABI),release_armeabi-v7a)
 	LOCAL_SRC_FILES     := $(LOCAL_PATH)/../thirdpart/obj/local/armeabi-v7a/libthirdpart.a
 	THIRD_MODULS        += $(LOCAL_MODULE)
 	include $(PREBUILT_STATIC_LIBRARY)
+	LOCAL_MODULE        := cjson
+	LOCAL_SRC_FILES     := $(LOCAL_PATH)/../../../libs/android/armv7-a/libcjson.a
+	THIRD_MODULS        += $(LOCAL_MODULE)
+	include $(PREBUILT_STATIC_LIBRARY)
+	LOCAL_MODULE        := luasocket
+	LOCAL_SRC_FILES     := $(LOCAL_PATH)/../../../libs/android/armv7-a/libluasocket.a
+	THIRD_MODULS        += $(LOCAL_MODULE)
+	include $(PREBUILT_STATIC_LIBRARY)
 else ifeq ($(APP_OPTIM)_$(TARGET_ARCH_ABI),release_x86)
 	LOCAL_MODULE        := lua51
 	LOCAL_SRC_FILES     := $(LOCAL_PATH)/../lua51/obj/local/x86/liblua51.a
@@ -18,6 +26,14 @@ else ifeq ($(APP_OPTIM)_$(TARGET_ARCH_ABI),release_x86)
 	include $(PREBUILT_STATIC_LIBRARY)
 	LOCAL_MODULE        := thirdpart
 	LOCAL_SRC_FILES     := $(LOCAL_PATH)/../thirdpart/obj/local/x86/libthirdpart.a
+	THIRD_MODULS        += $(LOCAL_MODULE)
+	include $(PREBUILT_STATIC_LIBRARY)
+	LOCAL_MODULE        := cjson
+	LOCAL_SRC_FILES     := $(LOCAL_PATH)/../../../libs/android/x86/libcjson.a
+	THIRD_MODULS        += $(LOCAL_MODULE)
+	include $(PREBUILT_STATIC_LIBRARY)
+	LOCAL_MODULE        := luasocket
+	LOCAL_SRC_FILES     := $(LOCAL_PATH)/../../../libs/android/x86/libluasocket.a
 	THIRD_MODULS        += $(LOCAL_MODULE)
 	include $(PREBUILT_STATIC_LIBRARY)
 else ifeq ($(APP_OPTIM)_$(TARGET_ARCH_ABI),debug_armeabi-v7a)
@@ -29,6 +45,14 @@ else ifeq ($(APP_OPTIM)_$(TARGET_ARCH_ABI),debug_armeabi-v7a)
 	LOCAL_SRC_FILES     := $(LOCAL_PATH)/../thirdpart/obj/local/armeabi-v7a/libthirdpartDebug.a
 	THIRD_MODULS        += $(LOCAL_MODULE)
 	include $(PREBUILT_STATIC_LIBRARY)
+	LOCAL_MODULE        := cjson
+	LOCAL_SRC_FILES     := $(LOCAL_PATH)/../../../libs/android/armv7-a/libcjson.a
+	THIRD_MODULS        += $(LOCAL_MODULE)
+	include $(PREBUILT_STATIC_LIBRARY)
+	LOCAL_MODULE        := luasocket
+	LOCAL_SRC_FILES     := $(LOCAL_PATH)/../../../libs/android/armv7-a/libluasocket.a
+	THIRD_MODULS        += $(LOCAL_MODULE)
+	include $(PREBUILT_STATIC_LIBRARY)
 else ifeq ($(APP_OPTIM)_$(TARGET_ARCH_ABI),debug_x86)
 	LOCAL_MODULE        := lua51Debug
 	LOCAL_SRC_FILES     := $(LOCAL_PATH)/../lua51/obj/local/x86/liblua51Debug.a
@@ -36,6 +60,14 @@ else ifeq ($(APP_OPTIM)_$(TARGET_ARCH_ABI),debug_x86)
 	include $(PREBUILT_STATIC_LIBRARY)
 	LOCAL_MODULE        := thirdpartDebug
 	LOCAL_SRC_FILES     := $(LOCAL_PATH)/../thirdpart/obj/local/x86/libthirdpartDebug.a
+	THIRD_MODULS        += $(LOCAL_MODULE)
+	include $(PREBUILT_STATIC_LIBRARY)
+	LOCAL_MODULE        := cjson
+	LOCAL_SRC_FILES     := $(LOCAL_PATH)/../../../libs/android/x86/libcjson.a
+	THIRD_MODULS        += $(LOCAL_MODULE)
+	include $(PREBUILT_STATIC_LIBRARY)
+	LOCAL_MODULE        := luasocket
+	LOCAL_SRC_FILES     := $(LOCAL_PATH)/../../../libs/android/x86/libluasocket.a
 	THIRD_MODULS        += $(LOCAL_MODULE)
 	include $(PREBUILT_STATIC_LIBRARY)
 endif

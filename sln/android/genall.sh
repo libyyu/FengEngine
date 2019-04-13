@@ -21,18 +21,6 @@ sh genApplicationDebug.sh || { echo "Build Error!"; exit 1; }
 cd ..
 
 
-echo "gen thirdpart -- genApplicationRelease"
-cd thirdpart
-sh genApplicationRelease.sh || { echo "Build Error!"; exit 1; }
-cd ..
-
-
-echo "gen thirdpart -- genApplicationDebug"
-cd thirdpart
-sh genApplicationDebug.sh || { echo "Build Error!"; exit 1; }
-cd ..
-
-
 echo "gen luasocket -- genApplicationRelease"
 cd luasocket
 sh genApplicationRelease.sh || { echo "Build Error!"; exit 1; }
@@ -53,6 +41,18 @@ cd ..
 
 echo "gen cjson -- genApplicationDebug"
 cd cjson
+sh genApplicationDebug.sh || { echo "Build Error!"; exit 1; }
+cd ..
+
+
+echo "gen thirdpart -- genApplicationRelease"
+cd thirdpart
+sh genApplicationRelease.sh || { echo "Build Error!"; exit 1; }
+cd ..
+
+
+echo "gen thirdpart -- genApplicationDebug"
+cd thirdpart
 sh genApplicationDebug.sh || { echo "Build Error!"; exit 1; }
 cd ..
 
