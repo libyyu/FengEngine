@@ -17,3 +17,5 @@ xmake $* || exit 1
 mkdir -p $dest_dir/x86
 cp -rf bin/$platform/$arch/libFengEngine.so $dest_dir/x86/
 cp -rf bin/$platform/$arch/libFengEngine.so /Users/lidengfeng/Documents/Workspace/testapk2/FLuaGame/src/main/jniLibs/x86/
+
+xmake project -k mk -a "armv7-a,x86" -m "release,debug" sln/android

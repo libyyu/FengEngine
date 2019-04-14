@@ -109,8 +109,6 @@ target("FengEngine")
         set_kind("shared")
     end
     add_deps("thirdpart")
-    set_strip("none")
-    set_optimize("none")
     if is_kind("iphoneos") then
         set_targetdir("libs/$(plat)/$(arch)")
     else
