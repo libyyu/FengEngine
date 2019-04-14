@@ -39,10 +39,22 @@ public:
     {
         return openInner(l_assetManager, fileName, read_only);
     }
-    
-private:
-    //open asset file in readonly mode
-    static FILE* openInner(AAssetManager* assetManager, char const* fileName, bool read_only)
+
+    static bool file_exists(char const* fileName)
+    {
+        AAsset* asset = openAAsset(l_assetManager, fileName);
+        if (asset == NULL)
+        {
+            return false;
+        }
+        
+        off_t fileStart, fileLength;
+        int fd = AAsset_openFileDescriptor(asset, &fileStart, &fileLength);
+        AAsset_close(asset);
+        return fd >=0;
+    }
+
+    static AAsset* openAAsset(AAssetManager* assetManager, char const* fileName)
     {
         if (assetManager == NULL)
         {
@@ -51,15 +63,27 @@ private:
         }
         
         AAsset* asset = AAssetManager_open(assetManager, fileName, AASSET_MODE_RANDOM);
+        return asset;
+    }
+    
+private:
+    //open asset file in readonly mode
+    static FILE* openInner(AAssetManager* assetManager, char const* fileName, bool read_only)
+    {
+        AAsset* asset = openAAsset(assetManager, fileName);
         if (asset == NULL)
         {
             LOGW("AAssetManager_open failed.");
             return NULL;
         }
+
+        size_t fileLength1 = AAsset_getLength(asset);
+        LOGD("before fd fileLength:%d",fileLength1);
         
         off_t fileStart, fileLength;
         int fd = AAsset_openFileDescriptor(asset, &fileStart, &fileLength);
         AAsset_close(asset);
+        LOGD("fd:%d  start:%d  length:%d", fd, fileStart, fileLength);
         
         if (fd < 0)    //fail
         {
@@ -85,7 +109,7 @@ private:
         
         return file;
     }
-    
+ 
     static int read(void *cookie, char *buffer, int buffer_size)
     {
         AssetFILEWrapper* self = (AssetFILEWrapper*)cookie;
@@ -238,15 +262,20 @@ File* File::OpenFile(const char *szFileName, bool readonly)
     if (pos != std::string::npos)
     {
         //是 assets 路径，去掉开头
-        std::string sAssetPath = strFile.substr(pos+strlen(assetsPrefix));       
-        FILE* fp = AssetFILEWrapper::open(sAssetPath.c_str(), readonly);
+        std::string sAssetPath = strFile.substr(pos+strlen(assetsPrefix));  
+        log_info("load android %s", sAssetPath.c_str());     
+        /*FILE* fp = AssetFILEWrapper::open(sAssetPath.c_str(), readonly);
         if(!fp)
         {
-            log_warning("Failed to open file: %s", szFileName);
+            return nullptr;
+        }*/
+        AAsset* asset = AssetFILEWrapper::openAAsset(l_assetManager, sAssetPath.c_str());
+        if(!asset)
+        {
             return nullptr;
         }
         File* file = new File;
-        file->m_pFileHandle = fp;
+        file->m_pFileHandle = asset/*fp*/;
         file->m_IsAndroidAssets = true;
         return file;
     }
@@ -256,7 +285,6 @@ File* File::OpenFile(const char *szFileName, bool readonly)
         if(0 != fp->Open(szFileName, readonly))
         {
             delete fp;
-            log_warning("Failed to open file: %s", szFileName);
             return nullptr;
         }
         File* file = new File;
@@ -265,5 +293,24 @@ File* File::OpenFile(const char *szFileName, bool readonly)
         return file;
     }
 }
+
+bool  File::FileExists(const char* szFileName)
+{
+    assert(szFileName && "szFileName is null");
+    std::string strFile(szFileName);
+    const char* assetsPrefix = "!/assets/";
+    size_t pos = strFile.find(assetsPrefix);
+    if (pos != std::string::npos)
+    {
+        //是 assets 路径，去掉开头
+        std::string sAssetPath = strFile.substr(pos+strlen(assetsPrefix));       
+        return AssetFILEWrapper::file_exists(sAssetPath.c_str());
+    }
+    else
+    {
+        return FStd::FFileExists(szFileName);
+    }
+}
+
 }
 #endif

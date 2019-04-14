@@ -50,22 +50,21 @@ F_DLL_API void L_CleanupAnyLog()
 	glb_SetAnyLog(NULL);
 }
 
-F_DLL_API void AddFilePackageLayer(const char* path)
+F_DLL_API void L_AddFilePackageLayer(const char* path)
 {
     FileSystem::Get().AddLayer(path);
-    std::string sFile = "res_base/Lua/FMain.lua";
-    char* pBuffer = NULL;
-    long length = 0;
-    bool b = FileSystem::Get().ReadFileBuffer(sFile.c_str(), &pBuffer, &length);
-    log_warning("read file: %s %d", sFile.c_str(), b ? 1 : 0);
 }
-F_DLL_API bool ReadFileBuffer(const char* szFile, char** ppbuffer, long* length)
+F_DLL_API bool L_ReadFileBuffer(const char* szFile, char** ppbuffer, int* length)
 {
     return FileSystem::Get().ReadFileBuffer(szFile, ppbuffer, length);
 }
-F_DLL_API void ReleaseFileBuffer(char* pbuffer)
+F_DLL_API void L_ReleaseFileBuffer(char* pbuffer)
 {
     FileSystem::Get().ReleaseFileBuffer(pbuffer);
+}
+F_DLL_API bool L_FileExists(const char* path)
+{
+    return FileSystem::Get().FileExists(path);
 }
 
 _FDeclsEnd

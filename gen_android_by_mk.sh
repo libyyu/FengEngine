@@ -16,6 +16,6 @@ cp -rf $src_dir/obj/local/armeabi-v7a/libFengEngine.so $dest_dir/armeabi-v7a/
 cp -rf $src_dir/obj/local/x86/libFengEngine.so $dest_dir/x86/
 
 # test
-testapk=/Users/lidengfeng/Documents/Workspace/testapk
+testapk=/Users/lidengfeng/Documents/Workspace/testapk3
 cp -rf $src_dir/obj/local/armeabi-v7a/libFengEngine.so $testapk/FLuaGame/src/main/jniLibs/armeabi-v7a/
 cp -rf $src_dir/obj/local/x86/libFengEngine.so $testapk/FLuaGame/src/main/jniLibs/x86/

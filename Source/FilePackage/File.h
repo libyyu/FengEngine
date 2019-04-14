@@ -8,7 +8,7 @@ class File
 public:
     ~File();
     static File* OpenFile(const char* szFileName, bool readonly = true);
-    
+    static bool  FileExists(const char* szFileName);
     size_t GetSize();
     size_t GetOffset();
     int    Seek(int offset, unsigned int mode);

@@ -20,18 +20,18 @@ FileSystem& FileSystem::Get()
 void FileSystem::AddLayer(const char* path)
 {
     assert(path);
-    for(size_t i=0;i < layers.size(); ++i){
-        if(layers[i].compare(path) == 0){
+    for(auto& p : layers){
+        if(p.compare(path) == 0){
             return;
         }
     }
     layers.push_back(path);
 }
-bool FileSystem::ReadFileBuffer(const char* szFile, char** ppbuffer, long* length)
+bool FileSystem::ReadFileBuffer(const char* szFile, char** ppbuffer, int* length)
 {
-    for(auto& path : layers)
+    for(auto& p : layers)
     {
-        std::string fPath = FStd::FJoinPath(path, szFile);
+        std::string fPath = FStd::FJoinPath(p, szFile);
         //sep path
         FILE* pFile = NULL;
         if(FStd::FFileExists(fPath.c_str()) && (pFile = fopen(fPath.c_str(), "rb")))
@@ -49,12 +49,12 @@ bool FileSystem::ReadFileBuffer(const char* szFile, char** ppbuffer, long* lengt
             pData[0] = 0x0;
             fread(pData, 1, fileLen, pFile);
             fclose(pFile);
-
+            
             *ppbuffer = pData;
             *length = fileLen;
             return true;
         }
-
+        
         File* pPlatFile = File::OpenFile(fPath.c_str(), true);
         if(pPlatFile)
         {
@@ -62,7 +62,7 @@ bool FileSystem::ReadFileBuffer(const char* szFile, char** ppbuffer, long* lengt
             char* pData = new char[fileLen];
             if(!pData)
             {
-                fclose(pFile);
+                delete pPlatFile;
                 log_warning("Not enough memory when read %s!", szFile);
                 return false;
             }
@@ -79,10 +79,33 @@ bool FileSystem::ReadFileBuffer(const char* szFile, char** ppbuffer, long* lengt
 }
 void FileSystem::ReleaseFileBuffer(char* ppbuffer)
 {
-    if(ppbuffer)
+    if(!!ppbuffer)
     {
         delete [] ppbuffer;
         ppbuffer = NULL;
     }
+}
+bool FileSystem::FileExists(const char* szFile)
+{
+    //sep path
+    //FILE* pFile = NULL;
+    if(FStd::FFileExists(szFile))// && (pFile = fopen(szFile, "rb")))
+    {
+        //fclose(pFile);
+        return true;
+    }
+    if(File::FileExists(szFile))
+    {
+        return true;
+    }
+
+    for(auto& p : layers)
+    {
+        std::string fPath = FStd::FJoinPath(p, szFile);
+        if(File::FileExists(fPath.c_str()))
+            return true;
+    }
+
+    return false;
 }
 }
