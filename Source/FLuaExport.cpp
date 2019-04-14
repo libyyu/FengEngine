@@ -2,12 +2,10 @@
 #define LUA_LIB
 
 #include "PCH.h"
-extern "C"
-{
-    extern void luaS_openextlibs(lua_State *L);
-}
+#include "FilePackage/FileSystem.h"
+using namespace FengEngine;
 _FDeclsBegin
-
+//extern void luaS_openextlibs(lua_State *L);
 F_DLL_API void L_CleanupLuaState()
 {
 	log_info("Cleanup luaState.");
@@ -50,6 +48,24 @@ F_DLL_API void L_CleanupAnyLog()
 {
 	log_info("AnyLog Cleanup!");
 	glb_SetAnyLog(NULL);
+}
+
+F_DLL_API void AddFilePackageLayer(const char* path)
+{
+    FileSystem::Get().AddLayer(path);
+    std::string sFile = "res_base/Lua/FMain.lua";
+    char* pBuffer = NULL;
+    long length = 0;
+    bool b = FileSystem::Get().ReadFileBuffer(sFile.c_str(), &pBuffer, &length);
+    log_warning("read file: %s %d", sFile.c_str(), b ? 1 : 0);
+}
+F_DLL_API bool ReadFileBuffer(const char* szFile, char** ppbuffer, long* length)
+{
+    return FileSystem::Get().ReadFileBuffer(szFile, ppbuffer, length);
+}
+F_DLL_API void ReleaseFileBuffer(char* pbuffer)
+{
+    FileSystem::Get().ReleaseFileBuffer(pbuffer);
 }
 
 _FDeclsEnd

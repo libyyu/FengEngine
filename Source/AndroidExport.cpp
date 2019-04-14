@@ -2,7 +2,7 @@
 
 #include "PCH.h"
 #if PLATFORM_TARGET == PLATFORM_ANDROID
-#include "File.h"
+#include "FilePackage/File.h"
 #include "flib/base/FFile.hpp"
 #include <jni.h>
 #include <android/log.h>
@@ -227,14 +227,19 @@ JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM* vm, void* reserved)
 }
 ///////////////////////////////////////////////////////////////////////////
 ////
+namespace FengEngine
+{
 File* File::OpenFile(const char *szFileName, bool readonly)
 {
     assert(szFileName && "szFileName is null");
-    const char* assetsPrefix = "assets://";
-    if (0 == strncmp(szFileName, assetsPrefix, strlen(assetsPrefix)))
+    std::string strFile(szFileName);
+    const char* assetsPrefix = "!/assets/";
+    size_t pos = strFile.find(assetsPrefix);
+    if (pos != std::string::npos)
     {
         //是 assets 路径，去掉开头
-        FILE* fp = AssetFILEWrapper::open(szFileName + strlen(assetsPrefix), readonly);
+        std::string sAssetPath = strFile.substr(pos+strlen(assetsPrefix));       
+        FILE* fp = AssetFILEWrapper::open(sAssetPath.c_str(), readonly);
         if(!fp)
         {
             log_warning("Failed to open file: %s", szFileName);
@@ -259,5 +264,6 @@ File* File::OpenFile(const char *szFileName, bool readonly)
         file->m_IsAndroidAssets = false;
         return file;
     }
+}
 }
 #endif

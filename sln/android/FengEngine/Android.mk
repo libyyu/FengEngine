@@ -108,6 +108,7 @@ LOCAL_CPPFLAGS += -Wno-error=deprecated-declarations -fno-strict-aliasing -fomit
 
 # includedirs
 LOCAL_C_INCLUDES  := $(LOCAL_PATH)/../../..
+LOCAL_C_INCLUDES  += $(LOCAL_PATH)/../../../Source
 LOCAL_C_INCLUDES  += $(LOCAL_PATH)/../../../flib
 LOCAL_C_INCLUDES  += $(LOCAL_PATH)/../../../lua-5.1.5/src
 
@@ -115,11 +116,12 @@ LOCAL_C_INCLUDES  += $(LOCAL_PATH)/../../../lua-5.1.5/src
 # source files
 LOCAL_SRC_FILES  := \
 	$(LOCAL_PATH)/../../../Source/AndroidExport.cpp    \
+	$(LOCAL_PATH)/../../../Source/WindowsExport.cpp    \
 	$(LOCAL_PATH)/../../../Source/AnyLog/ILog.cpp    \
 	$(LOCAL_PATH)/../../../Source/PCH.cpp    \
-	$(LOCAL_PATH)/../../../Source/WindowsExport.cpp    \
 	$(LOCAL_PATH)/../../../Source/FLuaExport.cpp    \
-	$(LOCAL_PATH)/../../../Source/File.cpp
+	$(LOCAL_PATH)/../../../Source/FilePackage/FileSystem.cpp    \
+	$(LOCAL_PATH)/../../../Source/FilePackage/File.cpp
 
 LOCAL_SRC_FILES  +=  $(THIRD_SRCS) 
 

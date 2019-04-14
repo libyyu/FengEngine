@@ -124,8 +124,9 @@ target("FengEngine")
     end
 
     add_defines("_F_DLL_")
-    add_includedirs("flib")
+    add_includedirs("Source", "flib")
     add_files("Source/AnyLog/*.cpp")
+    add_files("Source/FilePackage/*.cpp")
     add_files("Source/*.cpp")
 
     if has_config("luajit") then
@@ -137,7 +138,7 @@ target("FengEngine")
     end
 
     if has_config("genproj") then
-        add_headerfiles("Source/*.h", "Source/AnyLog/*.h")
+        add_headerfiles("Source/*.h", "Source/AnyLog/*.h", "Source/FilePackage/*.h")
         add_headerfiles("flib/flib/base/*.hpp", "flib/flib/3rd/lua/*.hpp")
     end
 target_end()
@@ -161,15 +162,6 @@ if has_config("test") then
         add_includedirs("Source")
     target_end()
 end
-
-target("TestLua")
-    set_kind("shared")
-    add_files("testlua.cpp")
-    add_deps("lua51")
-    add_includedirs("lua-5.1.5/src")
-    set_targetdir("bin/$(plat)/$(arch)")
-    add_defines("_F_DLL_")
-    add_includedirs("flib")
 
 
 

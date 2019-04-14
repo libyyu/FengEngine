@@ -79,20 +79,6 @@ call genApplicationDebug.bat
 cd ..
 
 
-@echo gen TestLua -- genApplicationRelease
-cd TestLua
-call genApplicationRelease.bat
-@if errorlevel 1 goto :BAD
-cd ..
-
-
-@echo gen TestLua -- genApplicationDebug
-cd TestLua
-call genApplicationDebug.bat
-@if errorlevel 1 goto :BAD
-cd ..
-
-
 goto :SUCCESS
 
 

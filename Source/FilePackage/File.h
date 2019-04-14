@@ -1,7 +1,8 @@
 #ifndef __FILE_H__
 #define __FILE_H__
 #pragma once
-
+namespace FengEngine
+{
 class File
 {
 public:
@@ -21,5 +22,7 @@ private:
     void* m_pFileHandle;
     bool  m_IsAndroidAssets;
 };
+    
+}
 
 #endif//__FILE_H__

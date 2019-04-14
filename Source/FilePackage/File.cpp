@@ -1,7 +1,8 @@
 #include "PCH.h"
 #include "File.h"
 #include "flib/base/FFile.hpp"
-
+namespace FengEngine
+{
 File::File() : m_pFileHandle(nullptr), m_IsAndroidAssets(false)
 {
 }
@@ -132,3 +133,5 @@ File* File::OpenFile(const char *szFileName, bool readonly)
     return file;
 }
 #endif
+
+}

@@ -69,17 +69,5 @@ sh genApplicationDebug.sh || { echo "Build Error!"; exit 1; }
 cd ..
 
 
-echo "gen TestLua -- genApplicationRelease"
-cd TestLua
-sh genApplicationRelease.sh || { echo "Build Error!"; exit 1; }
-cd ..
-
-
-echo "gen TestLua -- genApplicationDebug"
-cd TestLua
-sh genApplicationDebug.sh || { echo "Build Error!"; exit 1; }
-cd ..
-
-
 echo "Build Done!"
 exit 0
