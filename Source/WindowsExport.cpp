@@ -3,7 +3,7 @@
 
 #include "PCH.h"
 
-#if PLATFORM_TARGET == PLATFORM_WINDOWS
+#if FLIB_COMPILER_MSVC || FLIB_COMPILER_CYGWIN
 
 #include <Windows.h>
 

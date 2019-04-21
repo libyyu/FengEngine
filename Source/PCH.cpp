@@ -39,7 +39,7 @@ ErrRet DisplayError(const char* errorTitle,
 	const char* fileName,
 	int lineNumber)
 {
-#if PLATFORM_TARGET == PLATFORM_WINDOWS
+#if FLIB_COMPILER_MSVC
 	const int MODULE_NAME_SIZE = 255;
 	char moduleName[MODULE_NAME_SIZE] = {0};
 	// attempt to get the module name

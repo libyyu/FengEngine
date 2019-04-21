@@ -1,0 +1,904 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+		3C340F09781D6177A558213C = {
+			buildConfigurations = (
+				455EBCCD018050886517A53B,
+				18093767F76420226A4D4B7D,
+			);
+			defaultConfigurationIsVisible = 0;
+			isa = XCConfigurationList;
+		};
+		1617733FDE349954E26C274F = {
+			path = ../../../Source/FilePackage/File.h;
+			sourceTree = SOURCE_ROOT;
+			children = (
+			);
+			isa = PBXFileReference;
+			name = File.h;
+			lastKnownFileType = sourcecode.c.h;
+		};
+		E563B726F97AFBAB8BF1FFF1 = {
+			fileRef = 3601CEDC0EC45B2202467B34;
+			isa = PBXBuildFile;
+		};
+		5975526869E4EA3867C4BC68 = {
+			path = ../../../Source/AnyLog/ILog.h;
+			sourceTree = SOURCE_ROOT;
+			children = (
+			);
+			isa = PBXFileReference;
+			name = ILog.h;
+			lastKnownFileType = sourcecode.c.h;
+		};
+		BD68F4DEFFB2021D9F4518E5 = {
+			path = ../../../flib/flib/base/FPlugin.hpp;
+			sourceTree = SOURCE_ROOT;
+			children = (
+			);
+			isa = PBXFileReference;
+			name = FPlugin.hpp;
+			lastKnownFileType = sourcecode.cpp.h;
+		};
+		981073AE4A3A9DDCC683DBC0 = {
+			path = ../../../flib/flib/base/FPool.hpp;
+			sourceTree = SOURCE_ROOT;
+			children = (
+			);
+			isa = PBXFileReference;
+			name = FPool.hpp;
+			lastKnownFileType = sourcecode.cpp.h;
+		};
+		FE25547496DBC83BE053158A = {
+			buildSettings = {
+				GCC_DYNAMIC_NO_PIC = NO;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CLANG_CXX_LIBRARY = "libc++";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				GCC_C_LANGUAGE_STANDARD = "compiler-default";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_ENABLE_MODULES = YES;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				SYMROOT = build;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				IPHONEOS_DEPLOYMENT_TARGET = 7;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ENABLE_BITCODE = NO;
+				VALID_ARCHS = "x86_64";
+				SDKROOT = iphoneos;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				ONLY_ACTIVE_ARCH = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_IDENTITY = "-";
+				CLANG_WARN_INFINITE_RECURSION = YES;
+			};
+			name = Debug;
+			isa = XCBuildConfiguration;
+		};
+		EFF0CD27B9CB07B0C7DBF406 = {
+			path = ../../../Source/WindowsExport.cpp;
+			sourceTree = SOURCE_ROOT;
+			children = (
+			);
+			isa = PBXFileReference;
+			name = WindowsExport.cpp;
+			lastKnownFileType = sourcecode.cpp.cpp;
+		};
+		866F53FF01C7716C364B9FE8 = {
+			path = ../../../flib/flib/base/FPlatform.hpp;
+			sourceTree = SOURCE_ROOT;
+			children = (
+			);
+			isa = PBXFileReference;
+			name = FPlatform.hpp;
+			lastKnownFileType = sourcecode.cpp.h;
+		};
+		DA2C7663BB0D44D3231B9230 = {
+			children = (
+				978401CA1BE23F38EBC0D08E,
+			);
+			isa = PBXGroup;
+			name = flib;
+			sourceTree = "<group>";
+		};
+		3601CEDC0EC45B2202467B34 = {
+			path = ../../../Source/FLuaExport.cpp;
+			sourceTree = SOURCE_ROOT;
+			children = (
+			);
+			isa = PBXFileReference;
+			name = FLuaExport.cpp;
+			lastKnownFileType = sourcecode.cpp.cpp;
+		};
+		E1869168A49884A305FF259D = {
+			path = ../../../flib/flib/base/FMemPool.hpp;
+			sourceTree = SOURCE_ROOT;
+			children = (
+			);
+			isa = PBXFileReference;
+			name = FMemPool.hpp;
+			lastKnownFileType = sourcecode.cpp.h;
+		};
+		FD2419E3966F8D9044E6F7DC = {
+			path = ../../../flib/flib/base/FDReadAWriteLock.hpp;
+			sourceTree = SOURCE_ROOT;
+			children = (
+			);
+			isa = PBXFileReference;
+			name = FDReadAWriteLock.hpp;
+			lastKnownFileType = sourcecode.cpp.h;
+		};
+		F3AE946CF0D421E9B1E13B3A = {
+			path = ../../../flib/flib/base/FFunc.hpp;
+			sourceTree = SOURCE_ROOT;
+			children = (
+			);
+			isa = PBXFileReference;
+			name = FFunc.hpp;
+			lastKnownFileType = sourcecode.cpp.h;
+		};
+		D1EFE1C54529E43D66430551 = {
+			children = (
+				EBBCD8135C681E0692B7F623,
+				7E384B2EBBE5A644F7E80D43,
+				CC5D6C5382557E4363ECD512,
+			);
+			isa = PBXGroup;
+			sourceTree = "<group>";
+		};
+		3E7389F1AFA912318423D37A = {
+			children = (
+				B93FD55AC6EAA206685D53F3,
+				5975526869E4EA3867C4BC68,
+			);
+			isa = PBXGroup;
+			name = AnyLog;
+			sourceTree = "<group>";
+		};
+		47132300EAE8815AD2775380 = {
+			children = (
+				B19FEFAEB7558E46738AB50F,
+				10F60E03501ED312F63FB57E,
+				F06A5B2FB982909DDFE32E5B,
+			);
+			isa = PBXGroup;
+			name = lua;
+			sourceTree = "<group>";
+		};
+		26B3391F2C7AC529D91AB4C8 = {
+			fileRef = A58339E854E4697EA20B58DC;
+			isa = PBXBuildFile;
+		};
+		6867F765E5DD6DD0729CAA51 = {
+			path = ../../../flib/flib/base/FString.hpp;
+			sourceTree = SOURCE_ROOT;
+			children = (
+			);
+			isa = PBXFileReference;
+			name = FString.hpp;
+			lastKnownFileType = sourcecode.cpp.h;
+		};
+		68194A338852F59F20433EA4 = {
+			path = ../../../flib/flib/base/FConvert.hpp;
+			sourceTree = SOURCE_ROOT;
+			children = (
+			);
+			isa = PBXFileReference;
+			name = FConvert.hpp;
+			lastKnownFileType = sourcecode.cpp.h;
+		};
+		E269FD31193D3DD9983A696B = {
+			path = ../../../flib/flib/base/FConsole.hpp;
+			sourceTree = SOURCE_ROOT;
+			children = (
+			);
+			isa = PBXFileReference;
+			name = FConsole.hpp;
+			lastKnownFileType = sourcecode.cpp.h;
+		};
+		5C827D7B9477604529041D1C = {
+			path = ../../../flib/flib/base/FFile.hpp;
+			sourceTree = SOURCE_ROOT;
+			children = (
+			);
+			isa = PBXFileReference;
+			name = FFile.hpp;
+			lastKnownFileType = sourcecode.cpp.h;
+		};
+		D411941BA572A18DAF829E69 = {
+			path = ../../../flib/flib/base/FMemTrack.hpp;
+			sourceTree = SOURCE_ROOT;
+			children = (
+			);
+			isa = PBXFileReference;
+			name = FMemTrack.hpp;
+			lastKnownFileType = sourcecode.cpp.h;
+		};
+		35B020106FB4C8E28DFE32F3 = {
+			path = ../../../flib/flib/base/FObserver.hpp;
+			sourceTree = SOURCE_ROOT;
+			children = (
+			);
+			isa = PBXFileReference;
+			name = FObserver.hpp;
+			lastKnownFileType = sourcecode.cpp.h;
+		};
+		A40A3AF00145CA0EA91C5B49 = {
+			path = ../../../flib/flib/base/FSemaphore.hpp;
+			sourceTree = SOURCE_ROOT;
+			children = (
+			);
+			isa = PBXFileReference;
+			name = FSemaphore.hpp;
+			lastKnownFileType = sourcecode.cpp.h;
+		};
+		F1A15B077C0DEFBF23107C51 = {
+			path = ../../../Source/AndroidExport.cpp;
+			sourceTree = SOURCE_ROOT;
+			children = (
+			);
+			isa = PBXFileReference;
+			name = AndroidExport.cpp;
+			lastKnownFileType = sourcecode.cpp.cpp;
+		};
+		941A66B19B8F3FF35C8087C6 = {
+			runOnlyForDeploymentPostprocessing = 0;
+			isa = PBXHeadersBuildPhase;
+			files = (
+			);
+			buildActionMask = 2147483647;
+		};
+		0CF1C87F89495EF9D3B6BD7D = {
+			productType = "com.apple.product-type.library.static";
+			isa = PBXNativeTarget;
+			productName = FengEngine;
+			productReference = A58339E854E4697EA20B58DC;
+			buildRules = (
+			);
+			buildConfigurationList = 3C340F09781D6177A558213C;
+			buildPhases = (
+				72F11FB9F14A5221B5116CE7,
+				62275B4AA87E148BCEBF95F6,
+				941A66B19B8F3FF35C8087C6,
+				0A4A12E158488AD6BC8EDC42,
+				D61A5A0DF08E302AD3E8475E,
+			);
+			name = FengEngine;
+			dependencies = (
+			);
+		};
+		236B7CA9C9202C620ACA554B = {
+			path = ../../../flib/flib/base/FDoStructFile.hpp;
+			sourceTree = SOURCE_ROOT;
+			children = (
+			);
+			isa = PBXFileReference;
+			name = FDoStructFile.hpp;
+			lastKnownFileType = sourcecode.cpp.h;
+		};
+		72F11FB9F14A5221B5116CE7 = {
+			runOnlyForDeploymentPostprocessing = 0;
+			isa = PBXSourcesBuildPhase;
+			files = (
+				B94E4999987D4B2584238983,
+				E3633F9D15F422F58D075693,
+				4C6B3C0549F39612E2735151,
+				DD16A4C6936F8BE258E655EF,
+				E563B726F97AFBAB8BF1FFF1,
+				6DE9A07BF62031C32FBB33F3,
+				EE7ABD20D0AB6157AC597E98,
+			);
+			buildActionMask = 2147483647;
+		};
+		4614A75E4708E1C0C18F40A5 = {
+			path = ../../../flib/flib/base/FBuffer.hpp;
+			sourceTree = SOURCE_ROOT;
+			children = (
+			);
+			isa = PBXFileReference;
+			name = FBuffer.hpp;
+			lastKnownFileType = sourcecode.cpp.h;
+		};
+		18093767F76420226A4D4B7D = {
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				GCC_ENABLE_CPP_EXCEPTIONS = YES;
+				OTHER_CFLAGS = (
+					"-Wno-error=deprecated-declarations",
+					"-fno-strict-aliasing",
+					"-fomit-frame-pointer",
+				);
+				FRAMEWORK_SEARCH_PATHS = (
+				);
+				VALID_ARCHS = "x86_64";
+				EXECUTABLE_PREFIX = lib;
+				HEADER_SEARCH_PATHS = (
+					../../../Source,
+					../../../flib,
+					../../../lua-5.1.5/src,
+				);
+				LIBRARY_SEARCH_PATHS = (
+				);
+				EXECUTABLE_EXTENSION = a;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"_GNU_SOURCE=1",
+					"_FILE_OFFSET_BITS=64",
+					"_LARGEFILE_SOURCE",
+					"__IOS__",
+					"FLIB_DLL_EXPORTS",
+				);
+				SKIP_INSTALL = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				MACH_O_TYPE = staticlib;
+				OTHER_LDFLAGS = (
+				);
+				GCC_ENABLE_CPP_RTTI = YES;
+			};
+			name = Release;
+			isa = XCBuildConfiguration;
+		};
+		A58339E854E4697EA20B58DC = {
+			path = libFengEngine.a;
+			explicitFileType = archive.ar;
+			includeInIndex = 0;
+			isa = PBXFileReference;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		DD16A4C6936F8BE258E655EF = {
+			fileRef = E9636A47FB303DEA506E46A7;
+			isa = PBXBuildFile;
+		};
+		032936C411854444C0A43196 = {
+			path = ../../../flib/flib/base/FLogFile.hpp;
+			sourceTree = SOURCE_ROOT;
+			children = (
+			);
+			isa = PBXFileReference;
+			name = FLogFile.hpp;
+			lastKnownFileType = sourcecode.cpp.h;
+		};
+		B93FD55AC6EAA206685D53F3 = {
+			path = ../../../Source/AnyLog/ILog.cpp;
+			sourceTree = SOURCE_ROOT;
+			children = (
+			);
+			isa = PBXFileReference;
+			name = ILog.cpp;
+			lastKnownFileType = sourcecode.cpp.cpp;
+		};
+		B370693CC352BB78A66EF622 = {
+			path = ../../../flib/flib/base/FLogInterface.hpp;
+			sourceTree = SOURCE_ROOT;
+			children = (
+			);
+			isa = PBXFileReference;
+			name = FLogInterface.hpp;
+			lastKnownFileType = sourcecode.cpp.h;
+		};
+		D61A5A0DF08E302AD3E8475E = {
+			dstPath = "$(PROJECT_DIR)/../../../bin/iphoneos/x86_64";
+			runOnlyForDeploymentPostprocessing = 0;
+			buildActionMask = 2147483647;
+			dstSubfolderSpec = 0;
+			isa = PBXCopyFilesBuildPhase;
+			name = "Copy Files";
+			files = (
+				26B3391F2C7AC529D91AB4C8,
+			);
+		};
+		9884749E6355B43959474A7A = {
+			path = ../../../flib/flib/base/utfconvert.hpp;
+			sourceTree = SOURCE_ROOT;
+			children = (
+			);
+			isa = PBXFileReference;
+			name = utfconvert.hpp;
+			lastKnownFileType = sourcecode.cpp.h;
+		};
+		CC5D6C5382557E4363ECD512 = {
+			children = (
+			);
+			isa = PBXGroup;
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A097D863FB60DB38CCCE963A = {
+			children = (
+				47132300EAE8815AD2775380,
+			);
+			isa = PBXGroup;
+			name = 3rd;
+			sourceTree = "<group>";
+		};
+		978401CA1BE23F38EBC0D08E = {
+			children = (
+				87C58A1C3A8360EA3C1C322C,
+				A097D863FB60DB38CCCE963A,
+			);
+			isa = PBXGroup;
+			name = flib;
+			sourceTree = "<group>";
+		};
+		AB1687979E3E5C5F55355F2F = {
+			children = (
+				5A25D24EB0539D2B5585276B,
+				67B020DBF250224B87EF9CA2,
+				1B8EE0425D622C0419D45A7E,
+				1617733FDE349954E26C274F,
+			);
+			isa = PBXGroup;
+			name = FilePackage;
+			sourceTree = "<group>";
+		};
+		9E8347712AD45661793A5DF5 = {
+			path = ../../../flib/flib/base/FListAddLock.hpp;
+			sourceTree = SOURCE_ROOT;
+			children = (
+			);
+			isa = PBXFileReference;
+			name = FListAddLock.hpp;
+			lastKnownFileType = sourcecode.cpp.h;
+		};
+		62275B4AA87E148BCEBF95F6 = {
+			runOnlyForDeploymentPostprocessing = 0;
+			isa = PBXFrameworksBuildPhase;
+			files = (
+			);
+			buildActionMask = 2147483647;
+		};
+		F06A5B2FB982909DDFE32E5B = {
+			path = ../../../flib/flib/3rd/lua/lua_script.hpp;
+			sourceTree = SOURCE_ROOT;
+			children = (
+			);
+			isa = PBXFileReference;
+			name = lua_script.hpp;
+			lastKnownFileType = sourcecode.cpp.h;
+		};
+		10F60E03501ED312F63FB57E = {
+			path = ../../../flib/flib/3rd/lua/LuaEnv.hpp;
+			sourceTree = SOURCE_ROOT;
+			children = (
+			);
+			isa = PBXFileReference;
+			name = LuaEnv.hpp;
+			lastKnownFileType = sourcecode.cpp.h;
+		};
+		B19FEFAEB7558E46738AB50F = {
+			path = ../../../flib/flib/3rd/lua/lua_wrapper.hpp;
+			sourceTree = SOURCE_ROOT;
+			children = (
+			);
+			isa = PBXFileReference;
+			name = lua_wrapper.hpp;
+			lastKnownFileType = sourcecode.cpp.h;
+		};
+		4C6B3C0549F39612E2735151 = {
+			fileRef = B93FD55AC6EAA206685D53F3;
+			isa = PBXBuildFile;
+		};
+		D752174210DF7502340CAC82 = {
+			path = ../../../flib/flib/base/traits.hpp;
+			sourceTree = SOURCE_ROOT;
+			children = (
+			);
+			isa = PBXFileReference;
+			name = traits.hpp;
+			lastKnownFileType = sourcecode.cpp.h;
+		};
+		13A3A32EB98E22E11B1C3EA5 = {
+			path = ../../../flib/flib/base/FIni.hpp;
+			sourceTree = SOURCE_ROOT;
+			children = (
+			);
+			isa = PBXFileReference;
+			name = FIni.hpp;
+			lastKnownFileType = sourcecode.cpp.h;
+		};
+		455EBCCD018050886517A53B = {
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				GCC_ENABLE_CPP_EXCEPTIONS = YES;
+				OTHER_CFLAGS = (
+					"-Wno-error=deprecated-declarations",
+					"-fno-strict-aliasing",
+					"-fomit-frame-pointer",
+				);
+				FRAMEWORK_SEARCH_PATHS = (
+				);
+				VALID_ARCHS = "x86_64";
+				EXECUTABLE_PREFIX = lib;
+				HEADER_SEARCH_PATHS = (
+					../../../Source,
+					../../../flib,
+					../../../lua-5.1.5/src,
+				);
+				LIBRARY_SEARCH_PATHS = (
+				);
+				EXECUTABLE_EXTENSION = a;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"_GNU_SOURCE=1",
+					"_FILE_OFFSET_BITS=64",
+					"_LARGEFILE_SOURCE",
+					"__IOS__",
+					"FLIB_DLL_EXPORTS",
+				);
+				SKIP_INSTALL = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				MACH_O_TYPE = staticlib;
+				OTHER_LDFLAGS = (
+				);
+				GCC_ENABLE_CPP_RTTI = YES;
+			};
+			name = Debug;
+			isa = XCBuildConfiguration;
+		};
+		AF39315AC0E29D90AB3B15EF = {
+			path = ../../../flib/flib/base/FDequeAddLock.hpp;
+			sourceTree = SOURCE_ROOT;
+			children = (
+			);
+			isa = PBXFileReference;
+			name = FDequeAddLock.hpp;
+			lastKnownFileType = sourcecode.cpp.h;
+		};
+		CFD3905998B1439B0D90DF11 = {
+			path = ../../../flib/flib/base/FAlloctor.hpp;
+			sourceTree = SOURCE_ROOT;
+			children = (
+			);
+			isa = PBXFileReference;
+			name = FAlloctor.hpp;
+			lastKnownFileType = sourcecode.cpp.h;
+		};
+		8E84EEC0036AE84E5D9840B5 = {
+			path = ../../../flib/flib/base/FBase64.hpp;
+			sourceTree = SOURCE_ROOT;
+			children = (
+			);
+			isa = PBXFileReference;
+			name = FBase64.hpp;
+			lastKnownFileType = sourcecode.cpp.h;
+		};
+		1B8EE0425D622C0419D45A7E = {
+			path = ../../../Source/FilePackage/FileSystem.h;
+			sourceTree = SOURCE_ROOT;
+			children = (
+			);
+			isa = PBXFileReference;
+			name = FileSystem.h;
+			lastKnownFileType = sourcecode.c.h;
+		};
+		E079210D9CA4EAA64E66C837 = {
+			path = ../../../flib/flib/base/FEncoding.hpp;
+			sourceTree = SOURCE_ROOT;
+			children = (
+			);
+			isa = PBXFileReference;
+			name = FEncoding.hpp;
+			lastKnownFileType = sourcecode.cpp.h;
+		};
+		0A4A12E158488AD6BC8EDC42 = {
+			runOnlyForDeploymentPostprocessing = 0;
+			isa = PBXResourcesBuildPhase;
+			files = (
+			);
+			buildActionMask = 2147483647;
+		};
+		87C58A1C3A8360EA3C1C322C = {
+			children = (
+				981073AE4A3A9DDCC683DBC0,
+				827EB6ABD7DCF7D410F4F472,
+				35B020106FB4C8E28DFE32F3,
+				4614A75E4708E1C0C18F40A5,
+				5C827D7B9477604529041D1C,
+				6867F765E5DD6DD0729CAA51,
+				EEFC1A50206C5BE392C26FED,
+				FD2419E3966F8D9044E6F7DC,
+				5AF7A12C55F3124B062FBC51,
+				D752174210DF7502340CAC82,
+				186E036643FE478CF22C1B28,
+				6C49FB17B87DDAFAB3898CD0,
+				8E84EEC0036AE84E5D9840B5,
+				25C7897A800F5B3CFBAEF8BC,
+				13A3A32EB98E22E11B1C3EA5,
+				9884749E6355B43959474A7A,
+				35393F91943F69C367AD96C9,
+				E269FD31193D3DD9983A696B,
+				E1869168A49884A305FF259D,
+				032936C411854444C0A43196,
+				F3AE946CF0D421E9B1E13B3A,
+				B370693CC352BB78A66EF622,
+				D411941BA572A18DAF829E69,
+				866F53FF01C7716C364B9FE8,
+				8C7CA27EEEA621069E802CBB,
+				E079210D9CA4EAA64E66C837,
+				CFD3905998B1439B0D90DF11,
+				9E8347712AD45661793A5DF5,
+				236B7CA9C9202C620ACA554B,
+				BD68F4DEFFB2021D9F4518E5,
+				AF39315AC0E29D90AB3B15EF,
+				A40A3AF00145CA0EA91C5B49,
+				68194A338852F59F20433EA4,
+				AB6BBF1F49094B9F137DE931,
+			);
+			isa = PBXGroup;
+			name = base;
+			sourceTree = "<group>";
+		};
+		6DE9A07BF62031C32FBB33F3 = {
+			fileRef = 5A25D24EB0539D2B5585276B;
+			isa = PBXBuildFile;
+		};
+		6C49FB17B87DDAFAB3898CD0 = {
+			path = ../../../flib/flib/base/FLock.hpp;
+			sourceTree = SOURCE_ROOT;
+			children = (
+			);
+			isa = PBXFileReference;
+			name = FLock.hpp;
+			lastKnownFileType = sourcecode.cpp.h;
+		};
+		A6FE776733034A059B93A545 = {
+			children = (
+				F1A15B077C0DEFBF23107C51,
+				EFF0CD27B9CB07B0C7DBF406,
+				3E7389F1AFA912318423D37A,
+				E9636A47FB303DEA506E46A7,
+				3601CEDC0EC45B2202467B34,
+				AB1687979E3E5C5F55355F2F,
+				288B8CF2534DA727885B23D5,
+			);
+			isa = PBXGroup;
+			name = Source;
+			sourceTree = "<group>";
+		};
+		EBBCD8135C681E0692B7F623 = {
+			children = (
+				A58339E854E4697EA20B58DC,
+			);
+			isa = PBXGroup;
+			name = Products;
+			sourceTree = "<group>";
+		};
+		35393F91943F69C367AD96C9 = {
+			path = ../../../flib/flib/base/FTimer.hpp;
+			sourceTree = SOURCE_ROOT;
+			children = (
+			);
+			isa = PBXFileReference;
+			name = FTimer.hpp;
+			lastKnownFileType = sourcecode.cpp.h;
+		};
+		E3633F9D15F422F58D075693 = {
+			fileRef = EFF0CD27B9CB07B0C7DBF406;
+			isa = PBXBuildFile;
+		};
+		F5A875173B582E7FAFA3DFD2 = {
+			buildSettings = {
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				GCC_C_LANGUAGE_STANDARD = "compiler-default";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_ENABLE_MODULES = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				SYMROOT = build;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 7;
+				ENABLE_BITCODE = NO;
+				VALID_ARCHS = "x86_64";
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				SDKROOT = iphoneos;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				COPY_PHASE_STRIP = NO;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_IDENTITY = "-";
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+			};
+			name = Release;
+			isa = XCBuildConfiguration;
+		};
+		5A25D24EB0539D2B5585276B = {
+			path = ../../../Source/FilePackage/FileSystem.cpp;
+			sourceTree = SOURCE_ROOT;
+			children = (
+			);
+			isa = PBXFileReference;
+			name = FileSystem.cpp;
+			lastKnownFileType = sourcecode.cpp.cpp;
+		};
+		E9636A47FB303DEA506E46A7 = {
+			path = ../../../Source/PCH.cpp;
+			sourceTree = SOURCE_ROOT;
+			children = (
+			);
+			isa = PBXFileReference;
+			name = PCH.cpp;
+			lastKnownFileType = sourcecode.cpp.cpp;
+		};
+		25C7897A800F5B3CFBAEF8BC = {
+			path = ../../../flib/flib/base/FDataTable.hpp;
+			sourceTree = SOURCE_ROOT;
+			children = (
+			);
+			isa = PBXFileReference;
+			name = FDataTable.hpp;
+			lastKnownFileType = sourcecode.cpp.h;
+		};
+		47783AD72797522E0D1BFC41 = {
+			projectRoot = "";
+			projectDirPath = "";
+			hasScannedForEncodings = 0;
+			targets = (
+				0CF1C87F89495EF9D3B6BD7D,
+			);
+			isa = PBXProject;
+			developmentRegion = English;
+			mainGroup = D1EFE1C54529E43D66430551;
+			attributes = {
+				TargetAttributes = {
+					0CF1C87F89495EF9D3B6BD7D = {
+						CreatedOnToolsVersion = 8;
+					};
+				};
+				LastUpgradeCheck = 800;
+			};
+			buildConfigurationList = D81FDA0D2856E420D316758B;
+			compatibilityVersion = "Xcode 3.2";
+			knownRegions = (
+				en,
+			);
+		};
+		EEFC1A50206C5BE392C26FED = {
+			path = ../../../flib/flib/base/FThread.hpp;
+			sourceTree = SOURCE_ROOT;
+			children = (
+			);
+			isa = PBXFileReference;
+			name = FThread.hpp;
+			lastKnownFileType = sourcecode.cpp.h;
+		};
+		67B020DBF250224B87EF9CA2 = {
+			path = ../../../Source/FilePackage/File.cpp;
+			sourceTree = SOURCE_ROOT;
+			children = (
+			);
+			isa = PBXFileReference;
+			name = File.cpp;
+			lastKnownFileType = sourcecode.cpp.cpp;
+		};
+		827EB6ABD7DCF7D410F4F472 = {
+			path = ../../../flib/flib/base/FSingleton.hpp;
+			sourceTree = SOURCE_ROOT;
+			children = (
+			);
+			isa = PBXFileReference;
+			name = FSingleton.hpp;
+			lastKnownFileType = sourcecode.cpp.h;
+		};
+		288B8CF2534DA727885B23D5 = {
+			path = ../../../Source/PCH.h;
+			sourceTree = SOURCE_ROOT;
+			children = (
+			);
+			isa = PBXFileReference;
+			name = PCH.h;
+			lastKnownFileType = sourcecode.c.h;
+		};
+		D81FDA0D2856E420D316758B = {
+			defaultConfigurationName = Release;
+			buildConfigurations = (
+				FE25547496DBC83BE053158A,
+				F5A875173B582E7FAFA3DFD2,
+			);
+			defaultConfigurationIsVisible = 0;
+			isa = XCConfigurationList;
+		};
+		186E036643FE478CF22C1B28 = {
+			path = ../../../flib/flib/base/FCounter.hpp;
+			sourceTree = SOURCE_ROOT;
+			children = (
+			);
+			isa = PBXFileReference;
+			name = FCounter.hpp;
+			lastKnownFileType = sourcecode.cpp.h;
+		};
+		5AF7A12C55F3124B062FBC51 = {
+			path = ../../../flib/flib/base/FType.hpp;
+			sourceTree = SOURCE_ROOT;
+			children = (
+			);
+			isa = PBXFileReference;
+			name = FType.hpp;
+			lastKnownFileType = sourcecode.cpp.h;
+		};
+		7E384B2EBBE5A644F7E80D43 = {
+			path = FengEngine;
+			sourceTree = "<group>";
+			children = (
+				A6FE776733034A059B93A545,
+				DA2C7663BB0D44D3231B9230,
+			);
+			isa = PBXGroup;
+			name = FengEngine;
+		};
+		8C7CA27EEEA621069E802CBB = {
+			path = ../../../flib/flib/base/FMD5.hpp;
+			sourceTree = SOURCE_ROOT;
+			children = (
+			);
+			isa = PBXFileReference;
+			name = FMD5.hpp;
+			lastKnownFileType = sourcecode.cpp.h;
+		};
+		AB6BBF1F49094B9F137DE931 = {
+			path = ../../../flib/flib/base/FProcess.hpp;
+			sourceTree = SOURCE_ROOT;
+			children = (
+			);
+			isa = PBXFileReference;
+			name = FProcess.hpp;
+			lastKnownFileType = sourcecode.cpp.h;
+		};
+		B94E4999987D4B2584238983 = {
+			fileRef = F1A15B077C0DEFBF23107C51;
+			isa = PBXBuildFile;
+		};
+		EE7ABD20D0AB6157AC597E98 = {
+			fileRef = 67B020DBF250224B87EF9CA2;
+			isa = PBXBuildFile;
+		};
+
+	};
+	rootObject = 47783AD72797522E0D1BFC41 /* Project object */;
+}

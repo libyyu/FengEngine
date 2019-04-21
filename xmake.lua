@@ -123,7 +123,7 @@ target("FengEngine")
         add_syslinks("android")
     end
 
-    add_defines("_F_DLL_")
+    add_defines("FLIB_DLL_EXPORTS")
     add_includedirs("Source", "flib")
     add_files("Source/AnyLog/*.cpp")
     add_files("Source/FilePackage/*.cpp")
@@ -157,7 +157,7 @@ if has_config("test") then
             add_deps("lua51")
         end
         set_targetdir("bin/$(plat)/$(arch)")
-        add_defines("_F_DLL_")
+        add_defines("FLIB_DLL_EXPORTS")
         add_includedirs("flib")
         add_includedirs("Source")
     target_end()

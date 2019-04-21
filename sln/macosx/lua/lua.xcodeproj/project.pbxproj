@@ -1,0 +1,381 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+		100A77EB2F5CFD3E3EB28BBC = {
+			buildSettings = {
+				GCC_DYNAMIC_NO_PIC = NO;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CLANG_CXX_LIBRARY = "libc++";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				GCC_C_LANGUAGE_STANDARD = "compiler-default";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_ENABLE_MODULES = YES;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ENABLE_BITCODE = NO;
+				VALID_ARCHS = "x86_64";
+				SDKROOT = macosx;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				ONLY_ACTIVE_ARCH = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_IDENTITY = "-";
+				CLANG_WARN_INFINITE_RECURSION = YES;
+			};
+			name = Debug;
+			isa = XCBuildConfiguration;
+		};
+		D6D8CB4B3AD05F94E46BC21F = {
+			runOnlyForDeploymentPostprocessing = 0;
+			isa = PBXFrameworksBuildPhase;
+			files = (
+				59B822EED2888B96404EB3BA,
+			);
+			buildActionMask = 2147483647;
+		};
+		68A47935E4AAD1DC3E271FCC = {
+			runOnlyForDeploymentPostprocessing = 0;
+			isa = PBXSourcesBuildPhase;
+			files = (
+				3130C997D946402B507A7BFD,
+			);
+			buildActionMask = 2147483647;
+		};
+		45F068524C9C234B375ED824 = {
+			runOnlyForDeploymentPostprocessing = 0;
+			isa = PBXResourcesBuildPhase;
+			files = (
+			);
+			buildActionMask = 2147483647;
+		};
+		43A3799C34B7BFB9EFAB9B2D = {
+			productType = "com.apple.product-type.tool";
+			isa = PBXNativeTarget;
+			productName = lua;
+			productReference = 2BB5477B637CA6193D4C984A;
+			buildRules = (
+			);
+			buildConfigurationList = D3698ABA5459C611C29D5E00;
+			buildPhases = (
+				68A47935E4AAD1DC3E271FCC,
+				D6D8CB4B3AD05F94E46BC21F,
+				AE3ED9C87DBEA8D74A51ED77,
+				45F068524C9C234B375ED824,
+				5A6D22CA7676198CB3E34597,
+			);
+			name = lua;
+			dependencies = (
+			);
+		};
+		AE01C5CCC1AA63BD0165B9F6 = {
+			defaultConfigurationName = Release;
+			buildConfigurations = (
+				100A77EB2F5CFD3E3EB28BBC,
+				44F68C4E5717FCBE0B5CB0F1,
+			);
+			defaultConfigurationIsVisible = 0;
+			isa = XCConfigurationList;
+		};
+		4B49C19260E717463CDA80A5 = {
+			children = (
+			);
+			isa = PBXGroup;
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D3698ABA5459C611C29D5E00 = {
+			buildConfigurations = (
+				3A0FB6E461D6856CCC55E3D2,
+				AF2F846C9780CA13508B698D,
+			);
+			defaultConfigurationIsVisible = 0;
+			isa = XCConfigurationList;
+		};
+		5A6D22CA7676198CB3E34597 = {
+			dstPath = "$(PROJECT_DIR)/../../../bin/macosx/x86_64";
+			runOnlyForDeploymentPostprocessing = 0;
+			buildActionMask = 2147483647;
+			dstSubfolderSpec = 0;
+			isa = PBXCopyFilesBuildPhase;
+			name = "Copy Files";
+			files = (
+				8CF216C974B337792F727CFA,
+			);
+		};
+		3A0FB6E461D6856CCC55E3D2 = {
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				GCC_ENABLE_CPP_EXCEPTIONS = YES;
+				OTHER_CFLAGS = (
+					"-Wno-error=deprecated-declarations",
+					"-fno-strict-aliasing",
+					"-fomit-frame-pointer",
+				);
+				VALID_ARCHS = "x86_64";
+				EXECUTABLE_PREFIX = "";
+				HEADER_SEARCH_PATHS = (
+				);
+				FRAMEWORK_SEARCH_PATHS = (
+				);
+				EXECUTABLE_EXTENSION = "";
+				LIBRARY_SEARCH_PATHS = (
+					../../../libs/macosx/x86_64,
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"_GNU_SOURCE=1",
+					"_FILE_OFFSET_BITS=64",
+					"_LARGEFILE_SOURCE",
+					"__MACOSX__",
+					"FIXED_POINT",
+					"USE_KISS_FFT",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				MACH_O_TYPE = "";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-all_load",
+					"-pagezero_size 10000",
+					"-image_base 100000000",
+				);
+				GCC_ENABLE_CPP_RTTI = YES;
+			};
+			name = Debug;
+			isa = XCBuildConfiguration;
+		};
+		B337C7F493AE7E88685E158B = {
+			children = (
+				2BB5477B637CA6193D4C984A,
+			);
+			isa = PBXGroup;
+			name = Products;
+			sourceTree = "<group>";
+		};
+		7A62B87FB3E811701669374E = {
+			children = (
+				B337C7F493AE7E88685E158B,
+				5FD8AE63814694E9BABFCD10,
+				4B49C19260E717463CDA80A5,
+				46456730113FED726AE75661,
+			);
+			isa = PBXGroup;
+			sourceTree = "<group>";
+		};
+		46456730113FED726AE75661 = {
+			children = (
+				B4578D14E048271B6467481B,
+			);
+			isa = PBXGroup;
+			name = libs;
+			sourceTree = "<group>";
+		};
+		A0336655A7523F7582D74C2E = {
+			children = (
+				F73D640FB8BB7F5DD040DEF8,
+			);
+			isa = PBXGroup;
+			name = src;
+			sourceTree = "<group>";
+		};
+		AE3ED9C87DBEA8D74A51ED77 = {
+			runOnlyForDeploymentPostprocessing = 0;
+			isa = PBXHeadersBuildPhase;
+			files = (
+			);
+			buildActionMask = 2147483647;
+		};
+		8CF216C974B337792F727CFA = {
+			fileRef = 2BB5477B637CA6193D4C984A;
+			isa = PBXBuildFile;
+		};
+		44F68C4E5717FCBE0B5CB0F1 = {
+			buildSettings = {
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				GCC_C_LANGUAGE_STANDARD = "compiler-default";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_ENABLE_MODULES = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				ENABLE_BITCODE = NO;
+				VALID_ARCHS = "x86_64";
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				SDKROOT = macosx;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				COPY_PHASE_STRIP = NO;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_IDENTITY = "-";
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+			};
+			name = Release;
+			isa = XCBuildConfiguration;
+		};
+		3130C997D946402B507A7BFD = {
+			fileRef = F73D640FB8BB7F5DD040DEF8;
+			isa = PBXBuildFile;
+		};
+		D62CE3ADBC7EA8F270B49B41 = {
+			projectRoot = "";
+			projectDirPath = "";
+			hasScannedForEncodings = 0;
+			targets = (
+				43A3799C34B7BFB9EFAB9B2D,
+			);
+			isa = PBXProject;
+			developmentRegion = English;
+			mainGroup = 7A62B87FB3E811701669374E;
+			attributes = {
+				TargetAttributes = {
+					43A3799C34B7BFB9EFAB9B2D = {
+						CreatedOnToolsVersion = 8;
+					};
+				};
+				LastUpgradeCheck = 800;
+			};
+			buildConfigurationList = AE01C5CCC1AA63BD0165B9F6;
+			compatibilityVersion = "Xcode 3.2";
+			knownRegions = (
+				en,
+			);
+		};
+		F73D640FB8BB7F5DD040DEF8 = {
+			path = ../../../lua-5.1.5/src/lua.c;
+			sourceTree = SOURCE_ROOT;
+			children = (
+			);
+			isa = PBXFileReference;
+			name = lua.c;
+			lastKnownFileType = sourcecode.c.c;
+		};
+		5FD8AE63814694E9BABFCD10 = {
+			path = lua;
+			sourceTree = "<group>";
+			children = (
+				3A0CED3DCF395288D800CC17,
+			);
+			isa = PBXGroup;
+			name = lua;
+		};
+		B4578D14E048271B6467481B = {
+			path = ../../../libs/macosx/x86_64/liblua51.a;
+			sourceTree = SOURCE_ROOT;
+			children = (
+			);
+			isa = PBXFileReference;
+			name = liblua51.a;
+			lastKnownFileType = archive.ar;
+		};
+		3A0CED3DCF395288D800CC17 = {
+			children = (
+				A0336655A7523F7582D74C2E,
+			);
+			isa = PBXGroup;
+			name = lua-5.1.5;
+			sourceTree = "<group>";
+		};
+		59B822EED2888B96404EB3BA = {
+			fileRef = B4578D14E048271B6467481B;
+			isa = PBXBuildFile;
+		};
+		2BB5477B637CA6193D4C984A = {
+			path = lua;
+			explicitFileType = "compiled.mach-o.executable";
+			includeInIndex = 0;
+			isa = PBXFileReference;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		AF2F846C9780CA13508B698D = {
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				GCC_ENABLE_CPP_EXCEPTIONS = YES;
+				OTHER_CFLAGS = (
+					"-Wno-error=deprecated-declarations",
+					"-fno-strict-aliasing",
+					"-fomit-frame-pointer",
+				);
+				VALID_ARCHS = "x86_64";
+				EXECUTABLE_PREFIX = "";
+				HEADER_SEARCH_PATHS = (
+				);
+				FRAMEWORK_SEARCH_PATHS = (
+				);
+				EXECUTABLE_EXTENSION = "";
+				LIBRARY_SEARCH_PATHS = (
+					../../../libs/macosx/x86_64,
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"_GNU_SOURCE=1",
+					"_FILE_OFFSET_BITS=64",
+					"_LARGEFILE_SOURCE",
+					"__MACOSX__",
+					"FIXED_POINT",
+					"USE_KISS_FFT",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				MACH_O_TYPE = "";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-all_load",
+					"-pagezero_size 10000",
+					"-image_base 100000000",
+				);
+				GCC_ENABLE_CPP_RTTI = YES;
+			};
+			name = Release;
+			isa = XCBuildConfiguration;
+		};
+
+	};
+	rootObject = D62CE3ADBC7EA8F270B49B41 /* Project object */;
+}

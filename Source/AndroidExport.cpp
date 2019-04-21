@@ -1,7 +1,7 @@
 #define LUA_LIB
 
 #include "PCH.h"
-#if PLATFORM_TARGET == PLATFORM_ANDROID
+#if FLIB_COMPILER_ANDROID
 #include "FilePackage/File.h"
 #include "flib/base/FFile.hpp"
 #include <jni.h>

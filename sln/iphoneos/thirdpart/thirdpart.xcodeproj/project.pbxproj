@@ -1,0 +1,403 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+		829F863D122BF42B41893255 = {
+			children = (
+				DC86D1882C240B0A16B732BA,
+				8E016AFF0A59D94522B4859A,
+				7C5A105302F73B26DA124586,
+				30091A1529823650DC73452C,
+			);
+			isa = PBXGroup;
+			name = 3rd;
+			sourceTree = "<group>";
+		};
+		CAAB881C3651A5232CAB56C2 = {
+			buildSettings = {
+				GCC_DYNAMIC_NO_PIC = NO;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CLANG_CXX_LIBRARY = "libc++";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				GCC_C_LANGUAGE_STANDARD = "compiler-default";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_ENABLE_MODULES = YES;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				SYMROOT = build;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				IPHONEOS_DEPLOYMENT_TARGET = 7;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ENABLE_BITCODE = NO;
+				VALID_ARCHS = "x86_64";
+				SDKROOT = iphoneos;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				ONLY_ACTIVE_ARCH = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_IDENTITY = "-";
+				CLANG_WARN_INFINITE_RECURSION = YES;
+			};
+			name = Debug;
+			isa = XCBuildConfiguration;
+		};
+		A419347208260D0E442064DD = {
+			defaultConfigurationName = Release;
+			buildConfigurations = (
+				CAAB881C3651A5232CAB56C2,
+				936F8EF3A4EEF8952926899A,
+			);
+			defaultConfigurationIsVisible = 0;
+			isa = XCConfigurationList;
+		};
+		1A1B093A212EB5A883CB95FB = {
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				GCC_ENABLE_CPP_EXCEPTIONS = YES;
+				OTHER_CFLAGS = (
+					"-Wno-error=deprecated-declarations",
+					"-fno-strict-aliasing",
+					"-fomit-frame-pointer",
+				);
+				FRAMEWORK_SEARCH_PATHS = (
+				);
+				VALID_ARCHS = "x86_64";
+				EXECUTABLE_PREFIX = lib;
+				HEADER_SEARCH_PATHS = (
+					../../../lua-5.1.5/src,
+				);
+				LIBRARY_SEARCH_PATHS = (
+				);
+				EXECUTABLE_EXTENSION = a;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"_GNU_SOURCE=1",
+					"_FILE_OFFSET_BITS=64",
+					"_LARGEFILE_SOURCE",
+					"__IOS__",
+				);
+				SKIP_INSTALL = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				MACH_O_TYPE = staticlib;
+				OTHER_LDFLAGS = (
+				);
+				GCC_ENABLE_CPP_RTTI = YES;
+			};
+			name = Debug;
+			isa = XCBuildConfiguration;
+		};
+		886CEB33022F68D67E90C08A = {
+			runOnlyForDeploymentPostprocessing = 0;
+			isa = PBXHeadersBuildPhase;
+			files = (
+			);
+			buildActionMask = 2147483647;
+		};
+		30091A1529823650DC73452C = {
+			path = ../../../3rd/pb.c;
+			sourceTree = SOURCE_ROOT;
+			children = (
+			);
+			isa = PBXFileReference;
+			name = pb.c;
+			lastKnownFileType = sourcecode.c.c;
+		};
+		E2569DFB553B21B1A1B01E4A = {
+			path = ../../../3rd/lpeg/lpeg.c;
+			sourceTree = SOURCE_ROOT;
+			children = (
+			);
+			isa = PBXFileReference;
+			name = lpeg.c;
+			lastKnownFileType = sourcecode.c.c;
+		};
+		7C5A105302F73B26DA124586 = {
+			children = (
+				7F83246B34D95F8E53497E57,
+			);
+			isa = PBXGroup;
+			name = i64lib;
+			sourceTree = "<group>";
+		};
+		E59C25CA75BD921399D840DA = {
+			path = libthirdpart.a;
+			explicitFileType = archive.ar;
+			includeInIndex = 0;
+			isa = PBXFileReference;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		936F8EF3A4EEF8952926899A = {
+			buildSettings = {
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				GCC_C_LANGUAGE_STANDARD = "compiler-default";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_ENABLE_MODULES = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				SYMROOT = build;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 7;
+				ENABLE_BITCODE = NO;
+				VALID_ARCHS = "x86_64";
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				SDKROOT = iphoneos;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				COPY_PHASE_STRIP = NO;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_IDENTITY = "-";
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+			};
+			name = Release;
+			isa = XCBuildConfiguration;
+		};
+		882165D08FC1D1ECDA53E317 = {
+			projectRoot = "";
+			projectDirPath = "";
+			hasScannedForEncodings = 0;
+			targets = (
+				3469BCA34A944EB8FA2FF8B8,
+			);
+			isa = PBXProject;
+			developmentRegion = English;
+			mainGroup = E8E14ECC8A70C450C3A3771F;
+			attributes = {
+				TargetAttributes = {
+					3469BCA34A944EB8FA2FF8B8 = {
+						CreatedOnToolsVersion = 8;
+					};
+				};
+				LastUpgradeCheck = 800;
+			};
+			buildConfigurationList = A419347208260D0E442064DD;
+			compatibilityVersion = "Xcode 3.2";
+			knownRegions = (
+				en,
+			);
+		};
+		31109BD4220F009CBB89C532 = {
+			children = (
+				E59C25CA75BD921399D840DA,
+			);
+			isa = PBXGroup;
+			name = Products;
+			sourceTree = "<group>";
+		};
+		6403A4B98C5AA8392D7E8AC2 = {
+			dstPath = "$(PROJECT_DIR)/../../../libs/iphoneos/x86_64";
+			runOnlyForDeploymentPostprocessing = 0;
+			buildActionMask = 2147483647;
+			dstSubfolderSpec = 0;
+			isa = PBXCopyFilesBuildPhase;
+			name = "Copy Files";
+			files = (
+				1918E278B446DCE85D4EA6EE,
+			);
+		};
+		A2E580D0A6CA274A347B2CB0 = {
+			children = (
+			);
+			isa = PBXGroup;
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		288D0C92DE18A220D752F262 = {
+			fileRef = E2569DFB553B21B1A1B01E4A;
+			isa = PBXBuildFile;
+		};
+		3469BCA34A944EB8FA2FF8B8 = {
+			productType = "com.apple.product-type.library.static";
+			isa = PBXNativeTarget;
+			productName = thirdpart;
+			productReference = E59C25CA75BD921399D840DA;
+			buildRules = (
+			);
+			buildConfigurationList = 508267927E710001DB2923EB;
+			buildPhases = (
+				F9087C6F8F21B800A75B4C82,
+				66471CACF97981F92F92EFFB,
+				886CEB33022F68D67E90C08A,
+				9A0998C7140A0EC23100FD51,
+				6403A4B98C5AA8392D7E8AC2,
+			);
+			name = thirdpart;
+			dependencies = (
+			);
+		};
+		16499C3ED8CE08DEBF1ADBD2 = {
+			fileRef = 7F83246B34D95F8E53497E57;
+			isa = PBXBuildFile;
+		};
+		B305DE78FEF22F54E5E0FBBB = {
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				GCC_ENABLE_CPP_EXCEPTIONS = YES;
+				OTHER_CFLAGS = (
+					"-Wno-error=deprecated-declarations",
+					"-fno-strict-aliasing",
+					"-fomit-frame-pointer",
+				);
+				FRAMEWORK_SEARCH_PATHS = (
+				);
+				VALID_ARCHS = "x86_64";
+				EXECUTABLE_PREFIX = lib;
+				HEADER_SEARCH_PATHS = (
+					../../../lua-5.1.5/src,
+				);
+				LIBRARY_SEARCH_PATHS = (
+				);
+				EXECUTABLE_EXTENSION = a;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"_GNU_SOURCE=1",
+					"_FILE_OFFSET_BITS=64",
+					"_LARGEFILE_SOURCE",
+					"__IOS__",
+				);
+				SKIP_INSTALL = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				MACH_O_TYPE = staticlib;
+				OTHER_LDFLAGS = (
+				);
+				GCC_ENABLE_CPP_RTTI = YES;
+			};
+			name = Release;
+			isa = XCBuildConfiguration;
+		};
+		7F83246B34D95F8E53497E57 = {
+			path = ../../../3rd/i64lib/i64lib.c;
+			sourceTree = SOURCE_ROOT;
+			children = (
+			);
+			isa = PBXFileReference;
+			name = i64lib.c;
+			lastKnownFileType = sourcecode.c.c;
+		};
+		8E016AFF0A59D94522B4859A = {
+			children = (
+				E2569DFB553B21B1A1B01E4A,
+			);
+			isa = PBXGroup;
+			name = lpeg;
+			sourceTree = "<group>";
+		};
+		5E66EBD6AF273016F47C35D7 = {
+			fileRef = 30091A1529823650DC73452C;
+			isa = PBXBuildFile;
+		};
+		9A0998C7140A0EC23100FD51 = {
+			runOnlyForDeploymentPostprocessing = 0;
+			isa = PBXResourcesBuildPhase;
+			files = (
+			);
+			buildActionMask = 2147483647;
+		};
+		E8E14ECC8A70C450C3A3771F = {
+			children = (
+				31109BD4220F009CBB89C532,
+				BDCED1AACF1BFF9D6F6CD270,
+				A2E580D0A6CA274A347B2CB0,
+			);
+			isa = PBXGroup;
+			sourceTree = "<group>";
+		};
+		58C1D94F8E10646C648A1DA2 = {
+			fileRef = DC86D1882C240B0A16B732BA;
+			isa = PBXBuildFile;
+		};
+		BDCED1AACF1BFF9D6F6CD270 = {
+			path = thirdpart;
+			sourceTree = "<group>";
+			children = (
+				829F863D122BF42B41893255,
+			);
+			isa = PBXGroup;
+			name = thirdpart;
+		};
+		DC86D1882C240B0A16B732BA = {
+			path = ../../../3rd/slua.c;
+			sourceTree = SOURCE_ROOT;
+			children = (
+			);
+			isa = PBXFileReference;
+			name = slua.c;
+			lastKnownFileType = sourcecode.c.c;
+		};
+		1918E278B446DCE85D4EA6EE = {
+			fileRef = E59C25CA75BD921399D840DA;
+			isa = PBXBuildFile;
+		};
+		508267927E710001DB2923EB = {
+			buildConfigurations = (
+				1A1B093A212EB5A883CB95FB,
+				B305DE78FEF22F54E5E0FBBB,
+			);
+			defaultConfigurationIsVisible = 0;
+			isa = XCConfigurationList;
+		};
+		F9087C6F8F21B800A75B4C82 = {
+			runOnlyForDeploymentPostprocessing = 0;
+			isa = PBXSourcesBuildPhase;
+			files = (
+				58C1D94F8E10646C648A1DA2,
+				288D0C92DE18A220D752F262,
+				16499C3ED8CE08DEBF1ADBD2,
+				5E66EBD6AF273016F47C35D7,
+			);
+			buildActionMask = 2147483647;
+		};
+		66471CACF97981F92F92EFFB = {
+			runOnlyForDeploymentPostprocessing = 0;
+			isa = PBXFrameworksBuildPhase;
+			files = (
+			);
+			buildActionMask = 2147483647;
+		};
+
+	};
+	rootObject = 882165D08FC1D1ECDA53E317 /* Project object */;
+}

@@ -1,0 +1,583 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+		97BACCA0E496761E64B4EC99 = {
+			path = ../../../3rd/luasocket/src/usocket.c;
+			sourceTree = SOURCE_ROOT;
+			children = (
+			);
+			isa = PBXFileReference;
+			name = usocket.c;
+			lastKnownFileType = sourcecode.c.c;
+		};
+		7CE839FFDA4D419AC8EE99E4 = {
+			path = ../../../3rd/luasocket/src/luasocket.c;
+			sourceTree = SOURCE_ROOT;
+			children = (
+			);
+			isa = PBXFileReference;
+			name = luasocket.c;
+			lastKnownFileType = sourcecode.c.c;
+		};
+		E038762B06B00A747FD6FF1B = {
+			buildSettings = {
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				GCC_C_LANGUAGE_STANDARD = "compiler-default";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_ENABLE_MODULES = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				SYMROOT = build;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 7;
+				ENABLE_BITCODE = NO;
+				VALID_ARCHS = "x86_64";
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				SDKROOT = iphoneos;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				COPY_PHASE_STRIP = NO;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_IDENTITY = "-";
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+			};
+			name = Release;
+			isa = XCBuildConfiguration;
+		};
+		C32644CC593D31436A1122D4 = {
+			children = (
+				D498637D145F68821507C195,
+				66481998F0C2B074693BF4BC,
+				B537108ADA6817133385CDC0,
+			);
+			isa = PBXGroup;
+			sourceTree = "<group>";
+		};
+		CDDDCF876C50DF51726C10AE = {
+			fileRef = E77306275E223A2D8F803AA7;
+			isa = PBXBuildFile;
+		};
+		2A9918586610080BE83FE413 = {
+			projectRoot = "";
+			projectDirPath = "";
+			hasScannedForEncodings = 0;
+			targets = (
+				07A764C9007322B2D6B3CA6C,
+			);
+			isa = PBXProject;
+			developmentRegion = English;
+			mainGroup = C32644CC593D31436A1122D4;
+			attributes = {
+				TargetAttributes = {
+					07A764C9007322B2D6B3CA6C = {
+						CreatedOnToolsVersion = 8;
+					};
+				};
+				LastUpgradeCheck = 800;
+			};
+			buildConfigurationList = 540C264A86827758BD40744F;
+			compatibilityVersion = "Xcode 3.2";
+			knownRegions = (
+				en,
+			);
+		};
+		E6D70C26C224F7CFF44145D2 = {
+			path = ../../../3rd/luasocket/src/unix.c;
+			sourceTree = SOURCE_ROOT;
+			children = (
+			);
+			isa = PBXFileReference;
+			name = unix.c;
+			lastKnownFileType = sourcecode.c.c;
+		};
+		1C5E0D5EB8510A2FF4820D6C = {
+			runOnlyForDeploymentPostprocessing = 0;
+			isa = PBXFrameworksBuildPhase;
+			files = (
+			);
+			buildActionMask = 2147483647;
+		};
+		1BEF1A4521EC9992E0E2AFFC = {
+			fileRef = 3A610B6E14409F6AE1057F1C;
+			isa = PBXBuildFile;
+		};
+		83241B55A71DC9711CBB210B = {
+			buildSettings = {
+				GCC_DYNAMIC_NO_PIC = NO;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CLANG_CXX_LIBRARY = "libc++";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				GCC_C_LANGUAGE_STANDARD = "compiler-default";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_ENABLE_MODULES = YES;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				SYMROOT = build;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				IPHONEOS_DEPLOYMENT_TARGET = 7;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ENABLE_BITCODE = NO;
+				VALID_ARCHS = "x86_64";
+				SDKROOT = iphoneos;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				ONLY_ACTIVE_ARCH = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_IDENTITY = "-";
+				CLANG_WARN_INFINITE_RECURSION = YES;
+			};
+			name = Debug;
+			isa = XCBuildConfiguration;
+		};
+		E77306275E223A2D8F803AA7 = {
+			path = ../../../3rd/luasocket/src/except.c;
+			sourceTree = SOURCE_ROOT;
+			children = (
+			);
+			isa = PBXFileReference;
+			name = except.c;
+			lastKnownFileType = sourcecode.c.c;
+		};
+		DA324256A4BABDF4486F7993 = {
+			path = ../../../3rd/luasocket/src/compat.c;
+			sourceTree = SOURCE_ROOT;
+			children = (
+			);
+			isa = PBXFileReference;
+			name = compat.c;
+			lastKnownFileType = sourcecode.c.c;
+		};
+		66481998F0C2B074693BF4BC = {
+			path = luasocket;
+			sourceTree = "<group>";
+			children = (
+				828BC681ABEA7C3872FCCCFB,
+			);
+			isa = PBXGroup;
+			name = luasocket;
+		};
+		540C264A86827758BD40744F = {
+			defaultConfigurationName = Release;
+			buildConfigurations = (
+				83241B55A71DC9711CBB210B,
+				E038762B06B00A747FD6FF1B,
+			);
+			defaultConfigurationIsVisible = 0;
+			isa = XCConfigurationList;
+		};
+		981000561ADBB0D3F679D855 = {
+			path = ../../../3rd/luasocket/src/select.c;
+			sourceTree = SOURCE_ROOT;
+			children = (
+			);
+			isa = PBXFileReference;
+			name = select.c;
+			lastKnownFileType = sourcecode.c.c;
+		};
+		9E83DB2F24104E2B2353EC71 = {
+			runOnlyForDeploymentPostprocessing = 0;
+			isa = PBXResourcesBuildPhase;
+			files = (
+			);
+			buildActionMask = 2147483647;
+		};
+		CCDDC2695999AA606C637D28 = {
+			fileRef = 02FAD65ACFF03C82963DE9DF;
+			isa = PBXBuildFile;
+		};
+		B05CC118EB0D8E53CB6BAC9E = {
+			fileRef = 7CE839FFDA4D419AC8EE99E4;
+			isa = PBXBuildFile;
+		};
+		827E972C58102CC4E0FBF777 = {
+			fileRef = 5B66CC57874785F4EEE84F8D;
+			isa = PBXBuildFile;
+		};
+		828BC681ABEA7C3872FCCCFB = {
+			children = (
+				C4A5D5C6FFABD929D6747895,
+			);
+			isa = PBXGroup;
+			name = 3rd;
+			sourceTree = "<group>";
+		};
+		A148C4F28D97C7499A10A126 = {
+			path = ../../../3rd/luasocket/src/options.c;
+			sourceTree = SOURCE_ROOT;
+			children = (
+			);
+			isa = PBXFileReference;
+			name = options.c;
+			lastKnownFileType = sourcecode.c.c;
+		};
+		FC7FB558FABE2AC8D5642439 = {
+			fileRef = 16246315B6B0A77E9739E188;
+			isa = PBXBuildFile;
+		};
+		B537108ADA6817133385CDC0 = {
+			children = (
+			);
+			isa = PBXGroup;
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D17CFAD9555756597B029C16 = {
+			runOnlyForDeploymentPostprocessing = 0;
+			isa = PBXSourcesBuildPhase;
+			files = (
+				1F342281E1D525248B58841A,
+				FC7FB558FABE2AC8D5642439,
+				CCDDC2695999AA606C637D28,
+				E93A5AACA1650D8545C3CB3A,
+				B05CC118EB0D8E53CB6BAC9E,
+				CDDDCF876C50DF51726C10AE,
+				8F33E86DF15281435639A6CA,
+				1BEF1A4521EC9992E0E2AFFC,
+				CCD2D223EF38CC9FA849C1A7,
+				81BABDA44A8928CAD18DE310,
+				2E94EE3B36A24B395C2F1000,
+				89FF70DDBC591862F879CA5D,
+				529303978999CB93FC2B6647,
+				794E3EFED77E11C0A0F8FBF8,
+				85084B1C40BA03C4CD25AB01,
+				4EF737448B8BDD914573BDC6,
+			);
+			buildActionMask = 2147483647;
+		};
+		529303978999CB93FC2B6647 = {
+			fileRef = DA324256A4BABDF4486F7993;
+			isa = PBXBuildFile;
+		};
+		85084B1C40BA03C4CD25AB01 = {
+			fileRef = 466E33CA87F5E87C4B85428C;
+			isa = PBXBuildFile;
+		};
+		794E3EFED77E11C0A0F8FBF8 = {
+			fileRef = E628034D09AAD15C75F84692;
+			isa = PBXBuildFile;
+		};
+		16246315B6B0A77E9739E188 = {
+			path = ../../../3rd/luasocket/src/inet.c;
+			sourceTree = SOURCE_ROOT;
+			children = (
+			);
+			isa = PBXFileReference;
+			name = inet.c;
+			lastKnownFileType = sourcecode.c.c;
+		};
+		07A764C9007322B2D6B3CA6C = {
+			productType = "com.apple.product-type.library.static";
+			isa = PBXNativeTarget;
+			productName = luasocket;
+			productReference = 5B66CC57874785F4EEE84F8D;
+			buildRules = (
+			);
+			buildConfigurationList = C1EA5BFBA78994BF6ED49534;
+			buildPhases = (
+				D17CFAD9555756597B029C16,
+				1C5E0D5EB8510A2FF4820D6C,
+				58A5CB818BD5E8F4B23E42A6,
+				9E83DB2F24104E2B2353EC71,
+				27D27C966927FA074FCD95B4,
+			);
+			name = luasocket;
+			dependencies = (
+			);
+		};
+		466E33CA87F5E87C4B85428C = {
+			path = ../../../3rd/luasocket/src/udp.c;
+			sourceTree = SOURCE_ROOT;
+			children = (
+			);
+			isa = PBXFileReference;
+			name = udp.c;
+			lastKnownFileType = sourcecode.c.c;
+		};
+		E628034D09AAD15C75F84692 = {
+			path = ../../../3rd/luasocket/src/timeout.c;
+			sourceTree = SOURCE_ROOT;
+			children = (
+			);
+			isa = PBXFileReference;
+			name = timeout.c;
+			lastKnownFileType = sourcecode.c.c;
+		};
+		5B66CC57874785F4EEE84F8D = {
+			path = libluasocket.a;
+			explicitFileType = archive.ar;
+			includeInIndex = 0;
+			isa = PBXFileReference;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		81B3EEB295FB86E3B8A7EA80 = {
+			children = (
+				A148C4F28D97C7499A10A126,
+				16246315B6B0A77E9739E188,
+				02FAD65ACFF03C82963DE9DF,
+				888EFBEAACF72FF7C80448C8,
+				7CE839FFDA4D419AC8EE99E4,
+				E77306275E223A2D8F803AA7,
+				97BACCA0E496761E64B4EC99,
+				3A610B6E14409F6AE1057F1C,
+				547C2C766E635DCD23799BD9,
+				981000561ADBB0D3F679D855,
+				950426CA1A93BB451525D8D9,
+				D17DBE354E260B73FC807576,
+				DA324256A4BABDF4486F7993,
+				E628034D09AAD15C75F84692,
+				466E33CA87F5E87C4B85428C,
+				E6D70C26C224F7CFF44145D2,
+			);
+			isa = PBXGroup;
+			name = src;
+			sourceTree = "<group>";
+		};
+		4EF737448B8BDD914573BDC6 = {
+			fileRef = E6D70C26C224F7CFF44145D2;
+			isa = PBXBuildFile;
+		};
+		6DEDF05A37D08F2AB524C3B1 = {
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				GCC_ENABLE_CPP_EXCEPTIONS = YES;
+				OTHER_CFLAGS = (
+					"-Wno-error=deprecated-declarations",
+					"-fno-strict-aliasing",
+					"-fomit-frame-pointer",
+				);
+				FRAMEWORK_SEARCH_PATHS = (
+				);
+				VALID_ARCHS = "x86_64";
+				EXECUTABLE_PREFIX = lib;
+				HEADER_SEARCH_PATHS = (
+					../../../lua-5.1.5/src,
+				);
+				LIBRARY_SEARCH_PATHS = (
+				);
+				EXECUTABLE_EXTENSION = a;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"_GNU_SOURCE=1",
+					"_FILE_OFFSET_BITS=64",
+					"_LARGEFILE_SOURCE",
+					"__IOS__",
+				);
+				SKIP_INSTALL = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				MACH_O_TYPE = staticlib;
+				OTHER_LDFLAGS = (
+				);
+				GCC_ENABLE_CPP_RTTI = YES;
+			};
+			name = Release;
+			isa = XCBuildConfiguration;
+		};
+		02FAD65ACFF03C82963DE9DF = {
+			path = ../../../3rd/luasocket/src/io.c;
+			sourceTree = SOURCE_ROOT;
+			children = (
+			);
+			isa = PBXFileReference;
+			name = io.c;
+			lastKnownFileType = sourcecode.c.c;
+		};
+		8F33E86DF15281435639A6CA = {
+			fileRef = 97BACCA0E496761E64B4EC99;
+			isa = PBXBuildFile;
+		};
+		89FF70DDBC591862F879CA5D = {
+			fileRef = D17DBE354E260B73FC807576;
+			isa = PBXBuildFile;
+		};
+		547C2C766E635DCD23799BD9 = {
+			path = ../../../3rd/luasocket/src/buffer.c;
+			sourceTree = SOURCE_ROOT;
+			children = (
+			);
+			isa = PBXFileReference;
+			name = buffer.c;
+			lastKnownFileType = sourcecode.c.c;
+		};
+		C1EA5BFBA78994BF6ED49534 = {
+			buildConfigurations = (
+				7BD47E6AFBDC56A1A7552A60,
+				6DEDF05A37D08F2AB524C3B1,
+			);
+			defaultConfigurationIsVisible = 0;
+			isa = XCConfigurationList;
+		};
+		950426CA1A93BB451525D8D9 = {
+			path = ../../../3rd/luasocket/src/auxiliar.c;
+			sourceTree = SOURCE_ROOT;
+			children = (
+			);
+			isa = PBXFileReference;
+			name = auxiliar.c;
+			lastKnownFileType = sourcecode.c.c;
+		};
+		81BABDA44A8928CAD18DE310 = {
+			fileRef = 981000561ADBB0D3F679D855;
+			isa = PBXBuildFile;
+		};
+		CCD2D223EF38CC9FA849C1A7 = {
+			fileRef = 547C2C766E635DCD23799BD9;
+			isa = PBXBuildFile;
+		};
+		D17DBE354E260B73FC807576 = {
+			path = ../../../3rd/luasocket/src/serial.c;
+			sourceTree = SOURCE_ROOT;
+			children = (
+			);
+			isa = PBXFileReference;
+			name = serial.c;
+			lastKnownFileType = sourcecode.c.c;
+		};
+		3A610B6E14409F6AE1057F1C = {
+			path = ../../../3rd/luasocket/src/tcp.c;
+			sourceTree = SOURCE_ROOT;
+			children = (
+			);
+			isa = PBXFileReference;
+			name = tcp.c;
+			lastKnownFileType = sourcecode.c.c;
+		};
+		58A5CB818BD5E8F4B23E42A6 = {
+			runOnlyForDeploymentPostprocessing = 0;
+			isa = PBXHeadersBuildPhase;
+			files = (
+			);
+			buildActionMask = 2147483647;
+		};
+		7BD47E6AFBDC56A1A7552A60 = {
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				GCC_ENABLE_CPP_EXCEPTIONS = YES;
+				OTHER_CFLAGS = (
+					"-Wno-error=deprecated-declarations",
+					"-fno-strict-aliasing",
+					"-fomit-frame-pointer",
+				);
+				FRAMEWORK_SEARCH_PATHS = (
+				);
+				VALID_ARCHS = "x86_64";
+				EXECUTABLE_PREFIX = lib;
+				HEADER_SEARCH_PATHS = (
+					../../../lua-5.1.5/src,
+				);
+				LIBRARY_SEARCH_PATHS = (
+				);
+				EXECUTABLE_EXTENSION = a;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"_GNU_SOURCE=1",
+					"_FILE_OFFSET_BITS=64",
+					"_LARGEFILE_SOURCE",
+					"__IOS__",
+				);
+				SKIP_INSTALL = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				MACH_O_TYPE = staticlib;
+				OTHER_LDFLAGS = (
+				);
+				GCC_ENABLE_CPP_RTTI = YES;
+			};
+			name = Debug;
+			isa = XCBuildConfiguration;
+		};
+		888EFBEAACF72FF7C80448C8 = {
+			path = ../../../3rd/luasocket/src/mime.c;
+			sourceTree = SOURCE_ROOT;
+			children = (
+			);
+			isa = PBXFileReference;
+			name = mime.c;
+			lastKnownFileType = sourcecode.c.c;
+		};
+		D498637D145F68821507C195 = {
+			children = (
+				5B66CC57874785F4EEE84F8D,
+			);
+			isa = PBXGroup;
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2E94EE3B36A24B395C2F1000 = {
+			fileRef = 950426CA1A93BB451525D8D9;
+			isa = PBXBuildFile;
+		};
+		27D27C966927FA074FCD95B4 = {
+			dstPath = "$(PROJECT_DIR)/../../../libs/iphoneos/x86_64";
+			runOnlyForDeploymentPostprocessing = 0;
+			buildActionMask = 2147483647;
+			dstSubfolderSpec = 0;
+			isa = PBXCopyFilesBuildPhase;
+			name = "Copy Files";
+			files = (
+				827E972C58102CC4E0FBF777,
+			);
+		};
+		C4A5D5C6FFABD929D6747895 = {
+			children = (
+				81B3EEB295FB86E3B8A7EA80,
+			);
+			isa = PBXGroup;
+			name = luasocket;
+			sourceTree = "<group>";
+		};
+		1F342281E1D525248B58841A = {
+			fileRef = A148C4F28D97C7499A10A126;
+			isa = PBXBuildFile;
+		};
+		E93A5AACA1650D8545C3CB3A = {
+			fileRef = 888EFBEAACF72FF7C80448C8;
+			isa = PBXBuildFile;
+		};
+
+	};
+	rootObject = 2A9918586610080BE83FE413 /* Project object */;
+}

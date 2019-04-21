@@ -1,7 +1,7 @@
 #include "PCH.h"
 #include "File.h"
 #include "flib/base/FFile.hpp"
-#if PLATFORM_TARGET == PLATFORM_ANDROID
+#if FLIB_COMPILER_ANDROID
 #include <jni.h>
 #include <android/log.h>
 #include <android/asset_manager.h>
@@ -33,7 +33,7 @@ void File::close()
         {
             //FILE* fp = static_cast<FILE*>(m_pFileHandle);
             //fclose(fp);
-#if PLATFORM_TARGET == PLATFORM_ANDROID
+#if FLIB_COMPILER_ANDROID
             AAsset *asset = static_cast<AAsset*>(m_pFileHandle);
             if(asset) AAsset_close(asset);
 #endif   
@@ -57,9 +57,11 @@ size_t File::GetSize()
         // log_info("offset:%d, filelen:%d", offset, filelen);
         // fseek(fp, offset, SEEK_SET);
         // return filelen-offset;
-#if PLATFORM_TARGET == PLATFORM_ANDROID
+#if FLIB_COMPILER_ANDROID
         AAsset *asset = static_cast<AAsset*>(m_pFileHandle);
         return (size_t)AAsset_getLength(asset);
+#else
+        return 0;
 #endif
     }
 }
@@ -74,9 +76,11 @@ size_t File::GetOffset()
     {
         //FILE* fp = static_cast<FILE*>(m_pFileHandle);
         //return ftell(fp);
-#if PLATFORM_TARGET == PLATFORM_ANDROID
+#if FLIB_COMPILER_ANDROID
         AAsset *asset = static_cast<AAsset*>(m_pFileHandle);
         return AAsset_getLength(asset) - AAsset_getRemainingLength(asset);
+#else
+        return 0;
 #endif
     }
 }
@@ -91,9 +95,11 @@ int File::Seek(int offset, unsigned int mode)
     {
         //FILE* fp = static_cast<FILE*>(m_pFileHandle);
         //return fseek(fp, offset, mode);
-#if PLATFORM_TARGET == PLATFORM_ANDROID
+#if FLIB_COMPILER_ANDROID
         AAsset *asset = static_cast<AAsset*>(m_pFileHandle);
         return AAsset_seek(asset, offset, mode);
+#else
+        return 0;
 #endif
     }
 }
@@ -109,9 +115,11 @@ size_t File::Read(void* p_buffer, size_t n_bytes_2_read)
     {
         //FILE* fp = static_cast<FILE*>(m_pFileHandle);
         //return fread(p_buffer, n_bytes_2_read, 1, fp);
-#if PLATFORM_TARGET == PLATFORM_ANDROID
+#if FLIB_COMPILER_ANDROID
         AAsset *asset = static_cast<AAsset*>(m_pFileHandle);
         return AAsset_read(asset, p_buffer, n_bytes_2_read);
+#else
+        return 0;
 #endif
     }
 }
@@ -143,14 +151,16 @@ size_t File::ReadAll(void* p_buffer)
         // FILE* fp = static_cast<FILE*>(m_pFileHandle);
         // size_t len = GetSize();
         // return fread(p_buffer, len, 1, fp);
-#if PLATFORM_TARGET == PLATFORM_ANDROID
+#if FLIB_COMPILER_ANDROID
         size_t len = GetSize();
         return Read(p_buffer, len);
+#else
+        return 0;
 #endif
     }
 }
 
-#if PLATFORM_TARGET != PLATFORM_ANDROID
+#if !FLIB_COMPILER_ANDROID
 File* File::OpenFile(const char *szFileName, bool readonly)
 {
     assert(szFileName && "szFileName is null");

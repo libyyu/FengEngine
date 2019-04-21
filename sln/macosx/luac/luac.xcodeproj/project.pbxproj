@@ -1,0 +1,396 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+		7FDDE9A07AF1753B8CEE76A1 = {
+			fileRef = 188D4FB514306F5B8A4F43F9;
+			isa = PBXBuildFile;
+		};
+		F1C6580B64E18F6A59E02E5F = {
+			dstPath = "$(PROJECT_DIR)/../../../bin/macosx/x86_64";
+			runOnlyForDeploymentPostprocessing = 0;
+			buildActionMask = 2147483647;
+			dstSubfolderSpec = 0;
+			isa = PBXCopyFilesBuildPhase;
+			name = "Copy Files";
+			files = (
+				7FDDE9A07AF1753B8CEE76A1,
+			);
+		};
+		122325CB7A19D0FF49CA4050 = {
+			buildConfigurations = (
+				A5FB9C67E6A4622D7B4C32B4,
+				2D169C016D1C41323E10AA08,
+			);
+			defaultConfigurationIsVisible = 0;
+			isa = XCConfigurationList;
+		};
+		0CA37C52B5AC354B68721556 = {
+			defaultConfigurationName = Release;
+			buildConfigurations = (
+				A8E7B7F5CD1EBEC176DEF267,
+				56D0D9DF7B023B7F399B813B,
+			);
+			defaultConfigurationIsVisible = 0;
+			isa = XCConfigurationList;
+		};
+		A5FB9C67E6A4622D7B4C32B4 = {
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				GCC_ENABLE_CPP_EXCEPTIONS = YES;
+				OTHER_CFLAGS = (
+					"-Wno-error=deprecated-declarations",
+					"-fno-strict-aliasing",
+					"-fomit-frame-pointer",
+				);
+				VALID_ARCHS = "x86_64";
+				EXECUTABLE_PREFIX = "";
+				HEADER_SEARCH_PATHS = (
+				);
+				FRAMEWORK_SEARCH_PATHS = (
+				);
+				EXECUTABLE_EXTENSION = "";
+				LIBRARY_SEARCH_PATHS = (
+					../../../libs/macosx/x86_64,
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"_GNU_SOURCE=1",
+					"_FILE_OFFSET_BITS=64",
+					"_LARGEFILE_SOURCE",
+					"__MACOSX__",
+					"FIXED_POINT",
+					"USE_KISS_FFT",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				MACH_O_TYPE = "";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-all_load",
+					"-pagezero_size 10000",
+					"-image_base 100000000",
+				);
+				GCC_ENABLE_CPP_RTTI = YES;
+			};
+			name = Debug;
+			isa = XCBuildConfiguration;
+		};
+		EA7B0FDABCA1897D0B9CD5EA = {
+			path = ../../../libs/macosx/x86_64/liblua51.a;
+			sourceTree = SOURCE_ROOT;
+			children = (
+			);
+			isa = PBXFileReference;
+			name = liblua51.a;
+			lastKnownFileType = archive.ar;
+		};
+		56D0D9DF7B023B7F399B813B = {
+			buildSettings = {
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				GCC_C_LANGUAGE_STANDARD = "compiler-default";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_ENABLE_MODULES = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				ENABLE_BITCODE = NO;
+				VALID_ARCHS = "x86_64";
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				SDKROOT = macosx;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				COPY_PHASE_STRIP = NO;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_IDENTITY = "-";
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+			};
+			name = Release;
+			isa = XCBuildConfiguration;
+		};
+		0EAD584267976759D512E756 = {
+			children = (
+			);
+			isa = PBXGroup;
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7DAF78E945079018D3B1668E = {
+			runOnlyForDeploymentPostprocessing = 0;
+			isa = PBXHeadersBuildPhase;
+			files = (
+			);
+			buildActionMask = 2147483647;
+		};
+		3875A5E96C15D12C33B9B3EB = {
+			fileRef = EA7B0FDABCA1897D0B9CD5EA;
+			isa = PBXBuildFile;
+		};
+		45605B190517A6C06F790F98 = {
+			children = (
+				EA7B0FDABCA1897D0B9CD5EA,
+			);
+			isa = PBXGroup;
+			name = libs;
+			sourceTree = "<group>";
+		};
+		FBE73C12EC3EF88DD7FF8222 = {
+			fileRef = 04108A9EE20C8677235A99C0;
+			isa = PBXBuildFile;
+		};
+		89FA8EE9BDCDDBF4EBA43ADB = {
+			runOnlyForDeploymentPostprocessing = 0;
+			isa = PBXFrameworksBuildPhase;
+			files = (
+				3875A5E96C15D12C33B9B3EB,
+			);
+			buildActionMask = 2147483647;
+		};
+		2D169C016D1C41323E10AA08 = {
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				GCC_ENABLE_CPP_EXCEPTIONS = YES;
+				OTHER_CFLAGS = (
+					"-Wno-error=deprecated-declarations",
+					"-fno-strict-aliasing",
+					"-fomit-frame-pointer",
+				);
+				VALID_ARCHS = "x86_64";
+				EXECUTABLE_PREFIX = "";
+				HEADER_SEARCH_PATHS = (
+				);
+				FRAMEWORK_SEARCH_PATHS = (
+				);
+				EXECUTABLE_EXTENSION = "";
+				LIBRARY_SEARCH_PATHS = (
+					../../../libs/macosx/x86_64,
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"_GNU_SOURCE=1",
+					"_FILE_OFFSET_BITS=64",
+					"_LARGEFILE_SOURCE",
+					"__MACOSX__",
+					"FIXED_POINT",
+					"USE_KISS_FFT",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				MACH_O_TYPE = "";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-all_load",
+					"-pagezero_size 10000",
+					"-image_base 100000000",
+				);
+				GCC_ENABLE_CPP_RTTI = YES;
+			};
+			name = Release;
+			isa = XCBuildConfiguration;
+		};
+		1F9EAB9BAA25FDA9FD7EC44B = {
+			path = luac;
+			sourceTree = "<group>";
+			children = (
+				BAF5A3F9F005762F48C3C8FF,
+			);
+			isa = PBXGroup;
+			name = luac;
+		};
+		A6739CD43BA59D1F1F9E3803 = {
+			fileRef = 3B487DEF3B952C10ED119B1D;
+			isa = PBXBuildFile;
+		};
+		04108A9EE20C8677235A99C0 = {
+			path = ../../../lua-5.1.5/src/luac.c;
+			sourceTree = SOURCE_ROOT;
+			children = (
+			);
+			isa = PBXFileReference;
+			name = luac.c;
+			lastKnownFileType = sourcecode.c.c;
+		};
+		65E5A208C4469F0978168E56 = {
+			children = (
+				3B487DEF3B952C10ED119B1D,
+				04108A9EE20C8677235A99C0,
+			);
+			isa = PBXGroup;
+			name = src;
+			sourceTree = "<group>";
+		};
+		188D4FB514306F5B8A4F43F9 = {
+			path = luac;
+			explicitFileType = "compiled.mach-o.executable";
+			includeInIndex = 0;
+			isa = PBXFileReference;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		DE649A37734CB0BD52BE1FAF = {
+			productType = "com.apple.product-type.tool";
+			isa = PBXNativeTarget;
+			productName = luac;
+			productReference = 188D4FB514306F5B8A4F43F9;
+			buildRules = (
+			);
+			buildConfigurationList = 122325CB7A19D0FF49CA4050;
+			buildPhases = (
+				01DF9A8EB3109EFCA62BABA3,
+				89FA8EE9BDCDDBF4EBA43ADB,
+				7DAF78E945079018D3B1668E,
+				E3E3281949C355A12B464E79,
+				F1C6580B64E18F6A59E02E5F,
+			);
+			name = luac;
+			dependencies = (
+			);
+		};
+		BAF5A3F9F005762F48C3C8FF = {
+			children = (
+				65E5A208C4469F0978168E56,
+			);
+			isa = PBXGroup;
+			name = lua-5.1.5;
+			sourceTree = "<group>";
+		};
+		E3E3281949C355A12B464E79 = {
+			runOnlyForDeploymentPostprocessing = 0;
+			isa = PBXResourcesBuildPhase;
+			files = (
+			);
+			buildActionMask = 2147483647;
+		};
+		4149DB6903C42FF829116A49 = {
+			children = (
+				E0EE32AB9E0B1E56A12CD387,
+				1F9EAB9BAA25FDA9FD7EC44B,
+				0EAD584267976759D512E756,
+				45605B190517A6C06F790F98,
+			);
+			isa = PBXGroup;
+			sourceTree = "<group>";
+		};
+		E0EE32AB9E0B1E56A12CD387 = {
+			children = (
+				188D4FB514306F5B8A4F43F9,
+			);
+			isa = PBXGroup;
+			name = Products;
+			sourceTree = "<group>";
+		};
+		3B487DEF3B952C10ED119B1D = {
+			path = ../../../lua-5.1.5/src/print.c;
+			sourceTree = SOURCE_ROOT;
+			children = (
+			);
+			isa = PBXFileReference;
+			name = print.c;
+			lastKnownFileType = sourcecode.c.c;
+		};
+		A0B93354F9D35ED39CBFF104 = {
+			projectRoot = "";
+			projectDirPath = "";
+			hasScannedForEncodings = 0;
+			targets = (
+				DE649A37734CB0BD52BE1FAF,
+			);
+			isa = PBXProject;
+			developmentRegion = English;
+			mainGroup = 4149DB6903C42FF829116A49;
+			attributes = {
+				TargetAttributes = {
+					DE649A37734CB0BD52BE1FAF = {
+						CreatedOnToolsVersion = 8;
+					};
+				};
+				LastUpgradeCheck = 800;
+			};
+			buildConfigurationList = 0CA37C52B5AC354B68721556;
+			compatibilityVersion = "Xcode 3.2";
+			knownRegions = (
+				en,
+			);
+		};
+		01DF9A8EB3109EFCA62BABA3 = {
+			runOnlyForDeploymentPostprocessing = 0;
+			isa = PBXSourcesBuildPhase;
+			files = (
+				A6739CD43BA59D1F1F9E3803,
+				FBE73C12EC3EF88DD7FF8222,
+			);
+			buildActionMask = 2147483647;
+		};
+		A8E7B7F5CD1EBEC176DEF267 = {
+			buildSettings = {
+				GCC_DYNAMIC_NO_PIC = NO;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CLANG_CXX_LIBRARY = "libc++";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				GCC_C_LANGUAGE_STANDARD = "compiler-default";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_ENABLE_MODULES = YES;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ENABLE_BITCODE = NO;
+				VALID_ARCHS = "x86_64";
+				SDKROOT = macosx;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				ONLY_ACTIVE_ARCH = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_IDENTITY = "-";
+				CLANG_WARN_INFINITE_RECURSION = YES;
+			};
+			name = Debug;
+			isa = XCBuildConfiguration;
+		};
+
+	};
+	rootObject = A0B93354F9D35ED39CBFF104 /* Project object */;
+}

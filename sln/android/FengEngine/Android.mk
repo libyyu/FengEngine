@@ -99,7 +99,7 @@ LOCAL_CFLAGS += -D _GNU_SOURCE=1
 LOCAL_CFLAGS += -D _FILE_OFFSET_BITS=64
 LOCAL_CFLAGS += -D _LARGEFILE_SOURCE
 LOCAL_CFLAGS += -D __ANDROID__
-LOCAL_CFLAGS += -D _F_DLL_
+LOCAL_CFLAGS += -D FLIB_DLL_EXPORTS
 LOCAL_CFLAGS += -std=c99
 LOCAL_CPPFLAGS += -std=c++11
 LOCAL_CFLAGS += -Wno-error=deprecated-declarations -fno-strict-aliasing -fomit-frame-pointer

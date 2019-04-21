@@ -1,17 +1,17 @@
 
 #define LUA_LIB
-
+#define FLIB_DLL
 #include "PCH.h"
 #include "FilePackage/FileSystem.h"
 using namespace FengEngine;
 _FDeclsBegin
 //extern void luaS_openextlibs(lua_State *L);
-F_DLL_API void L_CleanupLuaState()
+FLIB_DLL_API void L_CleanupLuaState()
 {
 	log_info("Cleanup luaState.");
 	glb_SetLuaEnv( NULL );
 }
-F_DLL_API void L_SetupLuaState(lua_State* L)
+FLIB_DLL_API void L_SetupLuaState(lua_State* L)
 {
 	LuaEnv* env = glb_GetLuaEnv();
 	SAFE_DELETE(env);
@@ -20,7 +20,7 @@ F_DLL_API void L_SetupLuaState(lua_State* L)
 	glb_SetLuaEnv(env);
 	log_info("Setup luaState.");
 }
-F_DLL_API void L_SetupAnyLog(void* pfunc)
+FLIB_DLL_API void L_SetupAnyLog(void* pfunc)
 {
 	glb_SetAnyLog(FLog::CreateILog(pfunc));
 	
@@ -44,25 +44,25 @@ F_DLL_API void L_SetupAnyLog(void* pfunc)
     log_info("AnyLog Setup!");
 }
 
-F_DLL_API void L_CleanupAnyLog()
+FLIB_DLL_API void L_CleanupAnyLog()
 {
 	log_info("AnyLog Cleanup!");
 	glb_SetAnyLog(NULL);
 }
 
-F_DLL_API void L_AddFilePackageLayer(const char* path)
+FLIB_DLL_API void L_AddFilePackageLayer(const char* path)
 {
     FileSystem::Get().AddLayer(path);
 }
-F_DLL_API bool L_ReadFileBuffer(const char* szFile, char** ppbuffer, int* length)
+FLIB_DLL_API bool L_ReadFileBuffer(const char* szFile, char** ppbuffer, int* length)
 {
     return FileSystem::Get().ReadFileBuffer(szFile, ppbuffer, length);
 }
-F_DLL_API void L_ReleaseFileBuffer(char* pbuffer)
+FLIB_DLL_API void L_ReleaseFileBuffer(char* pbuffer)
 {
     FileSystem::Get().ReleaseFileBuffer(pbuffer);
 }
-F_DLL_API bool L_FileExists(const char* path)
+FLIB_DLL_API bool L_FileExists(const char* path)
 {
     return FileSystem::Get().FileExists(path);
 }

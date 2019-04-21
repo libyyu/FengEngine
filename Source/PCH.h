@@ -59,7 +59,7 @@ typedef enum ErrRet
 ErrRet NotifyAssert(const char* condition, const char* fileName, int lineNumber, const char* formats, ...);
 
 #if defined( _DEBUG ) || defined( DEBUG )
-#if PLATFORM_TARGET == PLATFORM_WINDOWS
+#if FLIB_COMPILER_MSVC
 #define f_assertx(x,fmt,...) { \
 		static bool _ignoreAssert = false; \
 		if(!_ignoreAssert && !(x)) \
