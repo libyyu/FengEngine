@@ -1,7 +1,7 @@
 #ifndef __PCH_H__
 #define __PCH_H__
 #pragma once
-#include "flib/base/FType.hpp"
+#include "flib/flib.h"
 #include "AnyLog/ILog.h"
 #include "flib/3rd/lua/LuaEnv.hpp"
 

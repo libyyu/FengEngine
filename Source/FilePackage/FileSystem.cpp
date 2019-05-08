@@ -1,7 +1,6 @@
 #include "PCH.h"
 #include "FileSystem.h"
 #include "File.h"
-#include "flib/base/FFunc.hpp"
 namespace FengEngine
 {
 FileSystem::FileSystem()
