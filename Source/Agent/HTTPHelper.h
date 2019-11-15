@@ -33,7 +33,7 @@ class HTTPRequest
     friend class HTTPHelper;
     friend class HTTPImpl;
     std::shared_ptr<class HTTPImpl> _impl;
-    bool   _auto_destroy;
+    bool _auto_destroy;
     HTTPRequest(bool init = false);
     ~HTTPRequest();
 public:
@@ -41,6 +41,10 @@ public:
     bool         IsAutoDestroy(){ return _auto_destroy; }
     void         SetAutoDestroy(bool autoDestroy) { _auto_destroy = autoDestroy; }
     int          Run(bool download, bool async);
+    void         Stop();
+    int          Resume();
+    bool         IsRuning();
+    bool         IsCancle();
     static HTTPRequest* Create(bool init = false);
     static void  Destroy(HTTPRequest*& request);
     static void  Tick(float dt);

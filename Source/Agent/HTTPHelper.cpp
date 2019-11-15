@@ -72,6 +72,7 @@ private:
 public:
     ~HTTPHelper()
     {
+        printf("~HTTPHelper\n");
         s_request_lock->Lock();
         s_async_requests.clear();
         s_request_lock->UnLock();
@@ -99,7 +100,7 @@ public:
     {
         return s_share_handle;
     }
-    int  GetID()
+    int  GenID()
     {
         s_id++;
         return s_id;
@@ -118,18 +119,23 @@ public:
     }
     void RemoveRequest(HTTPRequest*& request)
     {
+        printf("RemoveRequest...\n");
         s_request_lock->Lock();
         auto p = s_async_requests.find(request);
         if(p != s_async_requests.end())
+        {
             s_async_requests.erase(p);
+            printf("RemoveRequest: %d\n", request->GetRequestId());
+        }
         s_request_lock->UnLock();
-        if(request->IsAutoDestroy())
+        if(request && request->IsAutoDestroy())
         {
             HTTPRequest::Destroy(request);
         }
     }
     void AddRequest(HTTPRequest* request)
     {
+        printf("AddRequest %d\n", request->GetRequestId());
         s_request_lock->Lock();
         s_async_requests.insert(request);
         s_request_lock->UnLock();
@@ -140,11 +146,13 @@ public:
         bool empty = false;
         while(!empty)
         {
+            printf("check empty %d\n", empty);
             s_request_lock->Lock();
             empty = s_async_requests.empty();
             s_request_lock->UnLock();
             h_Sleep(200);
         }
+        printf("exit tick\n");
     }
 };
 
@@ -152,6 +160,7 @@ int HTTPHelper::s_id = 0;
 
 class HTTPImpl
 {
+    friend class HTTPRequest;
 private:
     HTTPRequest*       m_owner;
     H_HTTPHANDLE       m_share_handle;
@@ -272,10 +281,11 @@ public:
     }
     void Release()
     {
-        curl_slist* clist = static_cast<curl_slist*>(m_http_headers);
-        if(clist)
-            curl_slist_free_all(clist);
-        m_http_headers = nullptr;
+        if (m_http_headers)
+        {
+            curl_slist_free_all(reinterpret_cast<curl_slist*>(m_http_headers));
+            m_http_headers = nullptr;
+        }
         
         delete m_post_data;
         m_post_data = nullptr;
@@ -284,6 +294,9 @@ public:
         
         m_owner = nullptr;
         m_is_running = false;
+        m_result_callback = nullptr;
+        m_progress_callback = nullptr;
+        m_request_handle = nullptr;
     }
     int GetRequestId()
     {
@@ -417,14 +430,15 @@ public:
         
         if (!async)
         {
-            return Perform();
+            int code = Perform();
+            HTTPHelper::Instance()->RemoveRequest(m_owner);
+            return code;
         }
         else
         {
 #ifdef _WIN32
             DWORD thread_id;
-            H_HTTPHANDLE async_thread = (H_HTTPHANDLE)CreateThread(NULL, 0, RequestThread, this, 0, &thread_id);
-            m_perform_thread = async_thread;
+            m_perform_thread = (H_HTTPHANDLE)CreateThread(NULL, 0, RequestThread, this, 0, &thread_id);
 #else
             pthread_create(&m_perform_thread, NULL, RequestThread, this);
 #endif
@@ -445,20 +459,24 @@ public:
     }
     void Close()
     {
+        printf("CLose\n");
         if(HTTPHelper::Instance()->FindRequest(m_owner))
         {
 #ifdef _WIN32
             if (WaitForSingleObject(m_perform_thread, 10) == WAIT_OBJECT_0)
 #else
+            printf("kill thread\n");
             if(pthread_kill(m_perform_thread, 0) != 0)
 #endif
             {
                 printf("Failed to close thread.\n");
             }
-            HTTPHelper::Instance()->RemoveRequest(m_owner);
-            m_is_cancel = true;
+            {
+                HTTPHelper::Instance()->RemoveRequest(m_owner);
+                m_is_cancel = true;
+            }
         }
-        
+        printf("sjdfiejf\n");
         try {
 #ifdef _WIN32
             if (m_perform_thread)
@@ -470,7 +488,7 @@ public:
             pthread_kill(m_perform_thread, 0);
 #endif
         } catch(std::exception e) {
-            
+            printf("exception\n");
         }
         
         m_is_running = false;
@@ -582,7 +600,7 @@ protected:
         
         HTTPHelper::h_Sleep(10);
 
-         HTTPImpl* request = reinterpret_cast<HTTPImpl*>(param);
+        HTTPImpl* request = reinterpret_cast<HTTPImpl*>(param);
         
         if (request)
         {
@@ -730,6 +748,7 @@ protected:
         {
             code = PerformRequest();
         }
+        printf("Perform Finish %d\n", code);
         return code;
     }
     int PerformRequest()
@@ -1268,12 +1287,17 @@ HTTPRequest::HTTPRequest(bool init)
 }
 HTTPRequest::~HTTPRequest()
 {
+    if(_impl)
+    {
+        _impl.reset();
+    }
+    _impl = nullptr;
 }
 
 void         HTTPRequest::Init()
 {
     if(_impl) return;
-    int id = HTTPHelper::Instance()->GetID();
+    int id = HTTPHelper::Instance()->GenID();
     H_HTTPHANDLE s_shared_handle = HTTPHelper::Instance()->GetSharedCurl();
     _impl = std::shared_ptr<HTTPImpl>(new HTTPImpl(id, this, s_shared_handle));
 }
@@ -1281,8 +1305,34 @@ void         HTTPRequest::Init()
 int          HTTPRequest::Run(bool download, bool async)
 {
     assert(_impl);
+    assert(!_impl->m_is_running);
+    assert(!_impl->m_is_cancel);
     _impl->SetDownloadMode(download);
     return _impl->Run(async);
+}
+
+void         HTTPRequest::Stop()
+{
+    assert(_impl);
+    assert(_impl->m_is_running);
+    _impl->Stop();
+}
+
+int          HTTPRequest::Resume()
+{
+    assert(_impl);
+    assert(!_impl->m_is_running);
+    assert(_impl->m_is_cancel);
+    return _impl->Resume();
+}
+
+bool         HTTPRequest::IsRuning()
+{
+    return _impl && _impl->m_is_running;
+}
+bool         HTTPRequest::IsCancle()
+{
+    return _impl && _impl->m_is_cancel;
 }
 
 void         HTTPRequest::Tick(float dt)
@@ -1296,8 +1346,9 @@ HTTPRequest* HTTPRequest::Create(bool init)
 }
 void  HTTPRequest::Destroy(HTTPRequest*& request)
 {
+    printf("HTTPRequest::Destroy\n");
     int id = request->GetRequestId();
     delete request;
     request = nullptr;
-    printf("~HTTPRequest:%d\n", id);
+    printf("~HTTPRequest: %d\n", id);
 }

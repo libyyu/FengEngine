@@ -1,24 +1,19 @@
 
 CURL_PATH=../../3rd/curl
 #./configure  --disable-shared --enable-static --without-zlib --without-libidn --without-ssl --without-librtmp --without-gnutls --without-nss --without-libssh2 --without-winidn --disable-rtsp --disable-ldap --disable-ldaps --disable-ipv6
-MODULE_NAME=libAgent
+MODULE_NAME=HTTP
 g++ -c \
 	-I./ \
-	-I$CURL_PATH/include \
-	HTTPRequest.cpp \
-	exp_HTTPRequest.cpp \
 	-std=c++11 -static \
+	HTTPHelper.cpp \
 	-DCURL_STATICLIB
-ar cr ${MODULE_NAME}.a exp_HTTPRequest.o HTTPRequest.o
-rm -rf *.o
+ar cr lib${MODULE_NAME}.a HTTPHelper.o #/usr/local/lib/libcurl.a
 
-MODULE_NAME=test
+MODULE_NAME2=test
 g++ \
 	-I./ \
-	-I$CURL_PATH/include \
 	-L./ \
-	-L../../3rd/curl/lib/macosx \
-	HTTPDemo.cpp \
-	-o ${MODULE_NAME} -std=c++11 \
+	Test.cpp \
+	-o ${MODULE_NAME2} -std=c++11 \
 	-DCURL_STATICLIB \
-	-lcurl -lldap -lAgent
+	-l${MODULE_NAME} -lldap -lcurl #-lcrypto
