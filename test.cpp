@@ -1,6 +1,6 @@
 #include <iostream>
 #include "flib/3rd/lua/LuaEnv.hpp"
-#include "File.h"
+#include "FilePackage/File.h"
 
 _FDeclsBegin
 _FCFun void luaS_openextlibs(lua_State *L);
@@ -59,7 +59,7 @@ int main()
     LuaEnv* env = new LuaEnv();
     luaS_openextlibs(*env);
     
-    FStd::File* file = FStd::File::OpenFile("/Users/lidengfeng/Documents/Workspace/FengEngine/a.txt");
+    FengEngine::File* file = FengEngine::File::OpenFile("/Users/lidengfeng/Documents/Workspace/FengEngine/a.txt");
     size_t len = file->GetSize();
     char* buffer = new char[len+1];
     file->ReadAll(buffer);
